@@ -1,0 +1,19 @@
+<!-- device alert -->
+<div *ngIf="alert">
+    <div class="device-alert">
+        <div class="popup-alert">
+            <div class="title">Alert</div>
+            <div class="text">
+                <div class="row m-0">
+                    <div class="col-3 p-0"><img src="assets/icon/general/alert.png"></div>
+                    <div class="col-9 p-0"><span>{{ message }}</span></div>
+                </div>
+            </div>
+            <div>
+                <button (click)="alert = !alert" class="btn btnBlue">
+                    <img style="margin-right: 10px" src="assets/icon/general/white-checkout.png">Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

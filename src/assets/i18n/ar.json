@@ -1,0 +1,74 @@
+{
+    "header": [
+        "الحفاظ",
+        "تذاكر",
+         "الفترة تمر",
+        "ضربات الجزاء",
+        "حسابات",
+        "تقارير",
+        "ضع المستخدمين",
+        "سائق"
+    ],
+
+    "account": {
+        "pageTitle": "حسابات",
+        "pageSubtitle": "عرض الحساب الحالي",
+        "pageButton": "انشاء حساب جديد"
+    },
+
+    "penalties": {
+        "pageTitle": "ضربات الجزاء"
+    },
+
+    "posUsers": {
+        "pageTitle": "POS المستخدمين",
+        "userHeaderTitle": "المستخدمين",
+        "usersHeader": [
+            {"name": "اسم"},
+            {"name": "IPA"},
+            {"name": "وظيفة"},
+            {"name": "الحالة"},
+            {"name": "سجل الماضي"}
+        ],
+        "button": "إعادة تعيين",
+        "sessionHeaderTitle": "جلسة اليوم",
+        "sessionHeaderSubtitle": "التاريخ",
+        "sessionHeader": [
+            {"name": "اسم"},
+            {"name": "من عند"},
+            {"name": "إلى"},
+            {"name": "المدة الزمنية"},
+            {"name": "نشط / مغلق(%)"}
+        ]
+    }, 
+
+    "driverCard": {
+        "pageTitle": "بطاقة السائق",
+        "pageSubtitle": "جميع السائقين",
+        "header": [
+            {"name": "سائق"},
+            {"name": "IPA"},
+            {"name": "تم التعديل"},
+            {"name": "الحالة"},
+            {"name": "بطاقة ذكية"}
+        ],
+        "assignPopup": {
+            "title": "تخصيص بطاقة",
+            "text": "أزل البطاقة الذكية أدناه وابحث عن بطاقة جديدة",
+            "cancelBtn": "إلغاء",
+            "saveBtn": "حفظ"
+        },
+        "unassignPopup": {
+            "title": "إلغاء تعيين",
+            "text": "هل أنت متأكد من أنك تريد إلغاء تعيين بطاقة التشغيل",
+            "cancelBtn": "إلغاء",
+            "saveBtn": "إلغاء تعيين"
+        },
+        "replacePopup": {
+            "title": "يحل محل",
+            "text": "أزل البطاقة الذكية أدناه وابحث عن بطاقة جديدة",
+            "cancelBtn": "إلغاء",
+            "saveBtn": "حفظ"
+        }
+    }
+}

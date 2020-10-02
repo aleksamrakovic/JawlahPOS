@@ -1,0 +1,106 @@
+<div class="col-12" style="padding: 0 24px;">
+  <form [formGroup]="form" (ngSubmit)="form.valid && confirm(form)">
+
+    <!-- First part amount box  -->
+    <div class="cash-box">
+      <div class="cash-part1">
+        <div>PAID</div>
+        <div>RETURN</div>
+      </div>
+      <div class="cash-part2">
+        <div class="input-group">
+          <input
+            [ngClass]="{'amount-input-ar' : selectedLang == 'ar'}"
+            type="text"
+            (keyup)="addValue($event)"
+            class="form-control amount-input"
+            #cashInput
+            formControlName="cashInput"
+            required
+            autocomplete="off"
+            >
+          <div class="input-group-append-2" *ngIf="posInfo">
+            <select (click)="checkAmount()" id="selectValue" class="input-group-text value" class="btn dropdown-toggle">
+              <option *ngIf="selectedLang != 'ar'" [value]="currency">{{currency}}</option>
+              <option *ngIf="selectedLang == 'ar'" [value]="currency">{{translations.get(currency)}}</option>
+              <option *ngIf="posInfo.showSecondCurrency && selectedLang != 'ar'" [value]="secondCurrency">{{secondCurrency}}</option>
+              <option *ngIf="posInfo.showSecondCurrency && selectedLang == 'ar'" [value]="secondCurrency">{{translations.get(secondCurrency)}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cash-return-amount" *ngIf="amountToReturn >= 0">
+          {{ amountToReturn | currency:opt:'' }}
+          <span *ngIf="selectedLang != 'ar'" class="mx-1">{{ opt }}</span>
+          <span *ngIf="selectedLang == 'ar'" class="mx-1">{{translations.get(opt)}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- First part box END -->
+
+    <!-- Numbers touchpad -->
+    <div class="cash-numbers">
+      <div class="box-number">
+        <a (click)="addValue($event)" value="7">7</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="8">8</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="9">9</a>
+      </div>
+      <div class="box-number red">
+        <a (click)="addValue($event)" value="del" class="numpad-del"></a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="4">4</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="5">5</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="6">6</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value=".">.</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="1">1</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="2">2</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="3">3</a>
+      </div>
+      <div class="box-number">
+        <a (click)="addValue($event)" value="0">0</a>
+      </div>
+    </div>
+
+    <button class="btnNormal btnGreen btnXl w-100 mt-4" type="submit" [disabled]="!form.valid" [ngClass]="{'disabled': !form.valid}">
+      <img src="assets/icon/general/checkout.png">CONFIRM
+    </button>
+
+  </form>
+</div>
+
+<!-- alert with action -->
+<div class="device-alert" *ngIf="ticketAlert">
+  <div class="popup-alert">
+    <div class="title">Alert</div>
+    <div class="text">
+      <div class="row m-0">
+        <div class="col-3 p-0"><img src="assets/icon/general/alert.png"></div>
+        <div class="col-9 p-0"><span>{{ ticketAlertMsg }}</span></div>
+      </div>
+    </div>
+    <div class="button-holder">
+      <button (click)="ticketAlertFunction()" class="btn">
+        <img style="margin-right: 10px" src="assets/icon/general/white-checkout.png">Ok
+      </button>
+    </div>
+  </div>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

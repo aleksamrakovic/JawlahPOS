@@ -1,0 +1,55 @@
+<div class="row m-0">
+  <div class="inner-page">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+      Sell period ticket
+    </div>
+
+    <!-- List of route type links-->
+    <div class="list-group">
+      <a *ngFor="let route of routeTypes" [ngClass]="{'active': defaultRoute == route}"
+        class="list-group-item" (click)="selectRouteType(route)">
+        {{ route.name | uppercase }}
+      </a>
+    </div>
+    <!-- List of route type END -->
+
+    <!-- List of rider types -->
+    <div class="boxes" *ngIf="riders">
+      <div class="rider-box" *ngFor="let rider of riders | paginate: config">
+        <div class="box btnGreen" (click)="selectRider(rider)">
+          <div>{{ rider.name | titlecase }}</div>
+        </div>
+      </div>
+    </div>
+    <!-- List of rider types END -->
+
+    <!-- Pagination -->
+    <div *ngIf="riders.length > 6">
+      <pagination-template class="my-pagination" #p="paginationApi" [id]="config.id" maxSize="999"
+        (pageChange)="config.currentPage = $event">
+        <button class="pagination-previous" (click)="p.previous()" [disabled]="p.isFirstPage()">
+          <img [ngClass]="{'page-disabled' : p.isFirstPage()}" src="assets/icon/general/nav-back.png">
+        </button>
+        <button class="pagination-next" (click)="p.next()" [disabled]="p.isLastPage()">
+          <img [ngClass]="{'page-disabled' : p.isLastPage()}" src="assets/icon/general/nav-next.png">
+        </button>
+      </pagination-template>
+      <div class="current-pages">
+        <a *ngFor="let page of p.pages" [ngClass]="{'page-active' : p.getCurrent() === page.value}">
+          <span><i class="fas fa-circle"></i></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <!-- Left part END -->
+
+  <!-- Cart Component-->
+  <div class="cart">
+    <app-cart></app-cart>
+  </div>
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

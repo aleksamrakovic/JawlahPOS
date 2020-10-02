@@ -1,0 +1,47 @@
+<div class="inner-page" *ngIf="pageTranslate">
+
+  <!-- Search account menu END -->
+  <div class="inner-page-title v-align">{{pageTranslate.header[4]}}</div>
+  <div class="search-account-box">
+    <div class="view-part1">
+      <div class="view-account-title">{{pageTranslate.account.pageSubtitle}}</div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+        <input formControlName="search" [ngClass]="{'border-set' : accountList.length > 0}" class="form-control"
+          #searchAccountInput (keyup)="searchAccount(searchAccountInput.value)">
+      </form>
+
+      <div class="account-list" *ngIf="accountList.length">
+        <a *ngFor="let item of accountList | slice:0:10" (click)="seeAccount(item)">
+
+          <div style="width:95%" class="d-flex flex-column align-items-start">
+            <span class="acc-name">{{ item.name }}</span>
+            <span class="acc-details">
+              <span *ngIf="item.id">ID {{ item.shortId }}</span>
+              <span *ngIf="item.phone">&bull; {{ item.phone }}</span>
+              <span *ngIf="item.email">&bull; {{ item.email }}</span>
+            </span>
+          </div>
+
+          <div [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" style="width:5%" class="acc-arrow"><img src="assets/icon/account/next.png"></div>
+        </a>
+      </div>
+    </div>
+    <div class="view-part2">
+      <button class="btn scan-qr-button">
+        <div><img src="assets/icon/account/scan-qr.png"></div>
+        <div>Scan Qr</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="button-holder">
+    <button class="btnNormal btnGreen btnXl w-100 font-weight-bold" routerLink="/accounts/create/form">
+      <img src="assets/icon/account/plus-black.png">{{pageTranslate.account.pageButton}}
+    </button>
+  </div>
+  <!-- Search account menu END -->
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

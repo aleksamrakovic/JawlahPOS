@@ -1,0 +1,54 @@
+<div class="inner-page">
+
+  <div class="inner-page-title v-align">
+    <span class="back" (click)="goBack()"><img src="assets/icon/general/white-back.png"></span>
+    <span>Purchase details</span>
+  </div>
+
+  <div class="list-group" *ngIf="transaction">
+
+    <div class="list-group-header v-align">
+      <span style="width: 30%">Details</span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Account name</span>
+      <span style="width: 60%" class="font-weight-bold">{{ transaction.account.name | titlecase }}, {{ transaction.account.id }}</span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Purchase date & Time</span>
+      <span style="width: 60%" class="font-weight-bold">{{ transaction.transactionDateFormated }}</span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Purchase type</span>
+      <span style="width: 60%" class="font-weight-bold">{{ transaction.transactionType }}</span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Purchase details</span>
+      <span style="width: 60%" class="font-weight-bold">{{ transaction.transactionDetails }}</span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Price</span>
+      <span style="width: 60%" class="font-weight-bold">{{ transaction.amount | currency:currency:''}} {{currency}}</span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Payment instrument type</span>
+      <span style="width: 60%" class="font-weight-bold d-flex justify-content-between">
+        {{ transaction.paymentType }} 
+        <span *ngIf="transaction.paymentInstrumentId">{{ transaction.paymentInstrumentId }}</span>
+      </span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Payment instrument details</span>
+      <span style="width: 60%" class="font-weight-bold">{{ transaction.transactionId }}</span>
+    </div>
+    <div class="list-group-item v-align">
+      <span style="width: 40%">Device</span>
+      <span style="width: 60%" class="font-weight-bold">{{ transaction.location }}</span>
+    </div>
+
+  </div>
+
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

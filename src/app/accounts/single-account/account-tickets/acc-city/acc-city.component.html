@@ -1,0 +1,79 @@
+<div class="row m-0">
+
+  <div class="inner-page">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/account/tickets"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="riderType && selectedLang != 'ar'">{{ routeInfo.city.name }} / {{ routeInfo.rider.name }}</span>
+      <span *ngIf="riderType && selectedLang == 'ar'">{{ routeInfo.city.nameTranslated }} /
+        {{ routeInfo.rider.nameTranslated }}</span>
+    </div>
+
+    <div class="ticket-list">
+      <div class="ticket-item" *ngFor="let item of items; let i = index" [ngClass]="{'btnGreen' : item.quantity > 0}">
+        <div class="row m-0">
+
+          <div class="col-6 p-0">
+            <div class="ticket-info" *ngIf="selectedLang != 'ar'">{{ item.cityTicket.name }}</div>
+            <div class="ticket-info" *ngIf="selectedLang == 'ar'">{{ item.cityTicket.nameTranslated }}</div>
+
+            <!-- price -->
+            <div *ngIf="selectedLang != 'ar'">
+              <span class="ticket-price">{{item.cityTicket.price | currency:currency:''}} {{currency}}</span>
+              <span class="ticket-price" *ngIf="showSecondCurrency">{{ item.cityTicket.price * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</span>
+            </div>
+
+            <!-- price ar -->
+            <div *ngIf="selectedLang == 'ar'">
+              <span class="ticket-price">{{item.cityTicket.price | currency:currency:''}} {{translations.get(currency)}}</span>
+              <span class="ticket-price" *ngIf="showSecondCurrency">{{ item.cityTicket.price * currencyRate | currency:secondCurrency:''}} {{translations.get(secondCurrency)}}</span>
+            </div>
+          </div>
+
+          <div class="col-6 p-0">
+            <div class="font-weight-bold mb-2">No of passengers</div>
+            <div class="button-control">
+              <a class="btn btn-minus" [ngClass]="{'btn-blue': item.numberOfPassengers > minGroup}"
+                (click)="removePassengers(item, i)">
+                <img *ngIf="item.numberOfPassengers == minGroup" src="assets/icon/general/minus_black.png">
+                <img *ngIf="item.numberOfPassengers > minGroup" src="assets/icon/general/minus_white.png">
+              </a>
+              <span class="ticket-amount">{{ item.numberOfPassengers }}</span>
+              <a class="btn btn-plus" (click)="addPassengers(item)">
+                <img src="assets/icon/general/plus_white.png">
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Group ticket part / Add no of passengers -->
+        <div class="row m-0">
+          <div class="col-6 p-0"></div>
+          <div class="col-6 p-0">
+            <div class="font-weight-bold mb-2">No of tickets</div>
+            <div class="button-control">
+              <a class="btn btn-minus" [ngClass]="{'btn-blue': item.quantity > 0}" (click)="removeFromCart(item, i)">
+                <img *ngIf="item.quantity == 0" src="assets/icon/general/minus_black.png">
+                <img *ngIf="item.quantity > 0" src="assets/icon/general/minus_white.png">
+              </a>
+              <span class="ticket-amount">{{ item.quantity }}</span>
+              <a class="btn btn-plus" (click)="addToCart(item)"><img src="assets/icon/general/plus_white.png"></a>
+            </div>
+          </div>
+        </div>
+        <!-- Group ticket part END -->
+
+      </div>
+      <!-- List of City tickets END-->
+    </div>
+
+  </div>
+
+  <div class="cart">
+    <!--Cart Component! -->
+    <app-cart></app-cart>
+  </div>
+</div>
+
+
+<loading-spinner *ngIf="loading"></loading-spinner>

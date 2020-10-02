@@ -1,0 +1,65 @@
+<div class="pos-settings-page">
+
+  <div class="pos-settings-title">
+    <span><img routerLink="/maintenance" src="assets/icon/maintenance/settings-arrow-up.png"></span>
+    Pos settings
+    <div class="button-holder">
+      <button class="btn save-settings-btn btnGreen" (click)="form.valid && saveSettings(form)">
+        <img src="assets/icon/general/checkout.png">Save
+      </button>
+    </div>
+  </div>
+
+  <div class="box" *ngIf="posInfo">
+    <div class="part">
+      <div class="row m-0">
+        <div class="col-6 p-0">
+          <div class="left-side">Show prices also in {{posInfo.secondCurrencyCode}}</div>
+        </div>
+        <div class="col-6 p-0">
+          <div class="buttons">
+            <button type="button" [ngClass]="{'active' : posSettings.showSecondCurrency}" class="btn yes-btn"
+              (click)="withSecond()">Yes
+            </button>
+            <button type="button" [ngClass]="{'active' : !posSettings.showSecondCurrency}" class="btn no-btn"
+              (click)="withoutSecond()">No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="part">
+      <div class="row m-0">
+        <div class="col-6 p-0">
+          <div class="left-side">Set lock time (min)</div>
+        </div>
+        <div class="col-6 p-0">
+          <form [formGroup]="form">
+            <input #autoLock formControlName="autoLock" class="input-time" type="number" required>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="part">
+      <div class="row m-0">
+        <div class="col-6 p-0">
+          <div class="left-side">Route type order</div>
+        </div>
+        <div class="col-6 p-0">
+          <ul class="list-group">
+            <li *ngFor="let item of routeTypes; let i = index" class="list-group-item">
+              <span class="left">{{ item.name }}</span>
+              <span class="right">
+                <img (click)="moveUp(i,routeTypes)" *ngIf="i != 0" src="assets/icon/maintenance/settings-arrow-up.png">
+                <img (click)="moveDown(i,routeTypes)" *ngIf="i != routeTypes.length-1" style="margin-left: 20px"
+                  src="assets/icon/maintenance/settings-arrow-down.png">
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

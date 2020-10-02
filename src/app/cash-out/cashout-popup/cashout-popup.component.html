@@ -1,0 +1,18 @@
+<!-- Confirm popup before logout -->
+<div class="col-12 cashout-popup-page">
+  <div class="cashout-popup-card">
+    <div class="cashout-popup-card-header">
+      <img src="assets/icon/icon_OK.png" alt="icon-ok">
+      <span>CASH OUT</span>
+    </div>
+    <div class="cashout-popup-card-body">
+      <div class="cashout-popup-card-text">
+        You have successfully logged out of this POS. You reported {{ cashoutAmount | currency:currency:''}} {{currency}} in the cashback.
+      </div>
+      <div class="cashout-popup-card-text">
+        If this is not correct <a (click)="countAgain()">click here</a> and count it again.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Confirm popup before logout END -->

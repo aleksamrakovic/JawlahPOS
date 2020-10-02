@@ -1,0 +1,570 @@
+<div class="inner-page">
+    <div class="inner-page-title v-align">
+        <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+        <span>Account details</span>
+    </div>
+
+    <!-- First box image -->
+    <div class="box-info" *ngIf="accountData">
+        <div class="row">
+            <div class="col-3">
+                <div class="box-part text-center">
+                    <div class="box-part-photo">
+                        <img *ngIf="!path" src="assets/icon/regular_full.svg" class="user-photo">
+                        <img *ngIf="path" class="user-photo" #userImage src="{{path}}">
+                        <div class="img-change">
+                            <span class="icon-change" *ngIf="hasImg" (click)="openPhotoPopup()">
+                                <img src="assets/icon/account/change-photo.png">
+                            </span>
+                            <span class="add-icon" *ngIf="!hasImg" (click)="openPhotoPopup()">
+                                <img src="assets/icon/checkout/cancel-ticket.png">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="box-part">
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="left-part">Owner</div>
+                        </div>
+                        <div class="col-8">
+                            <div class="right-part">{{ accountData.name }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="left-part">Number</div>
+                        </div>
+                        <div class="col-8">
+                            <div class="right-part">{{ accountData.shortId }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="left-part">Type</div>
+                        </div>
+                        <div class="col-8">
+                            <div class="right-part">{{ accountData.type | titlecase }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="left-part">Status</div>
+                        </div>
+                        <div class="col-8">
+                            <div class="right-part">{{ accountData.status }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="box-part">
+                    <a class="btnNormal btnBlue btnXl mb-3 w-100"
+                        [routerLink]="!accountData.verified && !accountData.pending ? ['/account/verify/rider'] : []"
+                        [ngClass]="{'link-disabled': accountData.verified || accountData.pending}">Change</a>
+                    <a *ngIf="!accountData.blocked" class="btnNormal btnRed btnXl w-100" (click)="showBlockAccountPopup()">Block</a>
+                    <a *ngIf="accountData.blocked" class="btnNormal btnRed btnXl w-100" (click)="showUnblockAccountPopup()">Unblock</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal details box -->
+    <div class="box-info2" *ngIf="accountData && box2" [ngClass]="{'saved': formSaved}">
+        <div class="title v-align">
+            <div class="title-text"><img src="assets/icon/account/blue-arrow-down.png">Personal details</div>
+            <div class="title-button">
+                <a *ngIf="!formSaved" class="btnNormal btnBlue" (click)="editBox2()">Edit</a>
+                <span *ngIf="formSaved"><img src="assets/icon/account/verified.png"> Saved</span>
+            </div>
+        </div>
+        <div class="main-part">
+            <div class="box-part">
+                <div class="row mb-4">
+                    <div class="col-3">
+                        <div class="left-part">Title</div>
+                    </div>
+                    <div class="col-9">
+                        <div class="right-part">{{ accountData.title }}</div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-3">
+                        <div class="left-part">Name surname</div>
+                    </div>
+                    <div class="col-9">
+                        <div class="right-part">{{ accountData.name }}</div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-3">
+                        <div class="left-part">Country</div>
+                    </div>
+                    <div class="col-9">
+                        <div class="right-part">{{ accountData.countryFull }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="left-part">Address</div>
+                    </div>
+                    <div class="col-9">
+                        <div class="right-part">{{ accountData.address }}</div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-3">
+                        <div class="left-part mb-0">Birthday</div>
+                    </div>
+                    <div class="col-9">
+                        <div class="right-part mb-0">{{ accountData.birthday }}</div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal details box / EDIT box 1 -->
+    <div class="box-info2 box-2" *ngIf="accountData && boxEdit2">
+        <form [formGroup]="form" (ngSubmit)="saveForm(form)">
+            <div class="title v-align">
+                <div class="title-text"><img src="assets/icon/account/blue-arrow-down.png">Edit personal details</div>
+                <div class="title-button d-flex justify-content-between">
+                    <a class="btnNormal btnBlue mr-4" (click)="closeEditBox2()"><i class="fas fa-times"></i>Cancel</a>
+                    <button class="btnNormal btnGreen"><i class="fas fa-check"></i>Save</button>
+                </div>
+            </div>
+            <div class="main-part">
+                <div class="box-part">
+                    <div class="row mb-4">
+                        <div class="col-3 v-align">
+                            <div class="left-part">Title</div>
+                        </div>
+                        <div class="col-5">
+                            <div class="right-part">
+                                <ul class="user-title-list mb-0">
+                                    <a (click)="selectTitle($event)" class="user-title-item"
+                                        [ngClass]="{'active':newTitle == 'MR'}">Mr</a>
+                                    <a (click)="selectTitle($event)" class="user-title-item"
+                                        [ngClass]="{'active':newTitle == 'MS'}">Ms</a>
+                                    <a (click)="selectTitle($event)" class="user-title-item"
+                                        [ngClass]="{'active':newTitle == 'MRS'}">Mrs</a>
+                                    <a (click)="selectTitle($event)" class="user-title-item"
+                                        [ngClass]="{'active':newTitle == 'MISS'}">Miss</a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-3 v-align">
+                            <div class="left-part">Name surname</div>
+                        </div>
+                        <div class="col-5">
+                            <div class="right-part">
+                                <!-- input -->
+                                <input [ngClass]="{'invalid-input': submitted && f.accountName.errors }"
+                                    class="edit-input" type="text" formControlName="accountName" required>
+                                <div *ngIf="submitted && f.accountName.invalid" class="invalid-feedback">
+                                    <div *ngIf="f.accountName.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-3 v-align">
+                            <div class="left-part">Country</div>
+                        </div>
+                        <div class="col-5">
+                            <div class="right-part">
+                                <!-- material select -->
+
+                                <mat-form-field [ngClass]="{'invalid-input': submitted && f.accountCountry.errors }"
+                                    class="edit-input country" appearance="none">
+                                    <mat-select formControlName="accountCountry" required placeholder="Select country">
+                                        <mat-option *ngFor="let country of countries" [value]="country.code">
+                                            {{country.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div *ngIf="submitted && f.accountCountry.invalid" class="invalid-feedback">
+                                    <div *ngIf="f.accountCountry.errors.required">Country is required</div>
+                                </div>
+
+                                <!-- material select END -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 v-align">
+                            <div class="left-part">Address</div>
+                        </div>
+                        <div class="col-5">
+                            <div class="right-part">
+                                <input [ngClass]="{'invalid-input': submitted && f.accountAddress.errors }"
+                                    class="edit-input" type="text" formControlName="accountAddress" required>
+                                <div *ngIf="submitted && f.accountAddress.invalid" class="invalid-feedback">
+                                    <div *ngIf="f.accountAddress.errors.required">Address is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Access to account -->
+    <div *ngIf="accountData && box5">
+        <div class="box-info2 box-5">
+            <div class="title v-align">
+                <div class="title-text">
+                    <img [ngClass]="{'rotate-icon' : accountData.identities.length < 1}"
+                        src="assets/icon/account/blue-arrow-down.png">
+                    Access to account
+                </div>
+                <div class="title-button"><a (click)="editIdentity()" class="btnNormal btnBlue">Add</a></div>
+            </div>
+            <div class="main-part" *ngFor="let identity of accountData.identities">
+                <div class="box-part">
+                    <div class="row">
+                        <div class="col-4 v-align">
+                            <div class="left-part">
+                                <div class="verify-text">
+                                    <span class="access-icon" *ngIf="identity.type === 'EMAIL_ADDRESS'">
+                                        <img src="assets/icon/account/account-status-mail.png">
+                                    </span>
+                                    <span class="access-icon" *ngIf="identity.type === 'PHONE_NUMBER'">
+                                        <img src="assets/icon/account/account-status-phone.png">
+                                    </span>
+                                    <span class="email-name">{{ identity.value }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 v-align">
+
+                            <div style="width: 100%;" *ngIf="identity.isPrimary" class="font-weight-bold d-flex">
+                                <div><img src="assets/icon/general/checkout.png"></div>
+                                <div class="text-uppercase ml-3">Primary</div>
+                            </div>
+                            <div style="width: 100%;" *ngIf="!identity.isPrimary">
+                                <a style="width: 100%;" class="btnNormal btnBlue rounded-pill" (click)="setPrimaryIdentity(identity)">Set as primary</a>
+                            </div>
+
+                        </div>
+                        <div class="col-5">
+                            <div class="verify-buttons">
+                                <a class="btnNormal btnBlue" (click)="setResetIdentity(identity)">Reset access</a>
+                                <a [ngClass]="{'link-disabled': identity.isPrimary}" class="btnNormal btnRed ml-auto"
+                                    (click)="showRemovePopup(identity)">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Access account END -->
+
+
+    <!-- ACCESS / EDIT box 4-->
+    <div class="box-info2" *ngIf="accountData && boxEdit5">
+        <form [formGroup]="identityForm" (ngSubmit)="saveIdentityForm(identityForm)">
+            <div class="title v-align">
+                <div class="title-text">
+                    <img src="assets/icon/account/blue-arrow-down.png">Add access
+                </div>
+                <div class="title-button d-flex justify-content-between">
+                    <a (click)="closeEditIdentity()" class="btnNormal btnBlue mr-4"><i style="margin-right: 5px"
+                            class="fas fa-times"></i>Cancel</a>
+                    <button type="submit" class="btnNormal btnGreen"><i style="margin-right: 5px"
+                            class="fas fa-check"></i>Save</button>
+                </div>
+            </div>
+            <div class="main-part">
+                <div class="box-part">
+                    <div class="row mb-4">
+                        <div class="col-3 v-align">
+                            <div class="left-part">Type</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="right-part">
+                                <ul class="user-title-list mb-0">
+                                    <a (click)="selectIdentity($event)" class="user-title-item"
+                                        [ngClass]="{'active':identityType == 'Email'}">Email</a>
+                                    <a (click)="selectIdentity($event)" class="user-title-item"
+                                        [ngClass]="{'active':identityType == 'Phone'}">Phone</a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 v-align">
+                            <div class="left-part">Enter {{ identityType }}</div>
+                        </div>
+                        <div class="col-5" *ngIf="identityType != 'Phone'">
+                            <div class="right-part">
+                                <input [ngClass]="{'invalid-input': identitySubmitted && f2.accessEmail.errors }"
+                                    class="edit-input" type="email" formControlName="accessEmail" required>
+                                <div *ngIf="identitySubmitted && f2.accessEmail.invalid" class="invalid-feedback">
+                                    <div *ngIf="f2.accessEmail.errors.required">Email is required</div>
+                                    <div *ngIf="f2.accessEmail.errors.pattern">Email is invalid</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-3" *ngIf="identityType == 'Phone'">
+                            <div class="right-part">
+                                <mat-form-field
+                                    [ngClass]="{'invalid-input': identitySubmitted && f2.accountCountryCode.errors }"
+                                    class="edit-input country" appearance="none">
+                                    <mat-select formControlName="accountCountryCode" required>
+                                        <mat-option *ngFor="let country of countries" [value]="country.callingCode">
+                                            {{ country.callingCode }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div *ngIf="identitySubmitted && f2.accountCountryCode.invalid"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f2.accountCountryCode.errors.required">Code is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5" *ngIf="identityType == 'Phone'">
+                            <div class="right-part">
+                                <input [ngClass]="{'invalid-input': identitySubmitted && f2.accessPhone.errors }"
+                                    class="edit-input" type="text" formControlName="accessPhone" required>
+                                <div *ngIf="identitySubmitted && f2.accessPhone.invalid" class="invalid-feedback">
+                                    <div *ngIf="f2.accessPhone.errors.required">Phone is required</div>
+                                    <div *ngIf="f2.accessPhone.errors.pattern">Phone is invalid</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Access / EDIT box 4 END-->
+
+
+    <!-- verification requests -->
+    <div class="box-info2" *ngIf="accountData" id="verificationRequests">
+        <div class="title v-align">
+            <div class="title-text"><img src="assets/icon/account/blue-arrow-down.png">Account verification:
+                {{accountData.allVerificationRequests.length}}</div>
+            <div class="title-button">
+                <a style="width:250px" class="btnNormal btnBlue"
+                    [hidden]="accountData.verificationRequest && accountData.verificationRequest.status == 'EXPIRED'"
+                    [routerLink]="!accountData.verified && !accountData.pending ? ['/account/verify/rider'] : []"
+                    [ngClass]="{'link-disabled': accountData.verified || accountData.pending}">Change account type
+                </a>
+                <a #renew style="width:250px" class="btnNormal btnBlue"
+                    *ngIf="accountData.verificationRequest && accountData.verificationRequest.status == 'EXPIRED'"
+                    (click)="renewStatus()">Renew status
+                </a>
+            </div>
+        </div>
+        <div class="main-part" style="padding:25px" *ngIf="accountData.allVerificationRequests.length > 0">
+            <div class="box-part">
+
+                <div class="request-list">
+                    <div class="header v-align">
+                        <span style="width:20%">Account type</span>
+                        <span style="width:20%">Status</span>
+                        <span style="width:20%">Start date</span>
+                        <span style="width:40%">Expires</span>
+                    </div>
+                    <div class="request-data">
+                        <div class="item v-align" *ngFor="let item of accountData.allVerificationRequests">
+                            <span style="width:20%">{{ item.targetRider }}</span>
+                            <span style="width:20%">{{ item.status | titlecase }}</span>
+                            <span style="width:20%">{{ item.concessionStartTimestamp }}</span>
+                            <span style="width:20%">{{ item.concessionExpirationTimestamp }}</span>
+                            <span style="width:20%" class="d-flex justify-content-end">
+                                <a *ngIf="item.status == 'PENDING' || item.status == 'VERIFIED'"
+                                    (click)="showCancelRequestPopup(item)" class="btnNormal btnRed"
+                                    style="width: 49%;margin-right: 2%;">Cancel</a>
+                                <a style="width: 49%;" *ngIf="item.status != 'PENDING'" (click)="viewRequest(item)" class="btnNormal btnBlue">View</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- verification requests -->
+
+</div>
+
+<!-- Remove document popup -->
+<div id="modal-popup" class="popup-modal-page" *ngIf="removePopup">
+    <div class="popup-modal">
+        <div class="popup-modal-title v-align">
+            <span *ngIf="selectedDocument.type == 'EMAIL_ADDRESS'">Remove Email Address ?</span>
+            <span *ngIf="selectedDocument.type == 'PHONE_NUMBER'">Remove Phone number ?</span>
+        </div>
+        <div class="popup-modal-text">
+            Are you sure you want to remove:
+            <span *ngIf="selectedDocument.type == 'EMAIL_ADDRESS'">Email Address ?</span>
+            <span *ngIf="selectedDocument.type == 'PHONE_NUMBER'">Phone number ?</span>
+        </div>
+        <div class="popup-modal-buttons">
+            <button style="background-color: #0080ff;" (click)="removePopup = !removePopup" class="btn cancel-btn">
+                <img src="assets/icon/checkout/cancel-ticket.png">Cancel
+            </button>
+            <button class="btn confirm-btn" (click)="removeDocument()">
+                <img src="assets/icon/account/trash.png">Remove
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Remove doc END -->
+
+
+<!-- Remove request popup -->
+<div id="modal-popup" class="popup-modal-page" *ngIf="cancelReqPopup">
+    <div class="popup-modal">
+        <div class="popup-modal-title v-align">Cancel verify request</div>
+        <div class="popup-modal-text">Are you sure you want to cancel verify request?</div>
+        <div class="popup-modal-buttons">
+            <button (click)="cancelReqPopup = !cancelReqPopup" class="btn cancel-btn">
+                <img src="assets/icon/checkout/cancel-ticket.png">No
+            </button>
+            <button class="btn confirm-btn" (click)="cancelRequest()">
+                <img src="assets/icon/account/trash.png">Yes
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Remove request END -->
+
+
+<!-- take photo popup -->
+<div id="photo-popup" class="photo-modal-page" *ngIf="photoPopup">
+    <div class="photo-modal">
+        <div class="photo-modal-title">
+            Take photo<span (click)="closePhotoPopup()"><img src="assets/icon/top-bar/Close_btn.png"></span>
+        </div>
+        <div class="photo-modal-part">
+            <div class="photo-box">
+                <video id="webcam-vid" class="videostream" autoplay #webcamVideo></video>
+                <img style="display: none" id="webcam-img" #webcamImage>
+            </div>
+        </div>
+        <div class="popup-modal-buttons border-0">
+            <button *ngIf="!imgTaken" class="btn photo-btn" (click)="takePicture()">
+                <img src="assets/icon/camera-white-big.png">
+            </button>
+            <button *ngIf="imgTaken" (click)="retakePhoto()" class="btn photo-btn">
+                <img style="margin-right: 20px" src="assets/icon/camera-white.png">Retake photo
+            </button>
+            <button *ngIf="imgTaken" (click)="savePhoto()" class="btn photo-btn">
+                <img src="assets/icon/general/white-checkout.png">Save photo
+            </button>
+        </div>
+    </div>
+</div>
+<!-- take photo END -->
+
+<!-- Block acc popup -->
+<div class="popup-modal-page" *ngIf="blockAccountPopup">
+    <div class="popup-modal" *ngIf="accountData">
+        <form [formGroup]="formBlockAcc" (ngSubmit)="blockAccount(formBlockAcc)">
+            <div class="popup-modal-title v-align">Block account</div>
+            <div class="popup-modal-text">
+                <div class="row m-0">
+                    <div class="col-3 p-0">
+                        <img src="assets/icon/general/help.png">
+                    </div>
+                    <div class="col-9 p-0">
+                        <div class="mb-2">
+                            Are you sure you want to block account
+                            <span class="bold">{{ accountData.shortId }} {{ accountData.name }}?</span>
+                        </div>
+
+                        <!-- material select -->
+                        <mat-form-field
+                            [ngClass]="{'invalid-input': formBlockSubmitted && f3.blockAccountReason.errors }"
+                            class="modal-input d-block" appearance="none">
+                            <mat-select formControlName="blockAccountReason" required placeholder="Select reason">
+                                <mat-option *ngFor="let reason of blockAccountReasons" [value]="reason">
+                                    {{ reason.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="formBlockSubmitted && f3.blockAccountReason.invalid" class="invalid-feedback">
+                            <div *ngIf="f3.blockAccountReason.errors.required">Reason is required</div>
+                        </div>
+                        <!-- material select END -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="popup-modal-buttons">
+                <button type="button" class="btn cancel-btn" (click)="hideBlockAccountPopup()">
+                    <img src="assets/icon/general/cancel-button.png">Cancel
+                </button>
+                <button type="submit" class="btn confirm-btn">
+                    <img src="assets/icon/general/checkout.png">Block
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Block acc popup END -->
+
+
+
+<!-- Unblock acc popup -->
+<div class="popup-modal-page" *ngIf="unblockAccountPopup">
+    <div class="popup-modal" *ngIf="accountData">
+        <form [formGroup]="formUnblockAcc" (ngSubmit)="unblockAccount(formUnblockAcc)">
+            <div class="popup-modal-title v-align">Unblock account</div>
+            <div class="popup-modal-text">
+                <div class="row m-0">
+                    <div class="col-3 p-0">
+                        <img src="assets/icon/general/help.png">
+                    </div>
+                    <div class="col-9 p-0">
+                        <div class="mb-2">
+                            Are you sure you want to unblock account
+                            <span class="bold">{{ accountData.shortId }} {{ accountData.name }}?</span>
+                        </div>
+
+                        <!-- material select -->
+                        <mat-form-field
+                            [ngClass]="{'invalid-input': formUnblockSubmitted && f4.unblockAccountReason.errors }"
+                            class="modal-input d-block" appearance="none">
+                            <mat-select formControlName="unblockAccountReason" required placeholder="Select reason">
+                                <mat-option *ngFor="let reason of unblockAccountReasons" [value]="reason">
+                                    {{ reason.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="formUnblockSubmitted && f4.unblockAccountReason.invalid" class="invalid-feedback">
+                            <div *ngIf="f4.unblockAccountReason.errors.required">Reason is required</div>
+                        </div>
+                        <!-- material select END -->
+                    </div>
+                </div>
+            </div>
+            <div class="popup-modal-buttons">
+                <button type="button" class="btn cancel-btn" (click)="hideUnblockAccountPopup()">
+                    <img src="assets/icon/general/cancel-button.png">Cancel
+                </button>
+                <button type="submit" class="btn confirm-btn">
+                    <img src="assets/icon/general/checkout.png">Unblock
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Unblock acc popup END -->
+
+
+<loading-spinner *ngIf="loading"></loading-spinner>

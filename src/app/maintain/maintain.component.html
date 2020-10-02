@@ -1,0 +1,35 @@
+<div class="row m-0" *ngIf="!rebootPopup">
+  <div class="inner-page">
+    <div class="inner-page-title v-align">Maintenance</div>
+
+    <div class="boxes">
+      <div class="box btnGreen v-align" routerLink="/maintenance/settings">Pos settings</div>
+      <div class="box btnGreen v-align" (click)="rebootPopup = !rebootPopup">Reboot pos</div>
+    </div>
+
+  </div>
+
+  <!-- Status -->
+  <app-maintain-status></app-maintain-status>
+
+</div>
+<!-- Row END -->
+
+<!-- Reboot popup -->
+<div class="popup-modal-page" *ngIf="rebootPopup">
+  <div class="popup-modal">
+    <div class="popup-modal-title v-align">Reboot device?</div>
+    <div class="popup-modal-text">Are you sure you want to reboot this POS device?</div>
+    <div class="popup-modal-buttons">
+      <button class="btn cancel-btn" (click)="rebootPopup = !rebootPopup">
+        <span><img src="assets/icon/maintenance/cancel-button.png"></span>
+        Cancel
+      </button>
+      <button class="btn confirm-btn" (click)="rebootDevice()">
+        <span><img src="assets/icon/maintenance/reboot-button.png"></span>
+        Reboot
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Reboot popup END -->

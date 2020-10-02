@@ -1,0 +1,316 @@
+<div class="inner-page">
+  <form [formGroup]="form" (ngSubmit)="submitRequest(form)">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="accountData && !accountData.rejected">Verify account as
+        {{ accountData.verificationRequest.targetRider }}</span>
+
+      <span *ngIf="accountData && accountData.rejected">Rejected as
+        {{ accountData.verificationRequest.targetRider }}</span>
+
+      <span class="verify-buttons" *ngIf="accountData && !accountData.rejected">
+        <button type="submit" class="verify-btn btnGreen"><img src="assets/icon/general/checkout.png">Submit</button>
+      </span>
+    </div>
+
+    <!-- First box image -->
+    <div class="box-info" *ngIf="accountData">
+      <div class="row">
+        <div class="col-3">
+          <div class="box-part text-center">
+            <div class="box-part-photo">
+              <div *ngIf="!hasImg" class="user-photo"></div>
+              <img *ngIf="hasImg" class="user-photo" #userImage src="{{path}}">
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="box-part">
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Account no</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.shortId }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Current account type</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.type | titlecase }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Requested account type</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.verificationRequest.targetRider | titlecase }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Full name</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.name }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Address</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.address }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Country</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.countryFull }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">E-mail</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.email }}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="left-part">Phone</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.phone }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal documents box -->
+    <div *ngIf="accountData">
+      <div class="box-info2 box-3" *ngFor="let document of accountData.personalDocument; let i = index">
+        <div class="title v-align">
+          <div class="title-text">Personal document</div>
+        </div>
+        <div class="main-part">
+          <div class="box-part">
+            <div class="row mb-4" *ngFor="let elem of document.elements">
+              <div class="col-4">
+                <div class="left-part">{{ elem.name }}:</div>
+              </div>
+              <div class="col-8">
+                <div class="right-part">{{ elem.value }}</div>
+              </div>
+            </div>
+            <div class="row mb-4" *ngFor="let photo of document.photoElements">
+              <div class="col-4">
+                <div class="left-part">{{ photo.name }}:</div>
+              </div>
+              <div class="col-4">
+                <div class="photo-box">
+                  <img #docImg src="data:image/png;base64,{{photo.value}}">
+                </div>
+                <div class="zoom-icon" (click)="zoomScanner(docImg)">
+                  <i class="fas fa-search-plus"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main-part" [ngClass]="{'documentError' : documentOk.checked}" *ngIf="!accountData.rejected">
+          <div class="box-part">
+            <div class="row mb-4">
+              <div class="col-4">
+                <div class="left-part">Document review</div>
+              </div>
+              <div class="col-4">
+                <mat-checkbox formControlName="docPersNotOk-{{i}}" labelPosition="after" color="primary" #documentOk>Not
+                  ok</mat-checkbox>
+              </div>
+            </div>
+            <!-- if not ok -->
+            <div class="row mb-4" *ngIf="documentOk.checked">
+              <div class="col-4 v-align">
+                <div class="left-part">Description</div>
+              </div>
+              <div class="col-8">
+                <div class="right-part">
+                  <textarea formControlName="docPersDescription-{{i}}" style="min-height:150px;max-height: 150px;"
+                    class="edit-input"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Personal details box END -->
+
+    <!-- Status proof document -->
+    <div *ngIf="accountData">
+      <div class="box-info2 box-3" *ngFor="let document of accountData.documentToProveStatus; let i = index">
+        <div class="title v-align">
+          <div class="title-text">{{ document.name }}</div>
+        </div>
+        <div class="main-part">
+          <div class="box-part">
+            <div class="row mb-4" *ngFor="let elem of document.elements">
+              <div class="col-4">
+                <div class="left-part">{{ elem.name }}:</div>
+              </div>
+              <div class="col-8">
+                <div class="right-part">{{ elem.value }}</div>
+              </div>
+            </div>
+            <div class="row mb-4" *ngFor="let photo of document.photoElements">
+              <div class="col-4">
+                <div class="left-part">{{ photo.name }}:</div>
+              </div>
+              <div class="col-4">
+                <div class="photo-box">
+                  <img #docImg src="data:image/png;base64,{{photo.value}}">
+                </div>
+                <div class="zoom-icon" (click)="zoomScanner(docImg)">
+                  <i class="fas fa-search-plus"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main-part" [ngClass]="{'documentError' : documentOk.checked}" *ngIf="!accountData.rejected">
+          <div class="box-part">
+            <div class="row mb-4">
+              <div class="col-4">
+                <div class="left-part">Document review</div>
+              </div>
+              <div class="col-4">
+                <mat-checkbox formControlName="docStatusNotOk-{{i}}" labelPosition="after" color="primary" #documentOk>
+                  Not ok</mat-checkbox>
+              </div>
+            </div>
+            <!-- if not ok -->
+            <div class="row mb-4" *ngIf="documentOk.checked">
+              <div class="col-4 v-align">
+                <div class="left-part">Description</div>
+              </div>
+              <div class="col-8">
+                <div class="right-part">
+                  <textarea formControlName="docStatusDescription-{{i}}" style="min-height:150px;max-height: 150px;"
+                    class="edit-input"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- status proof doc END -->
+
+    <div *ngIf="accountData && !accountData.rejected">
+      <div class="box-info2 box-3">
+        <div class="title v-align">
+          <div class="title-text d-flex">Account verification</div>
+          <div>
+            <mat-radio-group formControlName="request" required>
+              <mat-radio-button class="mr-2" value="1" color="primary" #confirm>Confirm</mat-radio-button>
+              <mat-radio-button value="2" color="primary" #reject>Reject</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="main-part" [hidden]="!confirm.checked">
+          <div class="box-part">
+            <!-- if confirm -->
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2 v-align">
+                    <div class="left-part">From</div>
+                  </div>
+                  <div class="col-10">
+                    <div class="right-part">
+                      <input [ngClass]="{'invalid-input': submitted && f.expireDateFrom.errors }" (keyup)="onKey($event)"
+                        #dateDirectivePicker="dpDayPicker" type="text" theme="dp-material" [dpDayPicker]="datePickerConfig"
+                        class="edit-input input-date" #expireDateFrom formControlName="expireDateFrom" placeholder="dd/mm/yyyy" required
+                        [minDate]="minDateAtt">
+                      <div *ngIf="submitted && f.expireDateFrom.invalid" class="invalid-feedback">
+                        <div *ngIf="f.expireDateFrom.errors.required">Date is required</div>
+                        <div *ngIf="f.expireDateFrom.errors.minDate">Date is invalid</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2 v-align">
+                    <div class="left-part">To</div>
+                  </div>
+                  <div class="col-10">
+                    <div class="right-part">
+                      <input [ngClass]="{'invalid-input': submitted && f.expireDateTo.errors }" (keyup)="onKey2($event)"
+                        #dateDirectivePicker="dpDayPicker" type="text" theme="dp-material" [dpDayPicker]="datePickerConfig"
+                        class="edit-input input-date" formControlName="expireDateTo" placeholder="dd/mm/yyyy" required
+                        [minDate]="expireDateFrom.value">
+                      <div *ngIf="submitted && f.expireDateTo.invalid" class="invalid-feedback">
+                        <div *ngIf="f.expireDateTo.errors.required">Date is required</div>
+                        <div *ngIf="f.expireDateTo.errors.minDate">Min date is {{ expireDateFrom.value }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main-part" [hidden]="!reject.checked">
+          <div class="box-part">
+            <!-- if reject -->
+            <div class="row mb-4">
+              <div class="col-4 v-align">
+                <div class="left-part">Reason:</div>
+              </div>
+              <div class="col-5">
+                <div class="right-part">
+                  <input [ngClass]="{'invalid-input': submitted && f.rejectReason.errors }" type="text"
+                    class="edit-input" formControlName="rejectReason" required>
+                  <div *ngIf="submitted && f.rejectReason.invalid" class="invalid-feedback">
+                    <div *ngIf="f.rejectReason.errors.required">Reason is required</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <div class="left-part">Can user correct request and reapply?</div>
+              </div>
+              <div class="col-8">
+                <div class="right-part">
+                  <mat-checkbox formControlName="canReapply" labelPosition="after" color="primary">Yes</mat-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- The Modal -->
+<div id="zoom" class="zoomModal" [hidden]="!zoomModal">
+  <span class="close" (click)="zoomModal = !zoomModal">&times;</span>
+  <img id="zoomImg">
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

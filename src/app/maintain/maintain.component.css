@@ -1,0 +1,21 @@
+.inner-page-title {
+  padding-left: 0;
+}
+
+.boxes {
+  margin-top: 22px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.box {
+  font-family: 'Clear Sans Bold';
+  height: 144px;
+  border-radius: 12px;
+  font-size: 21px;
+  line-height: 30px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  justify-content: center;
+}

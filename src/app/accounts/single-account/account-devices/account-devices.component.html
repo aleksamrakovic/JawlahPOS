@@ -1,0 +1,125 @@
+<div class="inner-page" *ngIf="accountData">
+
+  <div class="inner-page-title v-align">
+    <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+    <span>Devices</span>
+    <span class="right">{{ accountData.devices.length }}</span>
+  </div>
+
+  <!-- Device List -->
+  <div class="list-group mb-4">
+    <div class="list-group-header v-align">
+      <span style="width:20%">Device</span>
+      <span style="width:20%">OS</span>
+      <span style="width:25%">Latest access</span>
+      <span style="width:35%">Status</span>
+    </div>
+
+      <div class="list-group-item v-align" *ngFor="let item of accountData.devices">
+        <span style="width:20%">{{ item.name }}</span>
+        <span style="width:20%">{{ item.os }}</span>
+        <span style="width:25%">{{ item.lastAccessDate }}</span>
+        <span style="width:20%" class="font-weight-bold">{{ item.status }}</span>
+        <button style="width:15%" (click)="showBlockDevicePopup(item)" *ngIf="!item.blocked" class="btnNormal btnBlue">Block
+        </button>
+        <button style="width:15%" (click)="showUnblockDevicePopup(item)" *ngIf="item.blocked" class="btnNormal btnBlue">Unblock
+        </button>
+      </div>
+  </div>
+  <!-- Device list END -->
+
+</div>
+
+
+<!-- Block device popup -->
+<div class="popup-modal-page" *ngIf="blockDevicePopup">
+  <div class="popup-modal" *ngIf="accountData">
+    <form [formGroup]="form" (ngSubmit)="blockDevice(form)">
+      <div class="popup-modal-title v-align">Block device</div>
+      <div class="popup-modal-text">
+        <div class="row m-0">
+          <div class="col-3 p-0">
+            <img src="assets/icon/general/help.png">
+          </div>
+          <div class="col-9 p-0">
+            <div class="mb-2">
+              Are you sure you want to block device {{ deviceSelected.name }} to access account
+              <span class="bold">{{ accountData.shortId }} {{ accountData.name }}?</span>
+            </div>
+
+            <!-- material select -->
+            <mat-form-field [ngClass]="{'invalid-input': submitted && f.blockDeviceReason.errors }"
+              class="modal-input d-block" appearance="none">
+              <mat-select formControlName="blockDeviceReason" required placeholder="Select reason">
+                <mat-option *ngFor="let reason of blockDeviceReasons" [value]="reason">
+                  {{ reason.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="submitted && f.blockDeviceReason.invalid" class="invalid-feedback">
+              <div *ngIf="f.blockDeviceReason.errors.required">Reason is required</div>
+            </div>
+            <!-- material select END -->
+          </div>
+        </div>
+
+      </div>
+      <div class="popup-modal-buttons">
+        <button type="button" class="btn cancel-btn" (click)="hideBlockDevicePopup()">
+          <img src="assets/icon/general/cancel-button.png">Cancel
+        </button>
+        <button type="submit" class="btn confirm-btn">
+          <img src="assets/icon/general/checkout.png">Block
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Block device popup END -->
+
+<!-- Unblock device popup -->
+<div class="popup-modal-page" *ngIf="unblockDevicePopup">
+  <div class="popup-modal" *ngIf="accountData">
+    <form [formGroup]="form2" (ngSubmit)="unblockDevice(form2)">
+    <div class="popup-modal-title v-align">Unblock device</div>
+    <div class="popup-modal-text">
+      <div class="row m-0">
+        <div class="col-3 p-0">
+          <img src="assets/icon/general/help.png">
+        </div>
+        <div class="col-9 p-0">
+          <div class="mb-2">
+            Are you sure you want to unblock device {{ deviceSelected.name }} to access account
+            <span class="bold">{{ accountData.shortId }} {{ accountData.name }}?</span>
+          </div>
+
+          <!-- material select -->
+          <mat-form-field [ngClass]="{'invalid-input': submitted2 && f2.unblockDeviceReason.errors }"
+          class="modal-input d-block" appearance="none">
+            <mat-select formControlName="unblockDeviceReason" required placeholder="Select reason">
+              <mat-option *ngFor="let reason of unblockDeviceReasons" [value]="reason">
+                {{ reason.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <div *ngIf="submitted2 && f2.unblockDeviceReason.invalid" class="invalid-feedback">
+          <div *ngIf="f2.unblockDeviceReason.errors.required">Reason is required</div>
+        </div>
+        <!-- material select END -->
+        </div>
+      </div>
+    </div>
+    <div class="popup-modal-buttons">
+      <button type="button" class="btn cancel-btn" (click)="hideUnblockDevicePopup()">
+        <img src="assets/icon/general/cancel-button.png">Cancel
+      </button>
+      <button type="submit" class="btn confirm-btn">
+        <img src="assets/icon/general/checkout.png">Unblock
+      </button>
+    </div>
+    </form>
+  </div>
+</div>
+<!-- Unblock device popup END -->
+
+<loading-spinner *ngIf="loading"></loading-spinner>

@@ -1,0 +1,33 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  justify-content: center;
+}
+
+.reports-row {
+  flex-direction: column;
+  width: 427px;
+  margin: 70px auto 0 auto;
+}
+
+.reports-row a {
+  width: 100%;
+  height: 96px;
+  background-color: #0080ff;
+  color: #fff;
+  border-radius: 12px;
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.reports-row a img {
+  height: 25px;
+}

@@ -1,0 +1,359 @@
+<!-- different class for account page -->
+<div class="cart-menu"
+  [ngClass]="{'account-cart-mode-empty' : router.url == '/account', 'account-cart-mode-full' : (router.url == '/account' && paymentConfirmed) || (router.url == '/account' && reprintConfirmed) || (router.url == '/account' && cancelConfirmed), 'account-cart-mode-expand' : router.url == '/account' && lastActions}">
+
+  <!-- Cart title and icons -->
+  <div class="cart-title v-align" *ngIf="!paymentConfirmed && !cancelConfirmed && !reprintConfirmed"
+    [ngClass]="{'account-title-mode' : router.url == '/account', 'justify-content-between': cart.items.length > 0 && router.url != '/checkout'}">
+    <div *ngIf="router.url != '/checkout'" class="cart-icon">
+      <img src="assets/icon/general/cart.png">
+    </div>
+    <div *ngIf="router.url != '/checkout'">Cart
+      <span *ngIf="cart.items.length > 0">({{cart.items.length}})</span>
+    </div>
+    <div *ngIf="cart.items.length > 0 && router.url != '/checkout'">
+      <img (click)="deleteCart()" src="assets/icon/general/cart-delete.png">
+    </div>
+
+    <div *ngIf="router.url == '/checkout'">Purchase</div>
+  </div>
+  <!-- Cart title and icons END -->
+
+  <!-- Empty icon -->
+  <div class="cart-empty"
+    *ngIf="cart.items.length == 0 && !paymentConfirmed && router.url != '/account' && !cancelConfirmed && !reprintConfirmed">
+    <img src="assets/icon/general/cart-empty.png">
+  </div>
+
+  <!-- Scroll items list -->
+  <div class="scroll" [ngClass]="{'scroll-2' : router.url === '/checkout'}"
+    *ngIf="!paymentConfirmed && !cancelConfirmed && !reprintConfirmed">
+    <div class="cart-added" *ngFor="let item of cart.items; let i = index">
+
+      <!-- City cart items -->
+      <div class="box" *ngIf="item.cityTicket != null">
+        <div class="col-12">
+          <div class="row m-0">
+            <div class="col-11 p-0">
+              <div class="ticketAmount" *ngIf="selectedLang != 'ar'">{{ item.quantity }} x {{ item.cityTicket.route }}</div>
+              <div class="ticketAmount" *ngIf="selectedLang == 'ar'">{{ item.quantity }} x {{ item.cityTicket.routeTranslated }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang != 'ar'">{{ item.riderType.name }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang == 'ar'">{{ item.riderType.nameTranslated }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang != 'ar'">{{ item.cityTicket.name }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang == 'ar'">{{ item.cityTicket.nameTranslated }}</div>
+              <div class="ticketInfo" *ngIf="item.riderType.isGroup">(Group of {{ item.numberOfPassengers }})</div>
+              <div class="ticketInfo" *ngIf="item.accountNo">{{ item.accountNo }}</div>
+            </div>
+            <div class="col-1 p-0">
+              <img (click)="deleteCartItem(item,i)" src="assets/icon/general/cart-item-delete.png">
+            </div>
+          </div>
+
+          <!--price -->
+          <div *ngIf="selectedLang != 'ar'">
+            <div class="ticketPrice">{{ item.numberOfPassengers * item.cityTicket.price | currency:currency:''}}
+              {{ currency }}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">
+              {{ item.numberOfPassengers * item.cityTicket.price * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</div>
+          </div>
+
+          <!-- price ar -->
+          <div *ngIf="selectedLang == 'ar'">
+            <div class="ticketPrice">{{ item.numberOfPassengers * item.cityTicket.price | currency:currency:''}}
+              {{ translations.get(currency) }}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">
+              {{ item.numberOfPassengers * item.cityTicket.price * currencyRate | currency:secondCurrency:''}}
+              {{ translations.get(secondCurrency) }}</div>
+          </div>
+
+        </div>
+      </div>
+      <!-- City cart items END -->
+
+      <!-- Period City items -->
+      <div class="box" *ngIf="item.productPeriod != null">
+        <div class="col-12">
+          <div class="row m-0">
+            <div class="col-11 p-0">
+              <div class="ticketAmount" *ngIf="selectedLang != 'ar'">{{ item.quantity }} x {{ item.productPeriod.route }}</div>
+              <div class="ticketAmount" *ngIf="selectedLang == 'ar'">{{ item.quantity }} x {{ item.productPeriod.routeTranslated }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang != 'ar'">{{ item.riderType.name }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang == 'ar'">{{ item.riderType.nameTranslated }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang != 'ar'">{{ item.productPeriod.name }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang == 'ar'">{{ item.productPeriod.nameTranslated }}</div>
+              <div class="ticketInfo" *ngIf="item.accountNo">{{ item.accountNo }}</div>
+            </div>
+            <div class="col-1 p-0">
+              <img (click)="deleteCityPeriod(item,i)" src="assets/icon/general/cart-item-delete.png">
+            </div>
+          </div>
+          <!--price -->
+          <div *ngIf="selectedLang != 'ar'">
+            <div class="ticketPrice">{{ item.numberOfPassengers * item.productPeriod.price | currency:currency:''}} {{ currency }}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">
+              {{ item.numberOfPassengers * item.productPeriod.price * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</div>
+          </div>
+
+          <!-- price ar -->
+          <div *ngIf="selectedLang == 'ar'">
+            <div class="ticketPrice">{{ item.numberOfPassengers * item.productPeriod.price | currency:currency:''}} {{ translations.get(currency) }}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">
+              {{item.numberOfPassengers * item.productPeriod.price * currencyRate | currency:secondCurrency:''}} {{translations.get(secondCurrency)}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- Period City items END -->
+
+      <!-- Intercity cart items -->
+      <div class="box" *ngIf="item.intercityTicket != null">
+        <div class="col-12">
+          <div class="row m-0 mb-2">
+            <div class="col-11 p-0">
+              <div class="ticketAmount">{{ item.quantity }} x Intercity
+                <span *ngIf="!item.intercityTicket.isReturn">One-way</span>
+                <span *ngIf="item.intercityTicket.isReturn">Return</span>
+              </div>
+              <div class="ticketInfo" *ngIf="selectedLang != 'ar'">{{ item.riderType.name }}</div>
+              <div class="ticketInfo" *ngIf="selectedLang == 'ar'">{{ item.riderType.nameTranslated }}</div>
+
+              <div class="ticketInfo" *ngIf="item.riderType.isGroup">(Group of {{ item.numberOfPassengers }})</div>
+              <div class="ticketInfo" *ngIf="item.accountNo">{{ item.accountNo }}</div>
+            </div>
+            <div class="col-1 p-0">
+              <img (click)="deleteCartItemIntercity(item,i)" src="assets/icon/general/cart-item-delete.png">
+            </div>
+          </div>
+          <div class="station" *ngIf="selectedLang != 'ar'">{{ item.intercityTicket.busStationFromName }}</div>
+          <div class="station" *ngIf="selectedLang != 'ar'">{{ item.intercityTicket.busStationToName }}</div>
+          <div class="station" *ngIf="selectedLang == 'ar'">{{ item.intercityTicket.busStationFromNameTranslate }}</div>
+          <div class="station" *ngIf="selectedLang == 'ar'">{{ item.intercityTicket.busStationToNameTranslate }}</div>
+
+          <!-- price -->
+          <div *ngIf="selectedLang != 'ar'">
+            <div *ngIf="!item.intercityTicket.isReturn">
+              <div class="ticketPrice">{{item.intercityTicket.price * item.numberOfPassengers | currency:currency:''}}
+                {{currency}}</div>
+              <div class="ticketPriceSecond" *ngIf="showSecondCurrency">
+                {{item.intercityTicket.price * item.numberOfPassengers * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</div>
+            </div>
+            <div *ngIf="item.intercityTicket.isReturn">
+              <div class="ticketPrice">
+                {{item.intercityTicket.priceReturn * item.numberOfPassengers | currency:currency:''}} {{currency}}</div>
+              <div class="ticketPriceSecond" *ngIf="showSecondCurrency">
+                {{item.intercityTicket.priceReturn * item.numberOfPassengers * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+              </div>
+            </div>
+          </div>
+
+          <!-- price ar -->
+          <div *ngIf="selectedLang == 'ar'">
+            <div *ngIf="!item.intercityTicket.isReturn">
+              <div class="ticketPrice">{{item.intercityTicket.price * item.numberOfPassengers | currency:currency:''}}
+                {{translations.get(currency)}}</div>
+              <div class="ticketPriceSecond" *ngIf="showSecondCurrency">
+                {{item.intercityTicket.price * item.numberOfPassengers * currencyRate | currency:secondCurrency:''}}
+                {{ translations.get(secondCurrency)}}</div>
+            </div>
+            <div *ngIf="item.intercityTicket.isReturn">
+              <div class="ticketPrice">
+                {{item.intercityTicket.priceReturn * item.numberOfPassengers | currency:currency:''}}
+                {{translations.get(currency)}}</div>
+              <div class="ticketPriceSecond" *ngIf="showSecondCurrency">
+                {{item.intercityTicket.priceReturn * item.numberOfPassengers * currencyRate | currency:secondCurrency:''}}
+                {{translations.get(secondCurrency)}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Intercity cart items END -->
+
+
+      <!-- Luggage items -->
+      <div class="box" *ngIf="item.productBaggage != null"
+        [ngClass]="{'box-minus' : item.productBaggage.isIntercityTicket}">
+        <div class="col-12">
+          <div class="row m-0">
+            <div class="col-11 p-0">
+              <div class="ticketAmount" *ngIf="selectedLang != 'ar'">{{ item.quantity }} x {{ item.productBaggage.name }}</div>
+              <div class="ticketAmount" *ngIf="selectedLang == 'ar'">{{ item.quantity }} x {{ item.productBaggage.nameTranslated }}</div>
+              <div class="ticketInfo" *ngIf="item.productBaggage.isIntercityTicket">Ticket luggage</div>
+              <div class="ticketInfo" *ngIf="item.accountNo">{{ item.accountNo }}</div>
+            </div>
+            <div class="col-1 p-0" *ngIf="!item.productBaggage.isIntercityTicket">
+              <img (click)="deleteLuggage(item,i)" src="assets/icon/general/cart-item-delete.png">
+            </div>
+          </div>
+
+          <!-- price -->
+          <div *ngIf="selectedLang != 'ar'">
+            <div class="ticketPrice">{{item.productBaggage.price | currency:currency:''}} {{currency}}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">{{item.productBaggage.price * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</div>
+          </div>
+
+          <!-- price ar -->
+          <div *ngIf="selectedLang == 'ar'">
+            <div class="ticketPrice">{{item.productBaggage.price | currency:currency:''}} {{translations.get(currency)}}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">{{item.productBaggage.price * currencyRate | currency:secondCurrency:''}} {{translations.get(secondCurrency)}}</div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Luggage items END -->
+
+      <!-- Luggage items -->
+      <div class="box" *ngIf="item.productBaggageReturn != null"
+        [ngClass]="{'box-minus' : item.productBaggageReturn.isIntercityTicket}">
+        <div class="col-12">
+          <div class="row m-0">
+            <div class="col-11 p-0">
+              <div class="ticketAmount" *ngIf="selectedLang != 'ar'">{{ item.quantity }} x {{ item.productBaggageReturn.name }}</div>
+              <div class="ticketAmount" *ngIf="selectedLang == 'ar'">{{ item.quantity }} x {{ item.productBaggageReturn.nameTranslated }}</div>
+              <div class="ticketInfo" *ngIf="item.productBaggageReturn.isIntercityTicket">Ticket luggage return</div>
+              <div class="ticketInfo" *ngIf="item.accountNo">{{ item.accountNo }}</div>
+            </div>
+            <div class="col-1 p-0" *ngIf="!item.productBaggageReturn.isIntercityTicket">
+              <img (click)="deleteLuggage(item,i)" src="assets/icon/general/cart-item-delete.png">
+            </div>
+          </div>
+
+          <!-- price -->
+          <div *ngIf="selectedLang != 'ar'">
+            <div class="ticketPrice">{{item.productBaggageReturn.price | currency:currency:''}} {{currency}}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">{{item.productBaggageReturn.price * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</div>
+          </div>
+
+          <!-- price ar -->
+          <div *ngIf="selectedLang == 'ar'">
+            <div class="ticketPrice">{{item.productBaggageReturn.price | currency:currency:''}} {{translations.get(currency)}}</div>
+            <div *ngIf="showSecondCurrency" class="ticketPriceSecond">{{item.productBaggageReturn.price * currencyRate | currency:secondCurrency:''}} {{translations.get(secondCurrency)}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- Luggage items END -->
+
+
+      <!-- Penalty items -->
+      <div class="box" *ngIf="item.penalty != null">
+        <div class="col-12">
+          <div class="row m-0">
+            <div class="col-11 p-0">
+              <div class="ticketAmount">Penalty</div>
+              <div class="ticketInfo">{{ item.penalty.refNumber }}</div>
+              <div class="ticketInfo" *ngIf="item.accountNo">{{ item.accountNo }}</div>
+            </div>
+            <div class="col-1 p-0">
+              <img (click)="deletePenaltyItem(item,i)" src="assets/icon/general/cart-item-delete.png">
+            </div>
+          </div>
+          <div class="ticketPrice">{{ item.penalty.value | currency:currency:''}} {{ currency }}</div>
+          <div *ngIf="showSecondCurrency" class="ticketPriceSecond">{{ item.penalty.value * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+          </div>
+        </div>
+      </div>
+      <!--Penalty items END -->
+
+      <!-- Topup account wasel -->
+      <div class="box" *ngIf="item.topupAccount != null">
+        <div class="col-12">
+          <div class="row m-0">
+            <div class="col-11 p-0">
+              <div class="ticketAmount" *ngIf="selectedLang != 'ar'">Account top up</div>
+              <div class="ticketAmount" *ngIf="selectedLang == 'ar'">{{ translations.get('Account top up') }}</div>
+              <div class="ticketInfo">{{item.accountNo}}</div>
+            </div>
+            <div class="col-1 p-0">
+              <img (click)="deleteTopUpItem(item,i)" src="assets/icon/general/cart-item-delete.png">
+            </div>
+          </div>
+          <div class="ticketPrice" *ngIf="selectedLang != 'ar'">{{ item.topupAccount.value | currency:currency:''}}
+            {{ currency }}</div>
+          <div class="ticketPrice" *ngIf="selectedLang == 'ar'">{{ item.topupAccount.value | currency:currency:''}}
+            {{ translations.get(currency) }}</div>
+          <div *ngIf="showSecondCurrency && selectedLang != 'ar'" class="ticketPriceSecond">{{ item.topupAccount.value * currencyRate | currency:secondCurrency:''}}
+            {{secondCurrency}}</div>
+          <div *ngIf="showSecondCurrency && selectedLang == 'ar'" class="ticketPriceSecond">{{ item.topupAccount.value * currencyRate | currency:secondCurrency:''}}
+            {{ translations.get(secondCurrency) }}</div>
+        </div>
+      </div>
+      <!-- Topup account wasel end -->
+
+    </div>
+    <!-- Cart items END -->
+  </div>
+  <!-- Scroll End -->
+
+  <!-- Bottom box for price and checkout button -->
+  <div class="bottom" *ngIf="cart.items.length > 0 && !paymentConfirmed && !cancelConfirmed && !reprintConfirmed">
+    <div class="box-down d-flex">
+      <div class="col-3 p-0">
+        <span class="totalTitle text-uppercase">Total</span>
+      </div>
+      <div class="col-9 p-0">
+        <div class="totalAmount" *ngIf="selectedLang != 'ar'">{{ cart.total | currency:currency:''}} {{ currency }}</div>
+        <div class="totalAmount" *ngIf="selectedLang == 'ar'">{{ cart.total | currency:currency:''}} {{ translations.get(currency) }}</div>
+        <div *ngIf="showSecondCurrency && selectedLang != 'ar'" class="totalAmountSecond">{{ cart.total  * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</div>
+        <div *ngIf="showSecondCurrency && selectedLang == 'ar'" class="totalAmountSecond">{{ cart.total  * currencyRate | currency:secondCurrency:''}} {{ translations.get(secondCurrency) }}</div>
+      </div>
+    </div>
+    <div>
+      <button *ngIf="router.url !== '/checkout'" routerLink="/checkout" class="btnNormal btnGreen btnXl w-100">
+        <img src="assets/icon/general/checkout.png">Checkout
+      </button>
+    </div>
+  </div>
+  <!-- Bottom box for price and checkout button END -->
+
+  <!-- Payment show icon-end -->
+  <div class="payment-box" *ngIf="paymentConfirmed">
+    <img src="assets/icon/icon_OK.png" class="icon-ok d-block text-center">
+    <span class="payment-title d-block text-center">Purchase Confirmed</span>
+  </div>
+  <!-- Payment show icon-end END -->
+
+  <!-- Payment buttons/ Last actions before finishing-->
+  <div class="payment-box2"
+    *ngIf="cart.items.length == 0 && lastActions && !showCardTransaction && !cancelConfirmed && !reprintConfirmed"
+    [ngClass]="{'account-mode' : router.url == '/account'}">
+    <div class="last-action">LAST PURCHASE ACTIONS</div>
+    <button class="btn print-btn v-align lastActionBtn" (click)="printAgain()">
+      <img src="assets/icon/checkout/reprint-ticket.png">Print Again
+    </button>
+    <button class="btn cancel-btn v-align lastActionBtn" (click)="cancelTicket()">
+      <img src="assets/icon/checkout/cancel-ticket.png">Cancel Purchase
+    </button>
+  </div>
+  <!-- Payment buttons/ Last actions END -->
+
+
+  <!-- Payment cancell icon-end -->
+  <div class="payment-box" *ngIf="cancelConfirmed">
+    <img src="assets/icon/icon_OK.png" class="icon-ok d-block text-center">
+    <span class="payment-title d-block text-center">Purchase Cancelled</span>
+  </div>
+  <!-- Payment cancell icon-end END -->
+
+  <!-- Payment reprint icon-end -->
+  <div class="payment-box" *ngIf="reprintConfirmed">
+    <img src="assets/icon/icon_OK.png" class="icon-ok d-block text-center">
+    <span class="payment-title d-block text-center">Purchase Reprinted</span>
+  </div>
+  <!-- Payment reprint icon-end END -->
+
+  <!-- Cancel card transaction field -->
+  <div class="payment-box2" *ngIf="showCardTransaction" [ngClass]="{'account-mode' : router.url == '/account'}">
+    <form [formGroup]="form" (ngSubmit)="form.valid && submitForm(form)">
+      <div class="last-action">ENTER TRANSACTION</div>
+      <input type="text" class="form-control transaction-input" #transNo formControlName="transNo" required
+        autocomplete="off" />
+      <button class="btnNormal btnGreen btnXl w-100" type="submit" [disabled]="!form.valid">
+        <img src="assets/icon/general/checkout.png">Confirm
+      </button>
+    </form>
+  </div>
+  <!-- Cancel card field END -->
+
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

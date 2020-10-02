@@ -1,0 +1,44 @@
+<!-- Page 2 part / Enter Username -->
+<div class="login-box-main">
+
+  <div class="login-box1 text-center">
+    <a class="back-link" routerLink="/login"><img src="assets/icon/general/blue-back.png"></a>
+    <div class="login-title v-align">Log in to pos
+      <span class="login-title-pos" *ngIf="posInfo">{{ posInfo.id }}, {{ posInfo.location }}</span>
+    </div>
+  </div>
+
+  <div class="login-box2">
+    <form [formGroup]="form" (ngSubmit)="getByUsername(form.value)">
+
+      <div class="login-subtitle text-center" *ngIf="(!submitted || form.valid) && !errorInfo">
+        Enter your username / ID
+      </div>
+      <div class="error-message text-center" *ngIf="submitted && form.valid && errorInfo && online">
+        <div *ngIf="submitted && form.valid && errorInfo">{{ errorInfo }}</div>
+      </div>
+      <div class="error-message text-center" *ngIf="submitted && form.controls.username.errors && online">
+        <div *ngIf="form.controls.username.errors.required">Please fill in the required field.</div>
+      </div>
+      <div class="error-message text-center" *ngIf="submitted && !online">
+        No internet connection
+      </div>
+
+      <div class="form-group mb-0">
+        <div class="input-group login-input">
+          <input #usernameInput type="text" class="form-control login-user-input" formControlName="username"
+            [ngClass]="{ 'invalid-input' : submitted && !form.valid || errorInfo}" autocomplete="off" />
+          <div class="input-group-append">
+            <button type="submit" class="btn login-btn-arrow">
+              <img style="transform: rotate(270deg);" src="assets/icon/general/next-white.png">
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+<loading-spinner *ngIf="loading"></loading-spinner>
+<!-- Page 2 part END -->

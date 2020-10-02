@@ -1,0 +1,53 @@
+<div class="inner-page">
+  <div class="inner-page-title v-align">
+    <span class="back" routerLink="/pos-user"><img src="assets/icon/general/white-back.png"></span>
+    <span>Session history</span>
+  </div>
+
+  <div class="pos-users-list">
+    <div class="title">History</div>
+    <div class="header v-align">
+      <span style="width:20%">Name Surname</span>
+      <span style="width:15%">From</span>
+      <span style="width:15%">To</span>
+      <span style="width:20%">Duration</span>
+      <span style="width:30%">Active vs Locked(%)</span>
+    </div>
+    <div class="list-data" *ngIf="historyList">
+      <!-- History list -->
+      <div class="list-item v-align" *ngFor="let user of historyList | paginate: config">
+        <span style="width:20%">{{ user.name }}</span>
+        <span style="width:15%">{{ user.loggedFrom | date: 'dd/MM/yyyy HH:mm:ss'}}</span>
+        <span style="width:15%">{{ user.loggedTo | date: 'dd/MM/yyyy HH:mm:ss'}}</span>
+        <span style="width:20%">{{ user.duration }}</span>
+        <span style="width:30%">{{ user.activeTime }}</span>
+      </div>
+      <!-- History list -->
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="historyList">
+    <pagination-template class="my-pagination" #p="paginationApi" maxSize="999" [id]="config.id"
+      (pageChange)="config.currentPage = $event">
+      <button class="pagination-first" (click)="p.setCurrent(1)" [disabled]="p.isFirstPage()">
+        <img src="assets/icon/general/first_page.png" [ngClass]="{'page-disabled' : p.isFirstPage()}">
+      </button>
+      <button class="pagination-previous" (click)="p.previous()" [disabled]="p.isFirstPage()">
+        <img src="assets/icon/general/nav-back.png" [ngClass]="{'page-disabled' : p.isFirstPage()}">
+      </button>
+      <div class="current-pages">
+        <a>{{ config.currentPage }} / {{ p.pages.length }}</a>
+      </div>
+      <button class="pagination-next" (click)="p.next()" [disabled]="p.isLastPage()">
+        <img src="assets/icon/general/nav-next.png" [ngClass]="{'page-disabled' : p.isLastPage()}">
+      </button>
+      <button class="pagination-last" (click)="p.setCurrent(p.pages.length)" [disabled]="p.isLastPage()">
+        <img src="assets/icon/general/last_page.png" [ngClass]="{'page-disabled' : p.isLastPage()}">
+      </button>
+    </pagination-template>
+  </div>
+
+</div>
+
+<loading-spinner *ngIf="!historyList"></loading-spinner>

@@ -1,0 +1,38 @@
+<div class="row m-0">
+
+  <div class="inner-page">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/account/tickets/period/products"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="routeInfo">{{ routeInfo.city.name }} / {{ riderType.name }}</span>
+    </div>
+
+    <div class="ticket-list" *ngIf="items">
+      <!-- Dynamic List of period products -->
+      <div class="ticket-item" *ngFor="let item of items; let i = index" [ngClass]="{'btnGreen' : item.quantity > 0}">
+        <div class="row m-0">
+          <div class="col-6 p-0">
+            <div class="ticket-info">{{ item.productPeriod.name }}</div>
+            <div class="ticket-price">{{ item.productPeriod.price | currency:currency:''}} {{currency}}</div>
+            <div class="ticket-price" *ngIf="showSecondCurr">{{ item.productPeriod.price * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</div>
+          </div>
+          <div class="col-6 text-right p-0">
+            <a class="btn btn-minus" [ngClass]="{'btn-blue': item.quantity > 0}" (click)="removeFromCart(item, i)">
+              <img *ngIf="item.quantity == 0" src="assets/icon/general/minus_black.png">
+              <img *ngIf="item.quantity > 0" src="assets/icon/general/minus_white.png">
+            </a>
+            <span class="ticket-amount">{{ item.quantity }}</span>
+            <a class="btn btn-plus" (click)="addToCart(item)">
+              <img src="assets/icon/general/plus_white.png">
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- END-->
+    </div>
+
+  </div>
+
+  <div class="cart">
+    <app-cart></app-cart>
+  </div>
+</div>

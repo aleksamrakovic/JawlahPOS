@@ -1,0 +1,96 @@
+<div class="row m-0">
+  <div class="inner-page">
+
+    <div class="inner-page-title v-align" *ngIf="penaltySelected">
+      <span class="back" routerLink="/account/penalties"><img src="assets/icon/general/white-back.png"></span>
+      <span>Penalty {{ penaltySelected.penalty.refNumber }}</span>
+    </div>
+
+    <div class="penalty-scroll" *ngIf="penaltySelected">
+      <div class="penalty-details-menu">
+        <div class="penalty-details-menu-title">Penalty details</div>
+        <div class="penalty-details-part" [ngClass]="{'penalty-paid' : penaltySelected.penalty.status == 'In cart'}">
+          <div class="row">
+            <div class="col-4 p-0"><span class="left-details">Issued</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.issued }}</span></div>
+          </div>
+          <div class="row border-bot m-0 pb-4">
+            <div class="col-4 p-0"><span class="left-details">Route</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.route }}</span></div>
+          </div>
+        </div>
+        <div class="penalty-details-part" [ngClass]="{'penalty-paid' : penaltySelected.penalty.status == 'In cart'}">
+          <div class="row">
+            <div class="col-4 p-0"><span class="left-details">Reason</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.reason }}</span></div>
+          </div>
+          <div class="row">
+            <div class="col-4 p-0"><span class="left-details">Value</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.value | currency:currency:''}}
+                {{currency}}</span></div>
+          </div>
+          <div class="row border-bot m-0 pb-4">
+            <div class="col-4 p-0"><span class="left-details">Comment</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.comment }}</span></div>
+          </div>
+        </div>
+        <div class="penalty-details-part border-none"
+          [ngClass]="{'penalty-paid': penaltySelected.penalty.status == 'In cart'}">
+          <div class="row m-0">
+            <div class="col-4 p-0">
+              <span class="left-details">Status</span>
+            </div>
+            <div class="col-8 p-0 d-flex justify-content-between">
+              <span style="vertical-align: top" class="right-details">
+                {{ penaltySelected.penalty.status }}
+              </span>
+              <span *ngIf="penaltySelected.penalty.status == 'Paid'" class="right-details">
+                <img src="assets/icon/penalty-ok.png">{{ penaltySelected.penalty.paymentDate }}
+              </span>
+              <button (click)="removeFromCart(penaltySelected)" *ngIf="penaltySelected.penalty.status == 'In cart'"
+                class="pay-btn">
+                In cart <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="penalty-details-menu">
+        <div class="penalty-details-menu-title">Issued person details</div>
+        <div class="penalty-details-part" [ngClass]="{'penalty-paid' : penaltySelected.penalty.status == 'In cart'}">
+          <div class="row">
+            <div class="col-4 p-0"><span class="left-details">Account</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.account.id }}</span></div>
+          </div>
+          <div class="row">
+            <div class="col-4 p-0"><span class="left-details">Name</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.account.name }}</span></div>
+          </div>
+          <div class="row border-bot m-0 pb-4">
+            <div class="col-4 p-0"><span class="left-details">Type</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.account.type }}</span></div>
+          </div>
+        </div>
+        <div class="penalty-details-part border-none"
+          [ngClass]="{'penalty-paid' : penaltySelected.penalty.status == 'In cart'}">
+          <div class="row">
+            <div class="col-4 p-0"><span class="left-details">E-mail</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.account.email }}</span></div>
+          </div>
+          <div class="row border-bot m-0 pb-4">
+            <div class="col-4 p-0"><span class="left-details">Phone</span></div>
+            <div class="col-8 p-0"><span class="right-details">{{ penaltySelected.penalty.account.phone }}</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- Left part END -->
+
+
+  <app-cart></app-cart>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

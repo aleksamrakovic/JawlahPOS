@@ -1,0 +1,112 @@
+.cashout-card {
+  margin-top: 72px;
+  border-radius: 12px;
+  background-color: #e4e4e4;
+  width: 729px;
+  color: #000;
+}
+
+.cashout-card-header {
+  height: 96px;
+  padding-left: 75px;
+  font-family: "Clear Sans Bold";
+  font-size: 23px;
+  letter-spacing: 1.31px;
+  color: #474747;
+  line-height: 36px;
+  border-bottom: 2px solid #979797;
+  display: flex;
+  align-items: center;
+}
+
+.cashout-card-body {
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+  width: 100%;
+  padding: 0;
+}
+
+.cashout-card-text {
+  font-size: 23px;
+  line-height: 39px;
+  padding: 36px 75px 47px 75px;
+}
+
+.cashout-card-text-form {
+  padding: 0px 75px 0 75px;
+}
+
+.input-cashout {
+  height: 96px;
+  border-radius: 12px;
+  border: 2px solid #979797;
+  width: 278px;
+  display: inline-block;
+  font-size: 46px;
+  color: #000;
+  -webkit-appearance: none;
+  font-weight: bold;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: gray;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.cashout-card label {
+  margin-left: 25px;
+  font-size: 27px;
+  line-height: 39px;
+  transform: translateY(-10px);
+}
+
+.cashout-card .buttons-holder {
+  border-top: 1px solid #000;
+  margin-top: 50px;
+  display: flex;
+}
+
+.cashout-card .confirm-btn, .cancel-btn {
+  height: 96px;
+  width: 100%;
+  font-size: 21px;
+  line-height: 30px;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-family: 'Clear Sans Bold';
+}
+
+.cashout-card .confirm-btn img, .cancel-btn img {
+  margin-right: 10px;
+}
+
+.cashout-card .confirm-btn {
+  background-color: #81E03F;
+  border-radius: 0 0 12px 0;
+}
+
+.cashout-card .cancel-btn {
+  background-color: #0080ff;
+  border-radius: 0 0 0 12px;
+  color: #fff;
+  border-right: 1px solid #000;
+}
+
+.cashout-card .cancel-btn:focus,
+.cashout-card .confirm-btn:focus {
+  outline: none;
+  box-shadow: none;
+}

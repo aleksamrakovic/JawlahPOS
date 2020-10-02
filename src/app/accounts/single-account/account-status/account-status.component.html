@@ -1,0 +1,115 @@
+<!-- Account status menu -->
+<div class="account-status-page" *ngIf="accountData">
+  <div class="account-status-title v-align">Account status</div>
+
+  <div class="row m-0">
+    <div class="col-3 p-0">
+      <div class="account-status-left">Id</div>
+    </div>
+    <div class="col-9 p-0">
+      <div class="account-status-right">{{ accountData.shortId }}</div>
+    </div>
+  </div>
+  <div class="row m-0">
+    <div class="col-3 p-0">
+      <div class="account-status-left">Type</div>
+    </div>
+    <div class="col-9 p-0">
+      <div class="account-status-right">{{ accountData.type | titlecase  }}</div>
+    </div>
+  </div>
+  <div class="row m-0" *ngIf="accountData.verified && !accountData.verifiedFuture">
+    <div class="col-3 p-0">
+      <div class="account-status-left">Exp.</div>
+    </div>
+    <div class="col-9 p-0">
+      <div class="account-status-right" *ngIf="accountData.verificationRequest">
+        {{ accountData.verificationRequest.concessionExpirationTimestamp }}
+      </div>
+    </div>
+  </div>
+  <!-- rejected verify -->
+  <div class="row m-0" *ngIf="accountData.rejected">
+    <div class="col-3 p-0">
+      <div class="account-status-left" style="color: #D0021B;">Rej.</div>
+    </div>
+    <div class="col-9 p-0">
+      <div class="account-status-right" style="color: #D0021B;" *ngIf="accountData.verificationRequest">
+        {{ accountData.verificationRequest.targetRider }}
+      </div>
+    </div>
+  </div>
+  <div class="row m-0" *ngIf="accountData.rejectionDate">
+    <div class="col-3 p-0">
+      <div class="account-status-left" style="color: #D0021B;">Date</div>
+    </div>
+    <div class="col-9 p-0">
+      <div class="account-status-right" style="color: #D0021B;">{{ accountData.rejectionDate }}</div>
+    </div>
+  </div>
+
+  <div class="row m-0" *ngIf="accountData.email">
+    <div class="col-3 p-0">
+      <div class="account-status-left">
+        <img src="assets/icon/account/account-status-mail.png">
+      </div>
+    </div>
+    <div class="col-9 p-0">
+      <div class="account-status-right">{{ accountData.email }}</div>
+    </div>
+  </div>
+  <div class="row m-0" *ngIf="accountData.phone">
+    <div class="col-3 p-0">
+      <div class="account-status-left">
+        <img src="assets/icon/account/account-status-phone.png">
+      </div>
+    </div>
+    <div class="col-9 p-0">
+      <div class="account-status-right">{{ accountData.phone }}</div>
+    </div>
+  </div>
+
+
+  <div class="part-action-links">
+    <!-- hide credit if user is not allowed -->
+    <a class="account-status-link" [routerLink]="!accountData.blocked ? ['/account/wasel'] : []" *ngIf="hasTopup">Credit
+      <span>
+        {{ accountData.credit | currency:currency:''}} {{currency}}
+        <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
+      </span>
+    </a>
+    <a class="account-status-link" [routerLink]="accountData.ticketsNum > 0 && !accountData.blocked ? ['/account/tickets/all'] : []">Tickets
+      <span>
+        {{ accountData.ticketsNum }}
+        <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
+      </span>
+    </a>
+    <a class="account-status-link" [routerLink]="accountData.penaltiesNum > 0 && !accountData.blocked ? ['/account/penalties'] : []">Penalties
+      <span>
+        {{ accountData.penaltiesNum }}
+        <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
+      </span>
+    </a>
+    <a class="account-status-link" [routerLink]="accountData.devicesNum > 0 && !accountData.blocked ? ['/account/devices'] : []">Devices
+      <span>
+        {{ accountData.devicesNum }}
+        <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
+      </span>
+    </a>
+    <a class="account-status-link" [routerLink]="accountData.paymentsNum > 0 && !accountData.blocked ? ['/account/payments'] : []">Purchases
+      <span>
+        {{ accountData.paymentsNum }}
+        <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
+      </span>
+    </a>
+    <a class="account-status-link" [routerLink]="accountData.linkedAccountNum > 0 && !accountData.blocked ? ['/account/links'] : []">Linked
+      Accounts
+      <span>
+        {{ accountData.linkedAccountNum }}
+        <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
+      </span>
+    </a>
+  </div>
+
+</div>
+<!-- Account status END -->

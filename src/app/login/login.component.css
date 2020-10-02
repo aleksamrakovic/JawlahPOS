@@ -1,0 +1,110 @@
+.center-page {
+  width: 669px;
+  margin: 0 auto;
+}
+
+.login-part-one {
+  padding-top: 80px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  margin-bottom: 5px;
+}
+
+.login-pos-title {
+  font-size: 46px;
+  line-height: 72px;
+  font-family: "Clear Sans Medium";
+  color: #000;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.pos-location {
+  color: #A5001D;
+}
+
+.login-logo {
+  max-width: 100%;
+  max-height: 150px;
+}
+
+/*Login Button*/
+.login-btn {
+  display: block;
+  width: 100%;
+  height: 144px;
+  border-radius: 12px;
+  font-size: 21px;
+  letter-spacing: 1.2px;
+  margin-top: 142px;
+  background-color: #0080ff;
+  color: #fff;
+}
+
+.login-btn img {
+  margin-right: 20px;
+}
+
+.login-distribution, .login-appVersion {
+  color: #000000;
+  opacity: 0.25;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.login-appVersion {
+  margin-left: 50px;
+}
+
+.login-box1 {
+  border-bottom: 2px solid #bdbdbd;
+  position: relative;
+}
+
+.back-link {
+  position: absolute;
+  left: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.login-title {
+  height: 96px;
+  font-size: 23px;
+  line-height: 31px;
+  letter-spacing: 1.31px;
+  color: #303030;
+  justify-content: center;
+  text-transform: uppercase;
+  font-family: 'Clear Sans Bold';
+}
+
+.login-title-pos {
+  color: #A5001D;
+  margin-left: 5px;
+}
+
+.login-subtitle {
+  padding: 45px 0;
+  font-size: 23px;
+  color: #000000;
+  line-height: 31px;
+}
+
+.power-off-btn {
+  border: none;
+  position: absolute;
+  color: #0080ff;
+  top: 20px;
+  right: 20px;
+  font-size: 45px;
+  background-color: transparent;
+  padding: 0;
+}
+
+.power-off-btn:focus {
+  outline: none;
+  box-shadow: none;
+}

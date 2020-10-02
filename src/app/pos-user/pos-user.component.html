@@ -1,0 +1,101 @@
+<div class="inner-page" *ngIf="pageTranslate">
+
+  <div class="inner-page-title v-align">{{pageTranslate.header[6]}}</div>
+
+  <!-- All users list -->
+  <div class="pos-users-list" *ngIf="posUsers">
+    <div class="title"><span>Users</span></div>
+    <div class="header v-align">
+      <div style="width:20%">{{pageTranslate.posUsers.usersHeader[0]}}</div>
+      <div style="width:10%">{{pageTranslate.posUsers.usersHeader[1]}}</div>
+      <div style="width:20%">{{pageTranslate.posUsers.usersHeader[2]}}</div>
+      <div style="width:10%">{{pageTranslate.posUsers.usersHeader[3]}}</div>
+      <div style="width:40%">{{pageTranslate.posUsers.usersHeader[4]}}</div>
+    </div>
+
+    <div class="list-data">
+      <!-- POS User list -->
+      <div class="list-item v-align" *ngFor="let user of posUsers">
+        <span style="width:20%">{{ user.firstName }} {{user.lastName}}</span>
+        <span style="width:10%">{{ user.id }}</span>
+        <span style="width:20%">{{ user.employeeRoleName }}</span>
+        <span style="width:10%">{{ user.status }}</span>
+        <span style="width:23%">{{ user.lastLoginDate | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+        <button (click)="showRestPassPopup(user)" style="width:17%"
+          class="btnNormal btnBlue">{{pageTranslate.posUsers.button}}</button>
+      </div>
+      <!-- User list END -->
+    </div>
+  </div>
+  <!-- All users list END -->
+
+  <!-- Today user session list -->
+  <div class="pos-users-list" *ngIf="posUsersSession">
+    <div class="title d-flex justify-content-between">
+      <span>{{pageTranslate.posUsers.sessionHeaderTitle}}</span>
+      <span routerLink="/pos-user/history" class="history-title">
+        {{pageTranslate.posUsers.sessionHeaderSubtitle}} <img src="assets/icon/general/arrow-right.png">
+      </span>
+    </div>
+    <div class="header v-align">
+      <span style="width:20%">{{pageTranslate.posUsers.sessionHeader[0]}}</span>
+      <span style="width:15%">{{pageTranslate.posUsers.sessionHeader[1]}}</span>
+      <span style="width:15%">{{pageTranslate.posUsers.sessionHeader[2]}}</span>
+      <span style="width:20%">{{pageTranslate.posUsers.sessionHeader[3]}}</span>
+      <span style="width:30%">{{pageTranslate.posUsers.sessionHeader[4]}}</span>
+    </div>
+    <div class="list-data">
+      <!-- User Session list -->
+      <div class="list-item v-align" *ngFor="let user of posUsersSession">
+        <span style="width:20%">{{ user.name}}</span>
+        <span style="width:15%">{{ user.loggedFrom | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+        <span style="width:15%">{{ user.loggedTo | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+        <span style="width:20%">{{ user.duration }}</span>
+        <span style="width:30%">{{ user.activeTime }}</span>
+      </div>
+      <!-- User Session list -->
+    </div>
+  </div>
+  <!-- Today user session list END -->
+</div>
+
+<!-- Popup reset pass -->
+<div *ngIf="resetPassPopup">
+  <div class="popup-modal-page">
+    <div class="popup-modal">
+      <form name="form" (ngSubmit)="f.valid && resetPass(f)" #f="ngForm">
+        <div class="popup-modal-title v-align">Reset password</div>
+        <div class="popup-modal-text">
+          <div class="mb-4">Enter new 4-digit password for POS user {{ userPosSelected.firstName }}
+            {{ userPosSelected.lastName }}</div>
+
+          <div class="row">
+            <div class="col-4 v-align">Password</div>
+            <div class="col-8">
+              <input class="modal-input" name="password" type="password" ngModel #password="ngModel"
+                [ngClass]="{ 'invalid-input': f.submitted && password.invalid }" required minlength="4" maxlength="4"
+                pattern="[0-9]*" inputmode="numeric">
+              <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                <div *ngIf="password.errors.required">New password is required</div>
+                <div *ngIf="password.errors.pattern">Password must be a 4-digit number</div>
+                <div *ngIf="password.errors.minlength">Passwords must be 4 characters length</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="popup-modal-buttons">
+          <button type="button" class="btn cancel-btn" (click)="resetPassPopup = !resetPassPopup">
+            <img src="assets/icon/general/cancel-button.png">Cancel
+          </button>
+          <button class="btn confirm-btn">
+            <img src="assets/icon/general/checkout.png">Set new pass
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

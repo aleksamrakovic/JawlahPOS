@@ -1,0 +1,72 @@
+.account-penalties-history-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 24px 0;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.account-penalties-list {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.account-penalties-list-header {
+  background-color: #9b9b9b;
+  letter-spacing: 1.33px;
+  text-transform: uppercase;
+  font-family: 'Clear Sans Medium';
+  height: 48px;
+  padding: 0 24px;
+}
+
+/******************************** PENALTY LIST ************************************
+************************************************************************************/
+.penalties-list-data {
+  max-height: 400px;
+  overflow-y: overlay;
+}
+
+.penalties-list-item {
+  height: 72px;
+  background-color: #fff;
+  padding: 0 24px 0 12px;
+  border-bottom: 1px solid #979797;
+  border-left: 12px solid transparent;
+  word-break: break-word;
+  font-size: 15px;
+}
+
+.penalty-added {
+  border-left: 12px solid #81E03F;
+}
+
+.penalty-issued-date {
+  line-height: 19px;
+  color: #474747;
+}
+
+.penalty-account-name, .penalty-account-id {
+  color: #0080ff;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.52px;
+  display: block;
+}
+
+.penalty-account-id {
+  color: #474747;
+}
+
+.penalty-incart, .penalty-paid {
+  color: #474747;
+  letter-spacing: 1.03px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.penalty-paid {
+  color: #46aa00;
+}

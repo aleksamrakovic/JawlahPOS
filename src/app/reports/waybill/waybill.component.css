@@ -1,0 +1,34 @@
+.inner-page {
+  width: 100%;
+}
+
+.report-item {
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.report-header {
+  padding: 0 24px;
+  background-color: #9b9b9b;
+  font-family: 'Clear Sans Regular';
+  letter-spacing: 0.67px;
+  height: 48px;
+}
+
+.report-data {
+  padding: 0 24px;
+  background-color: #fff;
+  border-bottom: 1px solid #979797;
+  height: 72px;
+  word-wrap: break-word;
+}
+
+.report-data .bold {
+    font-family: 'Clear Sans Bold';
+}
+
+.report-data .red {
+  color: #D0021B;
+}

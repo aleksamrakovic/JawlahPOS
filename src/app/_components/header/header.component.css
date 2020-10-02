@@ -1,0 +1,36 @@
+.list-group {
+  background-color: #000;
+  height: 720px;
+  padding: 0 15px;
+  /* already have flex by default, column direction*/
+  justify-content: space-around;
+}
+
+.header-link {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  color: #0080FF;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.header-link .header-icon {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.header-icon span {
+  display: block;
+}
+
+/* set active link */
+.header-link.active {
+  color: #fff;
+}
+
+.header-link.disabled {
+  opacity: 0.4;
+}

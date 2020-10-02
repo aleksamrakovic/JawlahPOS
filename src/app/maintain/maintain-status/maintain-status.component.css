@@ -1,0 +1,63 @@
+.maintain-status-page {
+  height: 720px;
+  background-color: #e4e4e4;
+  padding: 0 24px;
+  width: 302px;
+}
+
+.maintain-status-title {
+  height: 96px;
+  font-size: 23px;
+  letter-spacing: 1.31px;
+  color: #474747;
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.status-box {
+  padding-top: 15px;
+  margin-bottom: 23px;
+}
+
+.left, .right {
+  font-family: 'Clear Sans Medium';
+  color: #474747;
+  letter-spacing: 1.33px;
+  font-size: 18px;
+  line-height: 36px;
+  text-transform: uppercase;
+}
+
+.right {
+  font-family: 'Clear Sans Regular';
+  color: #000;
+  letter-spacing: 0.67px;
+}
+
+.device-status {
+  margin-bottom: 23px;
+}
+
+.icon-holder i {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 40px;
+  vertical-align: middle;
+}
+
+.deviceId {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.67px
+}
+
+/* classes for device status */
+.connected {
+  color: #46AA00!important;
+}
+
+.disconnected {
+  color: #f00;
+}

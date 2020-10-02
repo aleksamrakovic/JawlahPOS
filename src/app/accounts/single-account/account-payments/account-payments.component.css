@@ -1,0 +1,128 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.payments-history-title {
+  color: #fff;
+  letter-spacing: 0.63px;
+  text-transform: uppercase;
+  margin: 15px 0;
+  position: relative;
+  font-family: 'Clear Sans Medium';
+}
+
+.payments-history-length {
+  position: absolute;
+  right: 0;
+}
+
+.list-group {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.list-group .list-group-header {
+  height: 48px;
+  background-color: #9b9b9b;
+  letter-spacing: 0.67px;
+  padding: 0 24px;
+}
+
+.list-group-header > span {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 2px;
+}
+
+.list-group .list-group-item {
+  height: 72px;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.125);
+  word-break: break-word;
+  font-weight: bold;
+}
+
+.list-group-item > span {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 2px;
+}
+
+.list-group-item:first-child {
+  border-radius: 0;
+}
+
+.report-msg {
+  color: #fff;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/**********************************Pagination style********************************
+***********************************************************************************/
+.my-pagination {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  height: 72px;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-next {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination .pagination-first, .my-pagination .pagination-last {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-first, .my-pagination .pagination-next {
+  border-right: 1px solid #000;
+}
+
+.my-pagination .page-disabled {
+  opacity: 0.5;
+}
+
+.current-pages {
+  width: 40%;
+  background-color: #0080ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #000;
+}
+
+.current-pages a {
+  letter-spacing: 1.71px;
+  color: #fff;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+}

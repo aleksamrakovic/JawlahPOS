@@ -1,0 +1,246 @@
+<div class="row m-0">
+  <div class="inner-page">
+
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/intercity-route"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="riderInfo && selectedLang == 'ar'">{{riderInfo.city.nameTranslated}} / {{riderInfo.rider.nameTranslated}}</span>
+      <span *ngIf="riderInfo && selectedLang != 'ar'">{{riderInfo.city.name}} / {{riderInfo.rider.name}}</span>
+      <span class="route-icon" *ngIf="routeInfo">{{ routeInfo.name }}</span>
+    </div>
+
+    <!-- Station list dropdown -->
+    <div class="dropdown" *ngIf="!nextStep && stationList.length > 0">
+      <div class="dropbtn v-align">
+        <span *ngIf="!busStopFrom">SELECT FROM</span>
+        <span *ngIf="busStopFrom">
+          FROM
+          <span class="stopSelected" *ngIf="selectedLang != 'ar'">{{ busStopFrom.stationName }}</span>
+          <span class="stopSelected" *ngIf="selectedLang == 'ar'">{{ busStopFrom.stationNameTranslation }}</span>
+        </span>
+        <span *ngIf="busStopFrom && !busStopTo">SELECT TO</span>
+        <span *ngIf="busStopFrom && busStopTo">
+          TO
+          <span class="stopSelected" *ngIf="selectedLang != 'ar'">{{ busStopTo.stationName }}</span>
+          <span class="stopSelected" *ngIf="selectedLang == 'ar'">{{ busStopTo.stationNameTranslation }}</span>
+        </span>
+      </div>
+
+      <div *ngIf="stationList.length > 0" [ngClass]="{'without-scroll' : stationList.length > 6}" id="myDropdown"
+        class="dropdown-content">
+        <a [ngClass]="{'station-disabled' : firstIndex > i || i == stationList.length - 1}"
+          class="intercity-station v-align" *ngFor="let item of stationList; let i = index"
+          (click)="selectBusStop(item, i)">
+          <span *ngIf="selectedLang != 'ar'">{{item.stationName}}</span>
+          <span *ngIf="selectedLang == 'ar'">{{item.stationNameTranslation}}</span>
+        </a>
+        <div id="scrollBot"></div>
+      </div>
+
+      <div class="scroll-buttons" *ngIf="stationList.length > 6">
+        <button (click)="scrollTop()">
+          <img style="transform: rotate(180deg)" src="assets/icon/intercity/button-down.png">
+        </button>
+        <button (click)="scrollBottom()">
+          <img src="assets/icon/intercity/button-down.png">
+        </button>
+      </div>
+    </div>
+    <!-- Station list END -->
+
+
+    <!-- DETAIL INTERCITY-BOX !-->
+    <div *ngFor="let item of items">
+      <div class="box-detail" *ngIf="nextStep">
+        <div class="title-box v-align">
+          <div class="from">
+            <span>FROM:</span>
+            <span class="stop-blue" (click)="resetStation()">
+              <span *ngIf="selectedLang != 'ar'">{{ item.intercityTicket.busStationFromName }}</span>
+              <span *ngIf="selectedLang == 'ar'">{{ item.intercityTicket.busStationFromNameTranslate }}</span>
+            </span>
+          </div>
+          <div class="to">
+            <span>TO:</span>
+            <span class="stop-blue" (click)="resetStation()">
+              <span *ngIf="selectedLang != 'ar'">{{ item.intercityTicket.busStationToName }}</span>
+              <span *ngIf="selectedLang == 'ar'">{{ item.intercityTicket.busStationToNameTranslate }}</span>
+            </span>
+          </div>
+          <div class="change-route" (click)="resetStation()">
+            <img src="assets/icon/general/switch.png">
+          </div>
+        </div>
+
+        <div class="main-box" [ngClass]="{'border-green' : item.quantity > 0}">
+          <div class="row m-0 mb-4">
+            <div class="col-6 p-0 v-align">
+              <div>Type</div>
+            </div>
+            <div class="col-6 text-right p-0">
+              <div class="type-buttons-holder text-right">
+                <button class="btn route-type-btn font-weight-bold" (click)="addOneway(item)"
+                  [ngClass]="{'btn-blue': !item.intercityTicket.isReturn}">ONE-WAY
+                </button>
+                <button [disabled]="item.intercityTicket.priceReturn == 0" class="btn route-type-btn font-weight-bold"
+                  (click)="addReturn(item)" [ngClass]="{'btn-blue': item.intercityTicket.isReturn}">RETURN
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-0 mb-4">
+            <div class="col-6 p-0 v-align">
+              <div>Ticket price</div>
+            </div>
+            <div class="col-6 p-0">
+              <div *ngIf="!item.intercityTicket.isReturn" class="font-weight-bold">
+                <span *ngIf="selectedLang == 'ar'">
+                  {{item.intercityTicket.price | currency:currency:''}} {{translations.get(currency)}} /
+                  {{item.intercityTicket.price * currencyRate | currency:secondCurrency:''}} {{translations.get(secondCurrency)}}
+                </span>
+                <span *ngIf="selectedLang != 'ar'">
+                  {{ item.intercityTicket.price | currency:currency:'' }} {{ currency }} /
+                  {{ item.intercityTicket.price * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+                </span>
+              </div>
+              <div *ngIf="item.intercityTicket.isReturn" class="font-weight-bold">
+                <span *ngIf="selectedLang == 'ar'">
+                  {{item.intercityTicket.priceReturn | currency:currency:''}} {{translations.get(currency)}} /
+                  {{item.intercityTicket.priceReturn * currencyRate | currency:secondCurrency:''}} {{translations.get(secondCurrency)}}
+                </span>
+                <span *ngIf="selectedLang != 'ar'">
+                  {{ item.intercityTicket.priceReturn | currency:currency:'' }} {{ currency }} /
+                  {{ item.intercityTicket.priceReturn * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Bagagge menu -->
+          <div class="row m-0 mb-4">
+            <div class="col-6 p-0 v-align">
+              <div>
+                <div>Additional luggage</div>
+                <div class="left-subtitle">*1 piece per trip per passanger is free</div>
+              </div>
+            </div>
+            <div class="col-6 p-0">
+              <!-- select for baggage -->
+              <mat-form-field appearance="none" class="edit-input d-block">
+                <mat-select placeholder="Add bags" (selectionChange)="selectBaggage($event, item)"
+                  [(value)]="selectedLuggage">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let itemBag of items2" [value]="itemBag">
+                    {{itemBag.productBaggage.name}}, {{ itemBag.productBaggage.price | currency:currency:''}}
+                    {{ currency }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <!-- Another menu for baggage return -->
+          <div class="row m-0 mb-4" *ngIf="item.intercityTicket.isReturn && item.intercityTicket.priceReturn > 0">
+            <div class="col-6 p-0"></div>
+            <div class="col-6 text-right p-0">
+              <mat-form-field appearance="none" class="edit-input d-block">
+                <mat-select placeholder="Add bags" (selectionChange)="selectBaggage2($event, item)"
+                  [(value)]="selectedLuggageReturn">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let itemBag of items3" [value]="itemBag">
+                    {{ itemBag.productBaggageReturn.name }},
+                    {{ itemBag.productBaggageReturn.price | currency:currency:''}} {{ currency }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+        <!-- Main box END -->
+
+        <!-- main box -->
+        <div class="main-box" [ngClass]="{'border-green' : item.quantity > 0}">
+          <div class="row m-0 mb-4">
+            <div class="col-6 p-0 v-align">
+              <div>No. of tickets</div>
+            </div>
+            <div class="col-6 p-0">
+              <div class="button-control">
+                <a class="btn btn-minus" [ngClass]="{'btn-blue': item.quantity > 0}" (click)="removeFromCart(item)">
+                  <img *ngIf="item.quantity == 0" src="assets/icon/general/minus_black.png">
+                  <img *ngIf="item.quantity > 0" src="assets/icon/general/minus_white.png">
+                </a>
+                <span class="ticket-amount">{{ item.quantity }}</span>
+                <a class="btn btn-plus" (click)="addToCart(item)"><img src="assets/icon/general/plus_white.png"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- main box end -->
+
+        <!-- Total amount show-->
+        <div class="row bottom-part m-0">
+          <div class="col-4 p-0">
+            <div class="bottom-left">TOTAL</div>
+          </div>
+          <div class="col-8 p-0">
+            <!-- oneway -->
+            <div class="curr" *ngIf="!item.intercityTicket.isReturn">
+              <span *ngIf="firstBaggage == undefined">{{ item.intercityTicket.price * item.quantity | currency:currency:''}} {{ currency }}</span>
+              <span *ngIf="firstBaggage != undefined">{{ item.intercityTicket.price * item.quantity + firstBaggage.productBaggage.price * item.quantity | currency:currency:''}} {{ currency }}</span>
+            </div>
+            <div class="secondCurr" *ngIf="!item.intercityTicket.isReturn && showSecondCurrency">
+              <span *ngIf="firstBaggage == undefined">{{ item.intercityTicket.price * item.quantity * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</span>
+              <span *ngIf="firstBaggage != undefined">{{ (item.intercityTicket.price + firstBaggage.productBaggage.price) * item.quantity * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}</span>
+            </div>
+
+            <!-- return curr -->
+            <div class="curr" *ngIf="item.intercityTicket.isReturn">
+              <span *ngIf="firstBaggage == undefined && secondBaggage == undefined">
+                {{ item.intercityTicket.priceReturn * item.quantity | currency:currency:''}} {{ currency }}
+              </span>
+              <span *ngIf="firstBaggage != undefined && secondBaggage == undefined">
+                {{ (item.intercityTicket.priceReturn + firstBaggage.productBaggage.price) * item.quantity | currency:currency:''}} {{ currency }}
+              </span>
+              <span *ngIf="firstBaggage == undefined && secondBaggage != undefined">
+                {{ (item.intercityTicket.priceReturn + secondBaggage.productBaggageReturn.price) * item.quantity | currency:currency:''}} {{ currency }}
+              </span>
+              <span *ngIf="firstBaggage != undefined && secondBaggage != undefined">
+                {{ (item.intercityTicket.priceReturn + firstBaggage.productBaggage.price + secondBaggage.productBaggageReturn.price) * item.quantity | currency:currency:''}} {{ currency }}
+              </span>
+            </div>
+
+            <!-- return secondCurr -->
+            <div class="secondCurr" *ngIf="item.intercityTicket.isReturn && showSecondCurrency">
+              <span *ngIf="firstBaggage == undefined && secondBaggage == undefined">
+                {{ item.intercityTicket.priceReturn * item.quantity * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+              </span>
+              <span *ngIf="firstBaggage != undefined && secondBaggage == undefined">
+                {{ (item.intercityTicket.priceReturn * item.quantity + firstBaggage.productBaggage.price * item.quantity) * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+              </span>
+              <span *ngIf="firstBaggage == undefined && secondBaggage != undefined">
+                {{ (item.intercityTicket.priceReturn + secondBaggage.productBaggageReturn.price) * item.quantity * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+              </span>
+              <span *ngIf="firstBaggage != undefined && secondBaggage != undefined">
+                {{ (item.intercityTicket.priceReturn + firstBaggage.productBaggage.price + secondBaggage.productBaggageReturn.price) * item.quantity * currencyRate | currency:secondCurrency:''}} {{secondCurrency}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Total amount end -->
+
+      </div>
+    </div>
+    <!-- Detail box end -->
+  </div>
+  <!-- Intercity page END -->
+
+  <!-- Cart -->
+  <app-cart></app-cart>
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

@@ -1,0 +1,81 @@
+<div class="nav-group">
+
+  <ul class="nav nav-left">
+    <li class="nav-item" *ngIf="auth.isAuthenticated && router.url !== '/new-password'"
+      (click)="showUserPopup()">
+      <span *ngIf="loggedUser">
+        <span *ngIf="loggedUser.employeeRoleId == roleType.Maintenance">
+          <img src="assets/icon/top-bar/Maintenance.png">
+        </span>
+        <span *ngIf="loggedUser.employeeRoleId == roleType.Administrator">
+          <img src="assets/icon/top-bar/Administrator.png">
+        </span>
+        <span *ngIf="loggedUser.employeeRoleId == roleType.CSA">
+          <img src="assets/icon/top-bar/Clerk.png">
+        </span>
+        <span *ngIf="loggedUser.employeeRoleId == roleType.RetailSupervisor">
+          <img src="assets/icon/top-bar/supervisor.png">
+        </span>
+
+        {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+
+        <img style="margin-left: 5px;" src="assets/icon/top-bar/Arrow-Down.png">
+      </span>
+    </li>
+
+    <li class="nav-item " [ngClass]="{'mr-auto' : !auth.isAuthenticated, 'mx-auto': auth.isAuthenticated}">
+      <span>{{date | date: 'dd/MM '}}</span>
+      <span class="white">{{date | date: 'HH:mm:ss '}}</span>
+      <span *ngIf="posInfo">{{ posInfo.location }}</span>
+    </li>
+
+
+    <!-- Show device icons and their status -->
+    <li class="nav-item" id="webcam_status">
+      <span class="camera-icon">
+        <img [hidden]="cameraConnected" src="assets/icon/top-bar/camera-red.png">
+        <img [hidden]="!cameraConnected" src="assets/icon/top-bar/camera-green.png">
+      </span>
+    </li>
+    <li class="nav-item" id="reader_status">
+      <span class="smartcard-icon">
+        <img [hidden]="smartcardConnected" src="assets/icon/top-bar/smartcard_reader-red.png">
+        <img [hidden]="!smartcardConnected" src="assets/icon/top-bar/smartcard_reader-green.png">
+      </span>
+    </li>
+    <li class="nav-item" id="printer_status">
+      <span class="printer-icon">
+        <img [hidden]="printerConnected" src="assets/icon/top-bar/Printer-red.png">
+        <img [hidden]="!printerConnected" src="assets/icon/top-bar/Printer-green.png">
+      </span>
+    </li>
+    <li class="nav-item" id="qrcode_status">
+      <span class="qr-icon">
+        <img [hidden]="qrcodeConnected" src="assets/icon/top-bar/qrcode_reader-red.png">
+        <img [hidden]="!qrcodeConnected" src="assets/icon/top-bar/qrcode_reader-green.png">
+      </span>
+    </li>
+    <li class="nav-item" id="scanner_status">
+      <span class="scanner-icon">
+        <img [hidden]="scannerConnected" src="assets/icon/top-bar/scanner-red.png">
+        <img [hidden]="!scannerConnected" src="assets/icon/top-bar/scanner-green.png">
+      </span>
+    </li>
+    <li class="nav-item" id="wifi_status">
+      <span class="internet-icon">
+        <img [hidden]="online" src="assets/icon/top-bar/import_export-red.png">
+        <img [hidden]="!online" src="assets/icon/top-bar/import_export-green.png">
+      </span>
+    </li>
+    <!-- <li class="lang">
+      <span *ngFor="let lang of languages" [hidden]="selectedLang == lang" (click)="changeLang(lang)">{{lang}}</span>
+    </li> -->
+  </ul>
+</div>
+
+<div *ngIf="userPopup">
+  <app-user-menu></app-user-menu>
+</div>
+
+<!-- alert popup -->
+<alert></alert>

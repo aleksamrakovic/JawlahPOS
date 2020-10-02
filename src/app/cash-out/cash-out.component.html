@@ -1,0 +1,39 @@
+<div class="cashout-card mx-auto border-0">
+  
+  <div class="cashout-card-header">CASH OUT</div>
+  <div class="cashout-card-body">
+    <div class="cashout-card-text">
+      Before Logging off of this POS, you need to enter amount of money in the cash drawer. Count it now!
+    </div>
+
+    <!-- Cashout Input Form -->
+    <form [formGroup]="form" (ngSubmit)="cashoutConfirm(form)">
+      <div class="cashout-card-text-form">
+        <input
+          #cashout
+          type="number" 
+          class="form-control input-cashout" 
+          formControlName="cashoutInput"
+          [ngClass]="{ 'invalid-input': submitted && f.cashoutInput.errors }" 
+          required 
+          autocomplete="off">
+        <label>{{ currency }}</label>
+        <div *ngIf="submitted && f.cashoutInput.invalid" class="invalid-feedback">
+          <div>Field is invalid</div>
+        </div>
+      </div>
+
+      <div class="buttons-holder">
+        <button type="button" class="btn cancel-btn" (click)="cancelCashout()">
+          <img src="assets/icon/checkout/cancel-ticket.png">Cancel
+        </button>
+        <button type="submit" class="btn confirm-btn" [disabled]="!form.valid">
+          <img src="assets/icon/general/checkout.png">Confirm
+        </button>
+      </div>
+    </form>
+    <!-- Cashout input form END -->
+  </div>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

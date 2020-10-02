@@ -1,0 +1,271 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cart-menu {
+  height: 720px;
+  width: 302px;
+  background-color: #e4e4e4;
+  position: relative;
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.account-cart-mode-empty {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 87%;
+  z-index: 10;
+}
+
+.account-cart-mode-expand {
+  top: 50%;
+}
+
+.account-cart-mode-full {
+  top: 0%;
+}
+
+.scroll {
+  overflow-y: auto;
+  max-height: 330px;
+}
+
+.scroll-2 {
+  max-height: 450px;
+}
+
+.cart-title {
+  justify-content: center;
+  font-size: 23px;
+  line-height: 31px;
+  letter-spacing: 1.31px;
+  color: #474747;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  font-family: 'Clear Sans Bold';
+  margin-bottom: 23px;
+  height: 96px;
+  text-transform: uppercase;
+  justify-content: center;
+}
+
+.account-title-mode {
+  background-color: #acacac;
+  margin: 0 -24px !important;
+  letter-spacing: 1.7px;
+  padding: 0 15px;
+}
+
+.cart-empty {
+  display: block;
+  text-align: center;
+  margin-top: 47px;
+}
+
+/****************************** Ticket *************************************/
+.box {
+  width: 99%;
+  margin: 0 auto;
+  font-size: 16px;
+  margin-bottom: 12px;
+  padding: 15px 0;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.33);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.33);
+  border-radius: 12px;
+  -webkit-animation: background-fade 4s;
+  animation: background-fade 4s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+/* animation for ticket added in cart */
+@-webkit-keyframes background-fade {
+  0% {
+    background-color: #DBFFC2;
+  }
+
+  100% {
+    background-color: #fff;
+  }
+}
+
+@keyframes background-fade {
+  0% {
+    background-color: #DBFFC2;
+  }
+
+  100% {
+    background-color: #fff;
+  }
+}
+
+.box-minus {
+  margin-top: -20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ticketAmount {
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ticketAmount span {
+  margin-left: 5px;
+}
+
+.ticketInfo {
+  font-size: 16px;
+  word-break: break-word;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.station {
+  color: #474747;
+  line-height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  word-break: break-all;
+}
+
+.ticketPrice,
+.ticketPriceSecond {
+  line-height: 22px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ticketPrice {
+  font-weight: bold;
+}
+
+.ticketPriceSecond {
+  color: #303030;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.box-down {
+  margin: 15px 0;
+  padding-top: 10px;
+  border-top: 1px solid rgb(128, 128, 128, 0.5);
+  font-family: "Clear Sans Medium";
+}
+
+.totalTitle {
+  color: #474747;
+  letter-spacing: 1px;
+}
+
+.totalAmount,
+.totalAmountSecond {
+  font-size: 26px;
+  line-height: 30px;
+  word-break: break-word;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.totalAmountSecond {
+  color: #474747;
+}
+
+.cart-menu .btnGreen {
+  font-size: 21px;
+  font-family: 'Clear Sans Bold';
+}
+
+/******************************************************************************
+****************************Last tickets action/Buttons**************************/
+.payment-box {
+  padding: 192px 0 152px 0;
+}
+
+.payment-box .icon-ok {
+  margin: 0 auto;
+  font-size: 70px;
+  color: #000;
+  padding-bottom: 25px;
+}
+
+.payment-title {
+  color: #000;
+  font-size: 18px;
+  letter-spacing: 0.67px;
+}
+
+.payment-box2 {
+  border-top: 1px solid #b1b1b1;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+}
+
+.payment-box2 .transaction-input {
+  height: 72px;
+  border: 3px solid #0080ff;
+  font-size: 28px;
+  border-radius: 12px;
+  width: 100%;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.payment-box2 .transaction-input:focus {
+  outline: none;
+  border-color: #0080ff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #000;
+}
+
+.account-mode {
+  bottom: unset;
+  border-top: none;
+}
+
+.last-action {
+  color: #000;
+  font-family: "Clear Sans Medium";
+  font-size: 18px;
+  letter-spacing: 1.33px;
+  padding: 20px 0;
+}
+
+.payment-box2 .print-btn,
+.payment-box2 .cancel-btn {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 1.03px;
+  line-height: 30px;
+  padding: 0;
+  padding-left: 15px;
+  height: 72px;
+  color: #fff;
+  border-radius: 12px;
+  text-align: left;
+  font-family: 'Clear Sans Bold';
+  border: none;
+}
+
+.payment-box2 .print-btn {
+  background-color: #0080ff;
+  margin-bottom: 23px;
+}
+
+.payment-box2 .cancel-btn {
+  background-color: #D0021B;
+}

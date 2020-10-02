@@ -1,0 +1,58 @@
+<div class="row m-0">
+
+  <div class="inner-page">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+      <span>Penalties</span>
+    </div>
+
+    <div class="account-penalties-history">
+      <div class="account-penalties-history-title">
+
+        <mat-form-field appearance="none" class="mr-4">
+          <mat-select class="selectWhite" placeholder="Select type" (selectionChange)="selectType($event)" [(value)]="selected">
+              <mat-option value="open">Open penalties</mat-option>
+              <mat-option value="all">All penalties</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div *ngIf="penalties">{{ penalties.length }}</div>
+      </div>
+
+      <div class="account-penalties-list" *ngIf="penalties.length > 0">
+        <div class="account-penalties-list-header v-align">
+          <div style="width:20%">Pen. ref</div>
+          <div style="width:20%">Issued</div>
+          <div style="width:30%">Account</div>
+          <div style="width:30%">{{currency}}</div>
+        </div>
+        <div class="penalties-list-data">
+          <!-- List of penalties -->
+          <div *ngFor="let item of penalties">
+            <div class="penalties-list-item v-align" [ngClass]="{'penalty-added': item.penalty.status == 'In cart'}">
+              <div style="width:20%" class="penalty-ref-link" (click)="seePenalty(item)">{{ item.penalty.refNumber }}</div>
+              <div style="width:20%" class="penalty-issued-date">{{ item.penalty.issued }}</div>
+              <div style="width:30%" class="penalty-account-data">
+                  <span class="penalty-account-name" *ngIf="accountData">{{ accountData.name }}</span>
+                  <span class="penalty-account-id" *ngIf="accountData">{{ accountData.shortId }}</span>
+              </div>
+              <div style="width:15%" class="penalty-price">{{ item.penalty.value | currency:currency:''}}</div>
+              <div style="width:15%" *ngIf="item.penalty.status == 'Paid'" class="penalty-paid">Paid</div>
+              <div style="width:15%" *ngIf="item.penalty.status == 'In cart'" class="penalty-incart">In cart</div>
+              <button style="width:15%" *ngIf="item.penalty.status != 'Paid' && item.penalty.status != 'In cart'"
+                (click)="addToCart(item)" class="btnNormal btnBlue">Pay
+              </button>
+            </div>
+          </div>
+          <!-- List of penalties END -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Left part END -->
+
+  <!-- Cart part -->
+  <app-cart></app-cart>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

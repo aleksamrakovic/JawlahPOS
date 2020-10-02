@@ -1,0 +1,60 @@
+<div class="row m-0">
+
+  <div class="inner-page">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/tickets"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="riderInfo && selectedLang == 'ar'">{{ riderInfo.city.nameTranslated }} / {{ riderInfo.rider.nameTranslated }}</span>
+      <span *ngIf="riderInfo && selectedLang != 'ar'">{{ riderInfo.city.name }} / {{ riderInfo.rider.name }}</span>
+    </div>
+
+    <!-- Route list boxes dynamically -->
+    <div class="route-boxes" *ngIf="routeList.length">
+      <div class="route-box-title text-uppercase v-align">
+        <div>Select route</div>
+      </div>
+      <div class="route-box-list" id="route-list">
+
+        <div class="route-box" *ngFor="let route of routeList">
+          <div class="route-title v-align">
+            <!-- TODO: get colors for route name ? -->
+            <div class="route-icon"><span>{{ route.name }}</span></div>
+            <div class="route-from" *ngIf="selectedLang != 'ar'">{{ route.origin }}</div>
+            <div class="route-from" *ngIf="selectedLang == 'ar'">{{ route.originTranslated }}</div>
+            <div class="route-arrow" [ngClass]="{'rotate-arab' : selectedLang == 'ar'}"><img src="assets/icon/intercity/arrow-grey.png"></div>
+            <div class="route-to" *ngIf="selectedLang != 'ar'">{{ route.destination }}</div>
+            <div class="route-to" *ngIf="selectedLang == 'ar'">{{ route.destinationTranslated }}</div>
+          </div>
+          <div class="route-select" [ngClass]="{'rotate-arab' : selectedLang == 'ar'}">
+            <a (click)="selectRoute(route)">
+              <img src="assets/icon/intercity/arrow-right.png">
+            </a>
+          </div>
+        </div>
+
+        <div id="scrollBot"></div>
+      </div>
+
+      <div class="scroll-buttons">
+        <button [ngClass]="{'button-disabled':routeList.length < 4}" [disabled]="routeList.length < 4"
+          (click)="scrollTop()">
+          <img style="transform: rotate(180deg)" src="assets/icon/intercity/button-down.png">
+        </button>
+        <button [ngClass]="{'button-disabled':routeList.length < 4}" [disabled]="routeList.length < 4"
+          (click)="scrollBottom()">
+          <img src="assets/icon/intercity/button-down.png">
+        </button>
+      </div>
+    </div>
+    <!-- Route list boxes END -->
+
+    <div *ngIf="routeList.length == 0" class="result-msg">No route list available</div>
+
+  </div>
+  <!-- left part END -->
+
+  <!-- Cart -->
+  <app-cart></app-cart>
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

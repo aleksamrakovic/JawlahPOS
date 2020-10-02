@@ -1,0 +1,158 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.inner-page-title {
+  justify-content: center;
+}
+
+.credit-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d8d8d8;
+  border-radius: 12px;
+  padding: 25px;
+  font-family: 'Clear Sans Medium';
+}
+
+.credit-value {
+  font-family: 'Clear Sans Bold';
+  font-size: 23px;
+  line-height: 31px;
+  letter-spacing: 1.31px;
+  text-transform: uppercase;
+  color: #474747;
+}
+
+.credit-value span {
+  color: #000;
+  margin-left: 15px;
+}
+
+.btnGreen {
+  font-weight: bold;
+  border: 1px solid #000;
+}
+
+.btnGreen .img-holder {
+  margin-right: 15px;
+}
+
+.btnGreen .img-holder img {
+  height: 26px;
+}
+
+.payments-history-title {
+  color: #fff;
+  letter-spacing: 0.63px;
+  text-transform: uppercase;
+  margin: 15px 0;
+  font-family: 'Clear Sans Medium';
+  display: flex;
+  justify-content: space-between;
+}
+
+.payments-history-length {
+  display: inline-block;
+}
+
+
+.list-group {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.list-group-header {
+  height: 48px;
+  padding: 0 24px;
+  letter-spacing: 0.5px;
+  background-color: #9b9b9b;
+}
+
+.list-group-item {
+  height: 72px;
+  word-break: break-word;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.list-group-item:first-child {
+  border-top: 0;
+  border-radius: 0;
+}
+
+.report-msg {
+  color: #fff;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/**********************************Pagination style********************************
+***********************************************************************************/
+.my-pagination {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  height: 72px;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-next {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination .pagination-first, .my-pagination .pagination-last {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-first, .my-pagination .pagination-next {
+  border-right: 1px solid #000;
+}
+
+.my-pagination .page-disabled {
+  opacity: 0.5;
+}
+
+.current-pages {
+  width: 40%;
+  background-color: #0080ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #000;
+}
+
+.current-pages a {
+  letter-spacing: 1.71px;
+  color: #fff;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+}

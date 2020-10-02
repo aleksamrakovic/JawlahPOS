@@ -1,0 +1,25 @@
+<div class="row m-0">
+
+  <div class="left-part text-center">
+    <div class="img-account-holder text-center" *ngIf="accountData">
+      <!-- set border color depanding on account type -->
+      <img 
+        [ngClass]="{'regular-border': accountData.type == 'ADULT', 'student-border': accountData.type == 'STUDENT', 'third': false}" *ngIf="hasImg" 
+        src="{{path}}" 
+        class="account-photo">
+      <img 
+        *ngIf="!hasImg" 
+        src="assets/icon/regular_full.svg" 
+        class="account-photo"
+      >
+      
+      <div *ngIf="accountData" class="account-id">{{ accountData.shortId }}</div>
+    </div>
+    <a class="exit-link d-block" routerLink="/accounts"><i class="fas fa-sign-out-alt"></i></a>
+  </div>
+
+  <div class="main-part">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

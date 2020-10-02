@@ -1,0 +1,106 @@
+.inner-page {
+  width: 100%;
+}
+
+/*******************************List styles*********************************
+***************************************************************************/
+.pos-users-list {
+  border-radius: 12px;
+  background-color: #e4e4e4;
+  margin-bottom: 23px;
+}
+
+.pos-users-list .title {
+  color: #474747;
+  letter-spacing: 1.31px;
+  font-size: 23px;
+  line-height: 31px;
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.pos-users-list .header {
+  background-color: #9b9b9b;
+  font-family: 'Clear Sans Medium';
+  padding: 0 24px;
+  letter-spacing: 1.33px;
+  text-transform: uppercase;
+  height: 48px;
+}
+
+.pos-users-list .list-item {
+  background-color: #fff;
+  border-bottom: 1px solid #cbcbcb;
+  padding: 0 24px;
+  height: 72px;
+}
+
+.pos-users-list .list-item:last-child {
+  border-radius: 0 0 12px 12px;
+}
+
+/**********************************Pagination style********************************
+***********************************************************************************/
+.my-pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: flex;
+  overflow: hidden;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-next {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination .pagination-first, .my-pagination .pagination-last {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-first, .my-pagination .pagination-next {
+  border-right: 1px solid #000;
+}
+
+.my-pagination .page-disabled {
+  opacity: 0.5;
+}
+
+.current-pages {
+  width: 40%;
+  background-color: #0080ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #000;
+}
+
+.current-pages a {
+  letter-spacing: 1.71px;
+  color: #fff;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+}

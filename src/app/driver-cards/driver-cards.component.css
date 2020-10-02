@@ -1,0 +1,181 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  padding-left: 0;
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.search-driver {
+  position: relative;
+  margin-bottom: 23px;
+}
+
+.search-driver input {
+  height: 72px;
+  border-radius: 12px;
+  border: 1px solid #b8b8b8;
+  font-size: 24px;
+  padding: 24px;
+  color: #000;
+}
+
+.search-driver input::placeholder {
+  font-size: 18px;
+  letter-spacing: 0.67px;
+  color: #808080;
+  padding-left: 10px;
+}
+
+.search-driver .search-icon {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search-driver input.form-control {
+  outline: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/****************************************************************************************
+*********************************All drivers list data************************************/
+.drivers-list .title {
+  font-family: 'Clear Sans Medium';
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.33px;
+}
+
+.drivers-list .list {
+  margin-top: 24px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.drivers-list .header {
+  height: 48px;
+  padding: 0 24px;
+  background-color: #9b9b9b;
+  letter-spacing: 0.67px;
+}
+
+.drivers-list .list-item {
+  height: 68px;
+  padding: 0 22px 0 22px;
+  background-color: #fff;
+  border-bottom: 1px solid #979797;
+  word-break: break-word;
+  font-size: 17px;
+}
+
+.drivers-result {
+  color: #fff;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/**********************************Pagination style********************************
+***********************************************************************************/
+.my-pagination {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  height: 72px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 0 0 12px 12px;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-next {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination .pagination-first, .my-pagination .pagination-last {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-first, .my-pagination .pagination-next {
+  border-right: 1px solid #000;
+}
+
+.my-pagination .page-disabled {
+  opacity: 0.5;
+}
+
+.current-pages {
+  width: 40%;
+  background-color: #0080ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #000;
+}
+
+.current-pages a {
+  letter-spacing: 1.71px;
+  color: #fff;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+
+/* popup modal style */
+.popup-modal-text .replace-input {
+  border: 2px solid #0080ff!important;
+  color: #0080ff!important;
+}
+
+.popup-modal-text .change-smartcard {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 72px;
+  height: 100%;
+  background-color: #0080ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 12px 12px 0;
+}
+
+.popup-modal-text .scan-button {
+  background-color: #0080ff;
+  border-radius: 12px;
+  width: 130px;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-connected {
+  background-color: #9B9B9B!important;
+}

@@ -1,0 +1,93 @@
+<div class="inner-page">
+    <div class="inner-page-title v-align">
+        <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+        <span>Link Accounts</span>
+    </div>
+
+
+    <!-- grant access -->
+    <div class="linked-list" *ngIf="accountData">
+        <div class="title v-align">
+            <span>{{ accountData.name }} allows others to</span>
+            <a style="width: 200px;" class="btnNormal btnBlue" routerLink="/account/links/new">
+                <img src="assets/icon/account/plus.png">Grant access
+            </a>
+        </div>
+        <div class="header v-align">
+            <div style="width:20%">Account</div>
+            <div style="width:20%">Account no</div>
+            <div style="width:15%">Type</div>
+            <div style="width:15%">Status</div>
+            <div style="width:30%">Permission level</div>
+        </div>
+        <div class="item v-align" *ngFor="let account of accountData.linkedAccounts">
+            <div style="width: 20%">{{ account.name }}</div>
+            <div style="width: 20%">{{ account.shortId }}</div>
+            <div style="width: 15%">{{ account.type }}</div>
+            <div style="width: 15%">{{ account.statusLink | titlecase}}</div>
+            <div style="width: 25%" class="d-flex v-align">
+                <span *ngFor="let perm of permissions" [ngClass]="{'d-none' : account.permission != perm.name }">
+                    <span class="circle-level mr-3">{{ perm.level }}</span>
+                </span>
+                <span>{{ account.permission }}</span>
+            </div>
+            <div style="width: 5%" class="text-center" *ngIf="account.statusLink == 'ACTIVE'" (click)="showRemoveAccess(account)">
+                <img src="assets/icon/general/cancel-button-blue.png">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- others allowed to -->
+    <!-- <div class="linked-list" *ngIf="accountData">
+        <div class="title v-align">
+            <span>Others allow {{ accountData.name }} to</span>
+        </div>
+        <div class="header v-align">
+            <div style="width:25%">Account</div>
+            <div style="width:20%">Account no</div>
+            <div style="width:15%">Type</div>
+            <div style="width:40%">Permission level</div>
+        </div>
+        <div class="item v-align" *ngFor="let account of accountData.linkedAccounts">
+            <div style="width: 25%">{{ account.name }}</div>
+            <div style="width: 20%">{{ account.shortId }}</div>
+            <div style="width: 15%">{{ account.type }}</div>
+            <div style="width: 35%">{{ account.type }}</div>
+            <div style="width: 5%" *ngIf="account.status == 'Active'" (click)="showRemoveAccess(account)">
+                <img src="assets/icon/general/cart-item-delete.png">
+            </div>
+        </div>
+    </div> -->
+
+</div>
+<!-- page end -->
+
+<!-- Block acc popup -->
+<div class="popup-modal-page" *ngIf="removeAccessPopup">
+    <div class="popup-modal">
+            <div class="popup-modal-title v-align">Remove access</div>
+            <div class="popup-modal-text">
+                <div class="row m-0">
+                    <div class="col-3 p-0">
+                        <img src="assets/icon/general/help.png">
+                    </div>
+                    <div class="col-9 p-0">
+                        Are you sure you want to remove access to this account to
+                        <span class="bold">{{ accountSelected.name }} ?</span>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-modal-buttons">
+                <button type="button" class="btn cancel-btn" (click)="removeAccessPopup = !removeAccessPopup">
+                    <img src="assets/icon/general/cancel-button.png">Cancel
+                </button>
+                <button class="btn confirm-btn" (click)="removeAccess()">
+                    <img src="assets/icon/account/trash.png">Remove
+                </button>
+            </div>
+    </div>
+</div>
+<!-- Block acc popup END -->
+
+<loading-spinner *ngIf="loading"></loading-spinner>

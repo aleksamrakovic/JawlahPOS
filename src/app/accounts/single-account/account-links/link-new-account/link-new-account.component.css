@@ -1,0 +1,131 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  justify-content: center;
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.search-input {
+  position: relative;
+}
+
+.view-account-title {
+  color: #474747;
+  letter-spacing: 1.3px;
+  font-size: 23px;
+  line-height: 30px;
+  padding-bottom: 30px;
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+}
+
+.view-part1 {
+  padding: 24px;
+  background-color: #e4e4e4;
+  border-radius: 12px 12px 0 0;
+}
+
+.search-account-box .edit-input {
+  background-color: #fff;
+  border: 1px solid #979797;
+  height: 96px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  width: 100%;
+  color: #000;
+  font-family: 'Clear Sans Medium';
+  letter-spacing: 0.67px;
+  font-size: 21px;
+}
+
+.edit-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-input input::placeholder {
+  color: #474747;
+  font-size: 23px;
+  background: #fff url('/assets/icon/account/search-blue.png');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-size: contain;
+}
+
+.border-set {
+  color: #0080ff !important;
+  border: 2px solid #0080ff !important;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+/**************************************************************************************
+**********************************Accounts List show************************************/
+.account-list {
+  max-height: 350px;
+  overflow-y: overlay;
+  border-radius: 0 0 12px 12px;
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+}
+
+.account-list a {
+  font-family: 'Clear Sans Medium';
+  letter-spacing: 0.67px;
+  border: 1px solid #9b9b9b;
+  background-color: #fff;
+  display: flex;
+  height: 72px;
+  padding-top: 11px;
+  padding-left: 21px;
+  position: relative;
+}
+
+.acc-name {
+  color: #000;
+}
+
+.acc-details {
+  display: block;
+  font-family: 'Clear Sans Regular';
+  color: #474747;
+  letter-spacing: 0.52px;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.acc-arrow {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #acacac;
+  font-size: 30px;
+}
+
+.box-part .box-part-photo .user-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid #979797;
+  background-color: #fff;
+  display: inline-block;
+}
+
+.box-part .left-part {
+  font-family: 'Clear Sans Medium';
+  color: #303030;
+  letter-spacing: 1.33px;
+  text-transform: uppercase;
+}
+
+.box-part .right-part {
+  letter-spacing: 0.67px;
+  color: #000;
+  word-break: break-all;
+}

@@ -1,0 +1,99 @@
+.user-menu-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 1024px;
+  height: 768px;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.user-menu {
+  width: 325px;
+  border: 1px solid #9B9B9B;
+  border-radius: 0 0 12px 12px;
+  background-color: #fff;
+}
+
+.user-info {
+  padding: 24px;
+  border-bottom: 2px solid #979797;
+  position: relative;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.close-icon {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+}
+
+.user-title {
+  font-family: 'Clear Sans Bold';
+  color: #303030;
+  margin-bottom: 24px;
+}
+
+.user-id {
+  font-family: 'Clear Sans Regular';
+  padding-left: 5px;
+}
+
+.user-role, .user-location {
+  padding-left: 35px;
+  letter-spacing: 0.67px;
+}
+
+.user-links {
+  padding: 24px;
+}
+
+.user-link {
+  font-size: 21px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  background-color: #0080FF;
+  letter-spacing: 1.2px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  height: 96px;
+  padding: 0 40px;
+  justify-content: space-around;
+}
+
+.pos-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 21px;
+  color: #474747;
+}
+
+/*Icons temporary*/
+.icon-csa, .icon-supervisor {
+  margin-right: 5px;
+  display: inline-block;
+  width: 29px;
+  height: 29px;
+  font-size: 16px;
+  color: #0080ff;
+  font-weight: bold;
+  border-radius: 50%;
+  border: 2px solid #0080ff;
+  text-align: center;
+}
+
+.icon-supervisor {
+  color: #F8E71C;
+  border: 2px solid #F8E71C;
+}
+
+.icon-maintenance {
+  font-size: 25px;
+  margin-right: 5px;
+  color: #FE8F25;
+  transform: rotateY(180deg);
+}

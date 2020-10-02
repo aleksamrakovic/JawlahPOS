@@ -1,0 +1,143 @@
+.inner-page-title {
+  justify-content: center;
+}
+
+.top-up-box {
+  margin-top: 23px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.top-up-current-value,
+.top-up-new-value {
+  text-transform: uppercase;
+  font-family: 'Clear Sans Medium';
+  font-size: 18px;
+  color: #303030;
+  letter-spacing: 1px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.top-up-current-value span,
+.top-up-new-value span {
+  font-family: 'Clear Sans Regular';
+  letter-spacing: normal;
+}
+
+.input-group {
+  width: 100%;
+  height: 71px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.input-group-append-2 {
+  display: flex;
+}
+
+.top-up-input {
+  display: inline-block;
+  border: 3px solid #0080ff;
+  border-radius: 12px;
+  font-size: 38px;
+  color: #000;
+  height: 71px;
+}
+
+.amount-input-ar {
+  border-radius: 0 12px 12px 0!important;
+}
+
+.topup-smaller {
+  font-size: 16px;
+}
+
+.top-up-input:focus {
+  border-color: #0080ff;
+  outline: none;
+  box-shadow: none;
+}
+
+.input-group select {
+  font-size: 23px;
+  line-height: 31px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding-right: 40px;
+  color: #fff;
+  background: #0080ff url('/assets/icon/general/white-arrow-down.png') no-repeat scroll 90% 50%;
+  background-size: 20%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+.input-group select:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.cash-numbers {
+  margin-top: 24.73px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.box-number a {
+  height: 96.27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Clear Sans Medium";
+  background-color: #0080ff;
+  color: #fff;
+  font-size: 56px;
+  line-height: 75px;
+  border: 2px solid #003366;
+  border-radius: 12px;
+}
+
+.box-number.red a {
+  background-color: #D0021B;
+  border: 2px solid #53000A;
+  background-image: url('/assets/icon/checkout/numpad-delete.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.addtoCart {
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 1.03px;
+  height: 72px;
+  border-radius: 12px;
+  margin-top: 23px;
+  width: 100%;
+  transition: all .3s;
+}
+
+.addtoCart:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.addtoCart img {
+  margin-right: 20px;
+}
+
+.btn[disabled] {
+  opacity: 1;
+  background-color: #9b9b9b;
+}

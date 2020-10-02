@@ -1,0 +1,128 @@
+/*************************************** Route box ****************************************
+*******************************************************************************************/
+.route-boxes {
+  background-color: #E4E4E4;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.route-box-title {
+  font-family: 'Clear Sans Medium';
+  letter-spacing: 1.33px;
+  color: #303030;
+  border-bottom: 1px solid #979797;
+  height: 72px;
+  padding: 0 50px;
+}
+
+.route-box-list {
+  padding: 15px;
+  max-height: 504px;
+  width: calc(100% - 75px);
+  overflow-y: overlay;
+  scroll-behavior: smooth;
+}
+
+.route-box {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  height: 120px;
+  border: 1px solid #acacac;
+  padding: 0 10px;
+}
+
+.route-title {
+  width: 90%;
+  letter-spacing: 0.3px;
+  font-weight: bold;
+}
+
+.route-from, .route-to {
+  width: 40%;
+  word-break: break-word;
+}
+
+.route-arrow {
+  width: 10%;
+  text-align: center;
+}
+
+.route-arrow img {
+  height: 20px;
+}
+
+.route-icon {
+  width: 10%;
+}
+
+.route-icon span {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: burlywood;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 90%;
+}
+
+.route-select {
+  width: 10%;
+}
+
+.route-select a {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.route-select a img {
+  height: 30px;
+}
+
+.result-msg {
+  color: #fff;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.rotate-arab {
+  transform: rotate(180deg)
+}
+
+/******************************************* Scroll buttons ****************************************
+***************************************************************************************************/
+.scroll-buttons {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  top: 72px;
+}
+
+.scroll-buttons button {
+  background-color: #0080ff;
+  width: 75px;
+  height: 252px;
+  border: none;
+}
+
+.scroll-buttons button:last-child {
+  border-top: 1px solid #000;
+}
+
+.scroll-buttons button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.button-disabled {
+  opacity: 0.6;
+}

@@ -1,0 +1,65 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  margin-bottom: 0;
+  padding-left: 0;
+  border-bottom: 0;
+}
+
+/*******************************List styles*********************************
+***************************************************************************/
+.pos-users-list {
+  border-radius: 12px;
+  background-color: #e4e4e4;
+  margin-bottom: 23px;
+  overflow: hidden;
+}
+
+.pos-users-list .title {
+  font-family: 'Clear Sans Bold';
+  color: #474747;
+  letter-spacing: 1.31px;
+  font-size: 23px;
+  line-height: 31px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  height: 72px;
+  padding: 0 20px;
+}
+
+.history-title {
+  color: #0080ff;
+}
+
+.pos-users-list .title img {
+  height: 18px;
+  vertical-align: unset;
+}
+
+.pos-users-list .header {
+  padding: 0 24px;
+  background-color: #9b9b9b;
+  font-family: 'Clear Sans Medium';
+  letter-spacing: 1.33px;
+  text-transform: uppercase;
+  height: 48px;
+}
+
+.pos-users-list .list-item {
+  padding: 0 24px;
+  background-color: #fff;
+  border-bottom: 1px solid #cbcbcb;
+  height: 72px;
+  letter-spacing: 0.67px;
+  word-break: break-word;
+}
+
+.pos-users-list .list-item span {
+  padding-right: 2px;
+}
+
+
+

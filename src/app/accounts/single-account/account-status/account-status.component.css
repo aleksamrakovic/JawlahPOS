@@ -1,0 +1,61 @@
+.account-status-page {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 24px;
+  background-color: #e4e4e4;
+}
+
+.account-status-title {
+  color: #474747;
+  font-size: 23px;
+  letter-spacing: 1.31px;
+  text-transform: uppercase;
+  font-family: 'Clear Sans Bold';
+  border-bottom: 1px solid #717171;
+  height: 96px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.account-status-left {
+  font-family: 'Clear Sans Medium';
+  letter-spacing: 1px;
+  min-height: 36px;
+  text-transform: uppercase;
+  color: #474747;
+}
+
+.account-status-right {
+  color: #000;
+  word-break: break-all;
+}
+
+.part-action-links {
+  margin-top: 30px;
+}
+
+.account-status-link {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Clear Sans Medium';
+  text-transform: uppercase;
+  color: #474747 !important;
+  border-bottom: 1px solid #b7b7b7;
+  padding: 11px 0;
+  flex-wrap: wrap;
+  text-decoration: none;
+}
+
+.account-status-link:last-child {
+  border: 0;
+}
+
+.account-status-link span {
+  font-family: 'Clear Sans Regular';
+  color: #000;
+  font-size: 16px;
+}
+
+.account-status-link span img {
+  height: 23px;
+}

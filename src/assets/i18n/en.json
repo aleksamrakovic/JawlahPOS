@@ -1,0 +1,68 @@
+{
+    "header": ["Maintain", "Tickets", "Period passes", "Penalties", "Accounts", "Reports", "Pos Users", "Driver Cards"],
+
+    "account": {
+        "pageSubtitle": "View existing account",
+        "pageButton": "Create new account"
+    },
+
+    "posUsers": {
+        "usersHeader": ["Name", "IPA", "Role", "Status", "Last logged in"],
+        "button": "Reset pass",
+        "sessionHeaderTitle": "Today's user session",
+        "sessionHeaderSubtitle": "History",
+        "sessionHeader": ["Name", "From", "To", "Duration", "Active vs locked(%)"]
+    },
+
+    "driverCard": {
+        "pageSubtitle": "All drivers",
+        "header": ["Driver", "IPA", "Last modified", "Status", "Smartcard"],
+        "assignPopup": {
+            "title": "Assign driver card",
+            "text": "Remove the smart card below and search for new one."
+        },
+        "unassignPopup": {
+            "title": "Unassign driver card",
+            "text": "Are you sure you want to unassign driver card"
+        },
+        "replacePopup": {
+            "title": "Replace driver card",
+            "text": "Remove the smart card below and search for new one."
+        }
+    },
+
+    "general" : {
+        "alert": "Alert",
+        "lock": "Lock",
+        "unlock": "Unlock",
+        "logout": "Logout",
+        "login": "Login",
+        "cashFloat": "Cash float",
+        "cashOut": "Cash out",
+        "pos": "Pos",
+        "user": "User",
+        "users": "Users",
+        "yes": "Yes",
+        "no": "No",
+        "ok": "Ok",
+        "cancel": "Cancel",
+        "save": "Save",
+        "confirm": "Confirm",
+        "checkout": "Checkout",
+        "cart": "Cart",
+        "payment": "Payment",
+        "total": "Total",
+        "cash": "Cash",
+        "card": "Card",
+        "paid": "Paid",
+        "return": "Return",
+        "driver": "Driver",
+        "driverCard": "Driver card",
+        "assign": "Assign",
+        "unassign": "Unassign",
+        "replace": "Replace",
+        "smartcard": "Smartcard",
+        "status": "Status",
+        "distribution": "Distribution"
+    }
+}

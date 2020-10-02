@@ -1,0 +1,67 @@
+.user-lock-page {
+  background-color: #e4e4e4;
+  height: 720px;
+  text-align: center;
+  position: relative;
+}
+
+.user-lock-center {
+  padding-top: 128px;
+  width: 561px;
+  margin: 0 auto;
+}
+
+.pos-locked-title {
+  font-size: 46px;
+  line-height: 63px;
+  margin-bottom: 33px;
+}
+
+.user-lock-center .img-holder {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.user-locked-info {
+  border-top: 4px solid rgba(0, 0, 0, 0.25);
+  padding-top: 15px;
+}
+
+.user-locked-name, .user-locked-id {
+  font-size: 30px;
+  font-weight: bold;
+  color: #303030;
+}
+
+.unlock-btn {
+  margin-top: 90px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  width: 729px;
+  height: 96px;
+  font-size: 21px;
+  font-family: 'Clear Sans Bold';
+}
+
+.unlock-btn .img-holder {
+  margin-right: 20px;
+}
+
+.signin-link {
+  font-family: 'Clear Sans Bold';
+  position: absolute;
+  top: 30px;
+  right: 28px;
+  font-size: 21px;
+  line-height: 30px;
+  letter-spacing: 1.2px;
+  color: #0080FF !important;
+  text-transform: uppercase;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.signin-link .img-holder {
+  margin-right: 12px;
+}

@@ -1,0 +1,41 @@
+<div class="row m-0">
+  <div class="inner-page">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/period-pass"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="riderType">{{ routeInfo.city.name }} / {{ riderType.name }}</span>
+    </div>
+
+    <!-- List of periodpass products -->
+    <div class="rider-list mt-4">
+      <div class="rider-item btnGreen" (click)="selectProduct(product)" *ngFor="let product of productList | paginate: config">
+        <div>{{ product.name }}</div>
+      </div>
+    </div>
+    <!-- List of products END -->
+
+    <!-- Pagination -->
+    <div *ngIf="productList.length > 6">
+      <pagination-template class="my-pagination" #p="paginationApi" [id]="config.id"
+        (pageChange)="config.currentPage = $event">
+        <button class="pagination-previous" (click)="p.previous()" [disabled]="p.isFirstPage()">
+          <img [ngClass]="{'page-disabled' : p.isFirstPage()}" src="assets/icon/general/nav-back.png">
+        </button>
+        <button class="pagination-next" (click)="p.next()" [disabled]="p.isLastPage()">
+          <img [ngClass]="{'page-disabled' : p.isLastPage()}" src="assets/icon/general/nav-next.png">
+        </button>
+      </pagination-template>
+      <!-- Current pages -->
+      <div class="current-pages">
+        <a *ngFor="let page of p.pages" [ngClass]="{'page-active' : p.getCurrent() === page.value}">
+          <span><i class="fas fa-circle"></i></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <!-- Left part END -->
+
+  <!-- Cart -->
+  <app-cart></app-cart>
+
+</div>

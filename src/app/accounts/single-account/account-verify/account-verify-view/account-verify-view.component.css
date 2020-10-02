@@ -1,0 +1,255 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  justify-content: space-between;
+}
+
+.inner-page-title .verify-buttons button {
+  font-family: 'Clear Sans Bold';
+  border: 0;
+  border-radius: 12px;
+  text-transform: uppercase;
+  height: 48px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  width: 150px;
+  margin-right: 15px;
+}
+
+.inner-page-title .verify-buttons button img {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.inner-page-title .verify-buttons button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.inner-page-title .verify-buttons .reject-btn {
+  background-color: #0080ff;
+  color: #fff;
+}
+
+.inner-page-title .verify-buttons .verify-btn {
+  margin-right: 0;
+}
+
+/* Box info style */
+.box-info {
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.box-part .box-part-photo {
+  position: relative;
+}
+
+.box-part .box-part-photo .user-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid #979797;
+  background-color: #fff;
+  display: inline-block;
+}
+
+.box-part .left-part {
+  font-family: 'Clear Sans Medium';
+  color: #303030;
+  letter-spacing: 1.33px;
+  text-transform: uppercase;
+}
+
+.box-part .right-part {
+  letter-spacing: 0.67px;
+  color: #000;
+  word-break: break-all;
+}
+
+/* Box info 2 style */
+.box-info2 {
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.box-info2 .title {
+  padding: 0 25px 0 50px;
+  height: 72px;
+  justify-content: space-between;
+}
+
+.box-info2 .title .title-text {
+  font-size: 23px;
+  line-height: 31px;
+  letter-spacing: 1.31px;
+  color: #474747;
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+}
+
+.box-info2 .title .title-text img {
+  margin-right: 10px;
+}
+
+.rotate-icon {
+  transform: rotate(-90deg);
+}
+
+.box-info2 .main-part {
+  padding: 25px 25px 25px 50px;
+  border-top: 2px solid #979797;
+}
+
+.box-info2 .box-part .right-part .user-title-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.box-info2 .box-part .right-part .user-title-item {
+  font-family: 'Clear Sans Medium';
+  text-transform: uppercase;
+  padding: 7px 20px;
+}
+
+.box-info2 .box-part .right-part .active {
+  background-color: #0080ff;
+  border-radius: 100px;
+  color: #fff;
+  padding: 7px 20px;
+}
+
+.box-info2 .box-part .edit-input {
+  background-color: #fff;
+  border: 1px solid #979797;
+  height: 72px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  width: 100%;
+  color: #000;
+  font-family: 'Clear Sans Medium';
+  letter-spacing: 0.67px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.box-info2 .box-part .edit-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.box-info2 .fake-input {
+  width: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  opacity: 0;
+  height: 0;
+  position: absolute;
+}
+
+.input-date {
+  background: #fff url('/assets/icon/header-menu/period-blue.png');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+}
+
+/* Edit document */
+.box-info2 .box-part .photo-box {
+  height: 190px;
+  border: 1px solid #979797;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.box-info2 .box-part .photo-box img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.front-doc,
+.back-doc {
+  height: 190px;
+  border: 1px solid #979797;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #9B9B9B;
+}
+
+.placeholder {
+  text-align: center;
+}
+
+/*********************************ZOOM modal***********************************/
+.zoom-icon {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 30px;
+}
+
+.zoomModal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.zoomModal #zoomImg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  display: block;
+  width: 70%;
+  height: 70%;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.zoomModal .close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}

@@ -1,0 +1,233 @@
+<div class="inner-page">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/accounts"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="accountDefault">Create {{accountDefault.name}} account</span>
+
+      <div style="width: 40%;" class="d-flex justify-content-between">
+        <button
+          style="width: 48%;"
+          class="btnNormal btnBlue mr-auto"
+          routerLink="/accounts"
+          type="button">
+          <img src="assets/icon/checkout/cancel-ticket.png">Cancel
+        </button>
+        <button
+          style="width: 48%;"
+          class="btnNormal btnGreen"
+          type="submit">
+          <img src="assets/icon/general/checkout.png">Create
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Personal details box -->
+    <div class="box-info2">
+      <div class="title v-align">
+        <div class="title-text"><img src="assets/icon/account/blue-arrow-down.png">Personal details</div>
+        <div class="title-text-right">Required</div>
+      </div>
+      <div class="main-part">
+        <div class="box-part">
+          <div class="row mb-4">
+            <div class="col-3 v-align">
+              <div class="left-part">Title</div>
+            </div>
+            <div class="col-5">
+              <div class="right-part">
+                <ul class="user-title-list mb-0">
+                  <a (click)="selectTitle($event)" class="user-title-item" [ngClass]="{'active':newTitle == 'MR'}">MR</a>
+                  <a (click)="selectTitle($event)" class="user-title-item" [ngClass]="{'active':newTitle == 'MS'}">MS</a>
+                  <a (click)="selectTitle($event)" class="user-title-item" [ngClass]="{'active':newTitle == 'MRS'}">MRS</a>
+                  <a (click)="selectTitle($event)" class="user-title-item" [ngClass]="{'active':newTitle == 'MISS'}">MISS</a>
+                </ul>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="box-absolute">
+                <div class="box-part-photo">
+                  <img id="user-photo" #userImage [ngClass]="{'invalid-input': submitted && f.fakeInput0.errors }">
+                  <input type="text" class="fake-input" formControlName="fakeInput0" required>
+                  <div class="img-change">
+                    <span class="icon-change" *ngIf="userImage.src != ''" (click)="openPhotoPopup('user-photo')">
+                      <img src="assets/icon/account/change-photo.png">
+                    </span>
+                    <span class="add-icon" *ngIf="userImage.src == ''" (click)="openPhotoPopup('user-photo')">
+                      <img src="assets/icon/checkout/cancel-ticket.png">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-3 v-align">
+              <div class="left-part">Name surname</div>
+            </div>
+            <div class="col-5">
+              <div class="right-part">
+                <input [ngClass]="{'invalid-input': submitted && f.accountName.errors }" class="edit-input" type="text"
+                  formControlName="accountName" required>
+                <div *ngIf="submitted && f.accountName.invalid" class="invalid-feedback">
+                  <div *ngIf="f.accountName.errors.required">Name is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-3 v-align">
+              <div class="left-part">Country</div>
+            </div>
+            <div class="col-5">
+              <div class="right-part">
+
+                <!-- material select -->
+                  <mat-form-field [ngClass]="{'invalid-input': submitted && f.accountCountry.errors }" class="edit-input country" appearance="none">
+                    <mat-select formControlName="accountCountry" required>
+                      <mat-option *ngFor="let country of countries" [value]="country.code">
+                        {{country.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                <div *ngIf="submitted && f.accountCountry.invalid" class="invalid-feedback">
+                  <div *ngIf="f.accountCountry.errors.required">Country is required</div>
+                </div>
+                <!-- material select END -->
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3 v-align">
+              <div class="left-part">Address</div>
+            </div>
+            <div class="col-5">
+              <div class="right-part">
+                <input [ngClass]="{'invalid-input': submitted && f.accountAddress.errors }" class="edit-input"
+                  type="text" formControlName="accountAddress" required>
+                <div *ngIf="submitted && f.accountAddress.invalid" class="invalid-feedback">
+                  <div *ngIf="f.accountAddress.errors.required">Address is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Personal details box END-->
+
+
+    <!-- ACCESS -->
+    <div class="box-info2">
+      <div class="title v-align">
+        <div class="title-text"><img src="assets/icon/account/blue-arrow-down.png">Access to account</div>
+        <div class="title-text-right">Required at least one</div>
+      </div>
+      <div class="main-part">
+        <div class="box-part">
+          <div class="row mb-4">
+            <div class="col-3 v-align">
+              <div class="left-part">E-mail</div>
+            </div>
+            <div class="col-5">
+              <div class="right-part">
+                <input type="text" [ngClass]="{'invalid-input': submitted && f.accessEmail.errors }" class="edit-input" formControlName="accessEmail" required>
+                <div *ngIf="submitted && f.accessEmail.invalid" class="invalid-feedback">
+                  <div *ngIf="f.accessEmail.errors.required">Email is required</div>
+                  <div *ngIf="f.accessEmail.errors.pattern">Email is invalid</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="text-holder-right">To access account, account holder needs at least one: e-mail or phone
+                number. The system will send instructions to complete access.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3 v-align">
+              <div class="left-part">Phone number</div>
+            </div>
+
+            <div class="col-3">
+              <div class="right-part">
+                <!-- material select -->
+                  <mat-form-field [ngClass]="{'invalid-input': submitted && f.accountCountryCode.errors }" class="edit-input country" appearance="none">
+                    <mat-select formControlName="accountCountryCode" required>
+                      <mat-option *ngFor="let country of countries" [value]="country.callingCode">
+                        {{ country.callingCode }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <!-- <mat-form-field [ngClass]="{'invalid-input': submitted && f.accountCountryCode.errors }" class="edit-input country" appearance="none">
+                    <input type="text" matInput formControlName="accountCountryCode" required [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let country of filteredOptions | async" [value]="country.callingCode">
+                        {{ country.callingCode }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field> -->
+
+                <div *ngIf="submitted && f.accountCountryCode.invalid" class="invalid-feedback">
+                  <div *ngIf="f.accountCountryCode.errors.required">Code is required</div>
+                </div>
+                <!-- material select END -->
+              </div>
+            </div>
+
+            <div class="col-5">
+              <div class="right-part">
+                <!-- input -->
+                <input (keyup)="onPhoneNumber($event)" [ngClass]="{'invalid-input': submitted && f.accessPhone.errors }" class="edit-input" type="text" formControlName="accessPhone" required>
+                <div *ngIf="submitted && f.accessPhone.invalid" class="invalid-feedback">
+                  <div *ngIf="f.accessPhone.errors.required">Phone is required</div>
+                  <div *ngIf="f.accessPhone.errors.pattern">Phone is invalid</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Access END-->
+
+  </form>
+  <!-- Form END -->
+
+
+</div>
+<!-- page END -->
+
+
+<!-- take photo popup -->
+<div id="photo-popup" class="photo-modal-page" *ngIf="photoPopup">
+  <div class="photo-modal">
+    <div class="photo-modal-title">
+      Take photo<span (click)="closePhotoPopup()"><img src="assets/icon/top-bar/Close_btn.png"></span>
+    </div>
+    <div class="photo-modal-part">
+      <div class="photo-box">
+        <video id="webcam-vid" class="videostream" autoplay></video>
+        <img style="display: none" id="webcam-img" #webcam>
+      </div>
+    </div>
+    <div class="popup-modal-buttons border-0">
+      <button *ngIf="!imgTaken" class="btn photo-btn" (click)="takePicture()">
+        <img src="assets/icon/camera-white-big.png">
+      </button>
+      <button *ngIf="imgTaken" (click)="retakePhoto()" class="btn photo-btn">
+        <img src="assets/icon/camera-white.png">Retake photo
+      </button>
+      <button *ngIf="imgTaken" (click)="savePhoto()" class="btn photo-btn">
+        <img src="assets/icon/general/white-checkout.png">Save photo
+      </button>
+    </div>
+  </div>
+</div>
+<!-- take photo END -->
+
+<loading-spinner *ngIf="loading"></loading-spinner>

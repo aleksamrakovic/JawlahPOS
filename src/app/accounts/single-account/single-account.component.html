@@ -1,0 +1,306 @@
+<div class="row m-0">
+
+  <!-- Function list menu -->
+  <div class="account-main-part">
+    <div class="account-name-title v-align" *ngIf="accountData">{{ accountData.name }}</div>
+
+    <div class="account-menu-boxes" *ngIf="accountData && !accountData.blocked">
+      <div class="account-menu-box btnGreen v-align" *ngIf="hasTopup" routerLink="/account/topup">
+        Top up
+      </div>
+
+      <div *ngIf="hasTickets" class="account-menu-box btnGreen v-align" routerLink="/account/tickets">
+        Sell ticket
+      </div>
+
+      <!--
+      <div *ngIf="hasPeriodPass" class="account-menu-box btnGreen v-align" routerLink="/account/tickets/period">
+        Sell period pass
+      </div> -->
+
+      <!-- verified in future date -->
+      <div class="account-menu-box-pending v-align" *ngIf="accountData.verifiedFuture">
+        <span class="verify-box-pending text-center" (click)="scrollToRequests()">
+          <span class="verified-icon"><img src="assets/icon/account/clock.png"></span>
+          <span>Verified as {{ accountData.verificationRequest.targetRider | lowercase}}</span>
+        </span>
+      </div>
+
+      <!-- verified in normal date -->
+      <div class="account-menu-box btnGreen v-align" *ngIf="!accountData.verifiedFuture ">
+        <span class="verify-box" *ngIf="!accountData.verified && !accountData.pending && !accountData.rejected"
+          routerLink="/account/verify/rider">
+          <span>Verify account</span>
+        </span>
+
+        <span class="verify-box text-center" *ngIf="accountData.verified" (click)="scrollToRequests()">
+          <span class="verified-icon"><img src="assets/icon/account/verified.png"></span>
+          <span>Verified as {{ accountData.verificationRequest.targetRider | lowercase}}</span>
+        </span>
+
+        <span class="verify-box" *ngIf="!accountData.verified && accountData.rejected" (click)="scrollToRequests()">
+          <span>Rejected as {{ accountData.verificationRequest.targetRider | lowercase}}</span>
+        </span>
+
+        <span class="verify-box" *ngIf="!accountData.verified && accountData.pending" routerLink="/account/verify">
+          <span class="verified-icon"><img src="assets/icon/account/pending.png"></span>
+          <span>Verify request</span>
+        </span>
+      </div>
+
+      <div class="account-menu-box btnGreen v-align" (click)="showBlockAccountPopup()">
+        Block account
+      </div>
+      <div class="account-menu-box btnGreen v-align"
+        [routerLink]="accountData.devicesNum > 0 ? ['/account/devices'] : []">
+        Block device
+      </div>
+      <div class="account-menu-box btnGreen v-align" routerLink="/account/manage">
+        Manage account
+      </div>
+      <div class="account-menu-box btnGreen v-align" routerLink="/account/links">
+        Link account
+      </div>
+      <!-- <div class="account-menu-box btnGreen v-align"
+        [routerLink]="accountData.penaltiesNum > 0 ? ['/account/penalties'] : []">
+        Pay penalties
+      </div> -->
+      <div class="account-menu-box btnGreen v-align"
+        [routerLink]="accountData.paymentsNum > 0 ? ['/account/payments'] : []">
+        Purchase history
+      </div>
+      <div class="account-menu-box btnGreen v-align" (click)="showAssignCardPopup()">
+        Assign card
+      </div>
+      <div class="account-menu-box btnGreen v-align" *ngIf="accountData.smartCards.length > 0" (click)="showUnassignCardPopup()">
+        Unassign card
+      </div>
+      <div class="account-menu-box btnGreen v-align" (click)="sendDataforPrint()">
+        Print Card
+      </div>
+    </div>
+    <!-- Function list END-->
+
+    <!-- Blocked account page -->
+    <div class="blocked-account-page" *ngIf="accountData">
+      <div class="text-center" *ngIf="accountData.blocked">
+        <div class="account-block-icon">
+          <div class="box"></div>
+        </div>
+        <div class="account-block-text">This account is blocked </div>
+        <div class="account-block-button">
+          <button class="btn btnGreen" (click)="showUnblockAccountPopup()">
+            <img style="margin-right:10px;" src="assets/icon/general/checkout.png">Unblock
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Blocked account page END -->
+
+  </div>
+  <!-- LEFT PART END -->
+
+
+  <!-- Right side - Cart/Status menu -->
+  <div class="account-status-part">
+    <div class="status-holder" *ngIf="!accountCreated">
+      <app-account-status></app-account-status>
+    </div>
+
+    <!-- cart -->
+    <app-cart *ngIf="!accountCreated"></app-cart>
+
+    <!-- Created account notifiaction -->
+    <div class="created-message" *ngIf="accountCreated && accountData">
+      <div class="text">
+        <img src="assets/icon/account/ok.png">
+        <div>Account created</div>
+      </div>
+      <div class="text-2">
+        {{ accountData.name }} needs to verify
+      </div>
+      <div class="text-3" *ngIf="accountData.email">
+        <div class="col-2 p-0 text-left"><img src="assets/icon/account/account-status-mail.png"></div>
+        <div class="col-8 p-0">{{ accountData.email }}</div>
+        <div class="col-2 p-0 text-right"><img class="pending" src="assets/icon/account/pending.png"></div>
+      </div>
+      <div class="text-3" *ngIf="accountData.phone">
+        <div class="col-2 p-0 text-left"><img src="assets/icon/account/account-status-phone.png"></div>
+        <div class="col-8 p-0">{{ accountData.phone }}</div>
+        <div class="col-2 p-0 text-right"><img class="pending" src="assets/icon/account/pending.png"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Right side end -->
+
+  <!-- Block acc popup -->
+  <div class="popup-modal-page" *ngIf="blockAccountPopup">
+    <div class="popup-modal" *ngIf="accountData">
+      <form [formGroup]="form" (ngSubmit)="blockAccount(form)">
+        <div class="popup-modal-title v-align">Block account</div>
+        <div class="popup-modal-text">
+          <div class="row m-0">
+            <div class="col-3 p-0">
+              <img src="assets/icon/general/help.png">
+            </div>
+            <div class="col-9 p-0">
+              <div class="mb-2">
+                Are you sure you want to block account
+                <span class="bold">{{ accountData.shortId }} {{ accountData.name }}?</span>
+              </div>
+
+              <!-- material select -->
+              <mat-form-field [ngClass]="{'invalid-input': submitted && f.blockAccountReason.errors }"
+                class="modal-input d-block" appearance="none">
+                <mat-select formControlName="blockAccountReason" required placeholder="Select reason">
+                  <mat-option *ngFor="let reason of blockAccountReasons" [value]="reason">
+                    {{ reason.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="submitted && f.blockAccountReason.invalid" class="invalid-feedback">
+                <div *ngIf="f.blockAccountReason.errors.required">Reason is required</div>
+              </div>
+              <!-- material select END -->
+
+            </div>
+          </div>
+        </div>
+        <div class="popup-modal-buttons">
+          <button type="button" class="btn cancel-btn" (click)="hideBlockAccountPopup()">
+            <img src="assets/icon/general/cancel-button.png">Cancel
+          </button>
+          <button type="submit" class="btn confirm-btn">
+            <img src="assets/icon/general/checkout.png">Block
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Block acc popup END -->
+
+
+  <!-- Unblock acc popup -->
+  <div class="popup-modal-page" *ngIf="unblockAccountPopup">
+    <div class="popup-modal" *ngIf="accountData">
+      <form [formGroup]="form2" (ngSubmit)="unblockAccount(form2)">
+        <div class="popup-modal-title v-align">Unblock account</div>
+        <div class="popup-modal-text">
+          <div class="row m-0">
+            <div class="col-3 p-0">
+              <img src="assets/icon/general/help.png">
+            </div>
+            <div class="col-9 p-0">
+              <div class="mb-2">
+                Are you sure you want to unblock account
+                <span class="bold">{{ accountData.shortId }} {{ accountData.name }}?</span>
+              </div>
+
+              <!-- material select -->
+              <mat-form-field [ngClass]="{'invalid-input': submitted2 && f2.unblockAccountReason.errors }"
+                class="modal-input d-block" appearance="none">
+                <mat-select formControlName="unblockAccountReason" required placeholder="Select reason">
+                  <mat-option *ngFor="let reason of unblockAccountReasons" [value]="reason">
+                    {{ reason.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="submitted2 && f2.unblockAccountReason.invalid" class="invalid-feedback">
+                <div *ngIf="f2.unblockAccountReason.errors.required">Reason is required</div>
+              </div>
+              <!-- material select END -->
+
+            </div>
+          </div>
+        </div>
+        <div class="popup-modal-buttons">
+          <button type="button" class="btn cancel-btn" (click)="hideUnblockAccountPopup()">
+            <img src="assets/icon/general/cancel-button.png">Cancel
+          </button>
+          <button type="submit" class="btn confirm-btn">
+            <img src="assets/icon/general/checkout.png">Unblock
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Unblock acc popup END -->
+
+
+  <!-- Assign card popup / DEMO-->
+  <div class="popup-modal-page" *ngIf="assignCardPopup">
+    <form [formGroup]="form3" (ngSubmit)="assignSmartcard(form3)">
+      <div class="popup-modal">
+        <div class="popup-modal-title v-align">Assign card</div>
+        <div class="popup-modal-text">
+          <div class="row m-0">
+            <div class="col-9 p-0"><span>Enter Smartcard id to assign card to this account</span></div>
+            <div class="col-3 text-right p-0">
+              <span class="scan-button">
+                <img src="assets/icon/general/driver_card_white.png">
+              </span>
+            </div>
+          </div>
+          <div class="v-align justify-content-between mb-0 mt-4">
+            <label for="smartcard" class="d-block font-weight-bold mr-4">Smartcard</label>
+            <input [ngClass]="{'invalid-input': submitted3 && f3.smartCardId.errors }" class="modal-input" type="text"
+              #smartCardId formControlName="smartCardId" required autocomplete="off">
+          </div>
+          <div *ngIf="submitted3 && f3.smartCardId.invalid" class="invalid-feedback text-right">
+            <div *ngIf="f3.smartCardId.errors.required">Field is required</div>
+          </div>
+        </div>
+        <div class="popup-modal-buttons">
+          <button type="button" class="btn cancel-btn" (click)="hideAssignCardPopup()">
+            <img src="assets/icon/general/cancel-button.png">Cancel
+          </button>
+          <button type="submit" class="btn confirm-btn">
+            <img src="assets/icon/general/checkout.png">Assign
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Assign card END -->
+
+
+  <!-- Unassign card popup / DEMO-->
+  <div class="popup-modal-page" *ngIf="unassignCardPopup">
+    <form [formGroup]="form4" (ngSubmit)="unassignSmartcard(form4)">
+      <div class="popup-modal">
+        <div class="popup-modal-title v-align">Unassign card</div>
+        <div class="popup-modal-text">
+          <div class="row m-0">
+            <div class="col-9 p-0"><span>Enter Smartcard id to unassign card from this account</span></div>
+            <div class="col-3 text-right p-0">
+              <span class="scan-button">
+                <img src="assets/icon/general/driver_card_white.png">
+              </span>
+            </div>
+          </div>
+          <div class="v-align justify-content-between mb-0 mt-4">
+            <label for="smartcard" class="d-block font-weight-bold mr-4">Smartcard</label>
+            <input [ngClass]="{'invalid-input': submitted4 && f4.smartCardId.errors }" class="modal-input" type="text"
+              #smartCardId formControlName="smartCardId" required autocomplete="off">
+          </div>
+          <div *ngIf="submitted4 && f4.smartCardId.invalid" class="invalid-feedback text-right">
+            <div *ngIf="f4.smartCardId.errors.required">Field is required</div>
+          </div>
+        </div>
+        <div class="popup-modal-buttons">
+          <button type="button" class="btn cancel-btn" (click)="hideUnassignCardPopup()">
+            <img src="assets/icon/general/cancel-button.png">Cancel
+          </button>
+          <button type="submit" class="btn confirm-btn">
+            <img src="assets/icon/general/checkout.png">Unassign
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Unassign card END -->
+
+
+</div>
+<!-- page end -->
+<loading-spinner *ngIf="loading"></loading-spinner>

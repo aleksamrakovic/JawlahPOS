@@ -1,0 +1,27 @@
+@font-face {
+    font-family: "Clear Sans Regular";
+    font-stretch: condensed;
+    src: url('../assets/fonts/clearsans/ClearSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Clear Sans Medium";
+    font-stretch: condensed;
+    src: url('../assets/fonts/clearsans/ClearSans-Medium.ttf');
+}
+
+@font-face {
+    font-family: "Clear Sans Bold";
+    src: url('../assets/fonts/clearsans/ClearSans-Bold.ttf');
+}
+
+.main-wrapp {
+    background-color: #000;
+    color: #000;
+    height: 768px;
+    width: 1024px;
+    font-family: "Clear Sans Regular";
+}
+
+
+

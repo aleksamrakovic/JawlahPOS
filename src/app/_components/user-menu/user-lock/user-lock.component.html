@@ -1,0 +1,43 @@
+<div class="user-lock-page">
+  <div class="user-lock-center">
+    <span class="img-holder"><img src="assets/icon/lock/locked-icon.png"></span>
+    <div class="pos-locked-title">POS Locked</div>
+
+    <div class="user-locked-info" *ngIf="loggedUser">
+      <div class="user-locked-name">
+        <!-- clerk -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.CSA">
+          <img src="assets/icon/top-bar/Clerk.png">
+        </span>
+        <!-- maintenance -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.Maintenance">
+          <img src="assets/icon/top-bar/Maintenance.png">
+        </span>
+        <!-- admin -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.Administrator">
+          <img src="assets/icon/top-bar/Administrator.png">
+        </span>
+        <!-- supervisor -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.RetailSupervisor">
+          <img src="assets/icon/top-bar/supervisor.png">
+        </span>
+        <span>{{ loggedUser.firstName }} {{ loggedUser.lastName }}</span>
+      </div>
+      <div class="user-locked-id font-weight-normal">{{ loggedUser.id }}</div>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn unlock-btn btnBlue" (click)="unlockUser()">
+      <span class="img-holder"><img src="assets/icon/lock/unlock-icon.png"></span>
+      <span>Unlock</span>
+    </button>
+  </div>
+
+  <a class="signin-link" (click)="signDifferentUser()">
+    <span class="img-holder"><img src="assets/icon/lock/signin-icon.png"></span>
+    <span>Sign in as a<br>different user</span>
+  </a>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

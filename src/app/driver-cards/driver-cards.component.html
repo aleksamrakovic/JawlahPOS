@@ -1,0 +1,168 @@
+<div class="inner-page">
+  <div class="inner-page-title v-align" *ngIf="pageTranslate">{{ pageTranslate.header[7] }}</div>
+
+  <div class="search-driver">
+    <input
+      #searchDriver
+      class="form-control"
+      [(ngModel)]="query"
+      type="text"
+      placeholder="Search by driver name, IPA, Smartcard ID">
+      <img class="search-icon" src="assets/icon/general/search-blue.png">
+  </div>
+
+  <div class="drivers-list" *ngIf="driversList.length > 0 && pageTranslate">
+    <div class="title">
+      <span>{{pageTranslate.driverCard.pageSubtitle}}</span>
+      <span>{{ driversList.length }}</span>
+    </div>
+
+    <div class="list">
+      <div class="header v-align">
+        <div style="width:15%">{{pageTranslate.driverCard.header[0]}}</div>
+        <div style="width:10%">{{pageTranslate.driverCard.header[1]}}</div>
+        <div style="width:20%">{{pageTranslate.driverCard.header[2]}}</div>
+        <div style="width:10%">{{pageTranslate.driverCard.header[3]}}</div>
+        <div style="width:45%">{{pageTranslate.driverCard.header[4]}}</div>
+      </div>
+      <!-- Drivers list data -->
+      <div class="list-data">
+        <div class="list-item v-align" *ngFor="let driver of driversList | search:'name, id' :query | paginate: config">
+          <div style="width:15%" class="driver-name">{{ driver.name | titlecase }}</div>
+          <div style="width:10%">{{ driver.id }}</div>
+          <div style="width:20%">{{ driver.lastModified }}</div>
+          <div style="width:10%">{{ driver.status }}</div>
+          <div style="width:20%">{{ driver.smartCardId }}</div>
+          <div style="width:25%" class="d-flex justify-content-end">
+            <button style="width: 48%;" (click)="unassignPopup(driver)" class="btnNormal btnRed mr-auto" *ngIf="driver.smartCardId != null">Unassign</button>
+            <button style="width: 48%;" (click)="assignPopup(driver)" class="btnNormal btnBlue" *ngIf="driver.smartCardId == null">Assign</button>
+            <button style="width: 48%;" (click)="replacePopup(driver)" class="btnNormal btnBlue" *ngIf="driver.smartCardId != null">Replace</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="drivers-result" *ngIf="driversList.length == 0">
+    No drivers list available
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="driversList.length > 0">
+    <pagination-template class="my-pagination" #p="paginationApi" maxSize="999" [id]="config.id"
+      (pageChange)="config.currentPage = $event">
+      <button class="pagination-first" (click)="p.setCurrent(1)" [disabled]="p.isFirstPage()">
+        <img src="assets/icon/general/first_page.png" [ngClass]="{'page-disabled' : p.isFirstPage()}">
+      </button>
+      <button class="pagination-previous" (click)="p.previous()" [disabled]="p.isFirstPage()">
+        <img src="assets/icon/general/nav-back.png" [ngClass]="{'page-disabled' : p.isFirstPage()}">
+      </button>
+      <div class="current-pages">
+        <a>{{ config.currentPage }} / {{ p.pages.length }}</a>
+      </div>
+      <button class="pagination-next" (click)="p.next()" [disabled]="p.isLastPage()">
+        <img src="assets/icon/general/nav-next.png" [ngClass]="{'page-disabled' : p.isLastPage()}">
+      </button>
+      <button class="pagination-last" (click)="p.setCurrent(p.pages.length)" [disabled]="p.isLastPage()">
+        <img src="assets/icon/general/last_page.png" [ngClass]="{'page-disabled' : p.isLastPage()}">
+      </button>
+    </pagination-template>
+  </div>
+
+</div>
+<!-- Page END -->
+
+<!-- Unassign popup -->
+<div class="popup-modal-page" *ngIf="unassignCardPopup">
+  <div class="popup-modal">
+    <div class="popup-modal-title v-align">{{pageTranslate.driverCard.unassignPopup.title}}</div>
+    <div class="popup-modal-text">
+      <div class="row m-0">
+        <div class="col-3 p-0"><img src="assets/icon/general/help.png"></div>
+        <div class="col-9 p-0">
+          {{pageTranslate.driverCard.unassignPopup.text}} <span class="bold">{{ driverSelected.name | titlecase }} ({{driverSelected.id}})</span>
+        </div>
+      </div>
+    </div>
+    <div class="popup-modal-buttons">
+      <button class="btn cancel-btn" (click)="closeUnassignPopup()">
+        <img src="assets/icon/general/cancel-button.png">{{pageTranslate.general.cancel}}
+      </button>
+      <button class="btn confirm-btn" (click)="blockDriverCard()">
+        <img src="assets/icon/general/checkout.png">{{pageTranslate.general.save}}
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Unassign popup END -->
+
+<!-- Assign card popup -->
+<div class="popup-modal-page" *ngIf="assignCardPopup">
+  <form [formGroup]="form" (ngSubmit)="assignSmartcard(form)">
+    <div class="popup-modal">
+      <div class="popup-modal-title v-align">{{pageTranslate.driverCard.assignPopup.title}}</div>
+      <div class="popup-modal-text">
+        <div class="row m-0">
+          <div class="col-9 p-0"><span>{{pageTranslate.driverCard.assignPopup.text}}</span></div>
+          <div class="col-3 text-right p-0">
+            <span class="scan-button">
+              <img src="assets/icon/general/driver_card_white.png">
+            </span>
+          </div>
+        </div>
+        <div class="v-align justify-content-between mb-0 mt-4">
+          <label for="smartcard" class="d-block font-weight-bold mr-4">Smartcard</label>
+          <input [ngClass]="{'invalid-input': submitted && f.smartCardId.errors }" class="modal-input" type="text"
+            #smartCardId formControlName="smartCardId" required autocomplete="off">
+        </div>
+        <div *ngIf="submitted && f.smartCardId.invalid" class="invalid-feedback text-right">
+          <div *ngIf="f.smartCardId.errors.required">Field is required</div>
+        </div>
+      </div>
+      <div class="popup-modal-buttons">
+        <button type="button" class="btn cancel-btn" (click)="closeAssignPopup()">
+          <img src="assets/icon/general/cancel-button.png">{{pageTranslate.general.cancel}}
+        </button>
+        <button type="submit" class="btn confirm-btn">
+          <img src="assets/icon/general/checkout.png">{{pageTranslate.general.save}}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- Assign card END -->
+
+<!-- Replace card popup -->
+<div class="popup-modal-page" *ngIf="replaceCardPopup">
+  <div class="popup-modal">
+    <div class="popup-modal-title v-align">{{pageTranslate.driverCard.replacePopup.title}}</div>
+    <div class="popup-modal-text">
+      <div class="row m-0">
+        <div class="col-9 p-0">{{pageTranslate.driverCard.replacePopup.text}}</div>
+        <div class="col-3 text-right p-0">
+          <span class="scan-button not-connected">
+            <img src="assets/icon/general/driver_card.png">
+          </span>
+        </div>
+      </div>
+      <div class="v-align justify-content-between mb-0 mt-4 position-relative">
+        <label class="d-block font-weight-bold mr-4">Smartcard</label>
+        <input class="modal-input replace-input" type="text" readonly value="{{driverSelected.smartCardId}}">
+        <a (click)="removeCard()" class="change-smartcard">
+          <img src="assets/icon/account/change-photo.png">
+        </a>
+      </div>
+    </div>
+    <div class="popup-modal-buttons">
+      <button class="btn cancel-btn" (click)="closeReplacePopup()">
+        <img src="assets/icon/general/cancel-button.png">{{pageTranslate.general.cancel}}
+      </button>
+      <button class="btn confirm-btn" (click)="closeReplacePopup()">
+        <img src="assets/icon/general/checkout.png">{{pageTranslate.general.save}}
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Replace card END -->
+
+<loading-spinner *ngIf="loading"></loading-spinner>

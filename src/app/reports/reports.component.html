@@ -1,0 +1,23 @@
+<div class="inner-page">
+
+    <div class="inner-page-title v-align">Reports</div>
+
+    <div class="row reports-row">
+        <div class="col-12 p-0 mb-4">
+            <a routerLink="/reports/waybill">
+                <span>Waybill report</span> 
+                <span>
+                    <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/general/nav-next.png">
+                </span>
+            </a>
+        </div>
+        <div class="col-12 p-0">
+            <a routerLink="/reports/transactions">
+                <span>Transactions this shift</span>
+                <span>
+                    <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/general/nav-next.png">
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

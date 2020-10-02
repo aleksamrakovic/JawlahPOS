@@ -1,0 +1,31 @@
+<div class="inner-page">
+  <div class="inner-page-title v-align">
+    <span class="back" routerLink="/account/manage"><img src="assets/icon/general/white-back.png"></span>
+    <span>Select account type to verify</span>
+  </div>
+
+  <div class="rider-list" *ngIf="riders">
+    <div class="rider-item btnGreen" *ngFor="let rider of riders | paginate: config" (click)="selectRider(rider)">
+      <div>{{ rider.name | titlecase }}</div>
+    </div>
+  </div>
+
+
+  <div *ngIf="riders && riders.length > 8">
+    <pagination-template class="my-pagination" #p="paginationApi" [id]="config.id" maxSize="999"
+      (pageChange)="config.currentPage = $event">
+      <button class="pagination-previous" (click)="p.previous()" [disabled]="p.isFirstPage()">
+        <img [ngClass]="{'page-disabled' : p.isFirstPage()}" src="assets/icon/general/nav-back.png">
+      </button>
+      <button class="pagination-next" (click)="p.next()" [disabled]="p.isLastPage()">
+        <img [ngClass]="{'page-disabled' : p.isLastPage()}" src="assets/icon/general/nav-next.png">
+      </button>
+    </pagination-template>
+    <div class="current-pages">
+      <a *ngFor="let page of p.pages" [ngClass]="{'page-active' : p.getCurrent() === page.value}">
+        <span><i class="fas fa-circle"></i></span>
+      </a>
+    </div>
+  </div>
+
+</div>

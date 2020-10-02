@@ -1,0 +1,106 @@
+.intercity-route {
+  height: 720px;
+  padding: 0 25px;
+  overflow-y: overlay;
+}
+
+.cart {
+  background-color: #e4e4e4;
+}
+
+.intercity-route-menu {
+  border-bottom: 2px solid #757575;
+  padding: 31px 0;
+  position: relative;
+  line-height: 30px;
+}
+
+.intercity-route-title {
+  color: #fff !important;
+  text-transform: uppercase;
+  font-size: 23px;
+  letter-spacing: 1.31px;
+  line-height: 31px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.intercity-route-title i {
+  margin-right: 20px;
+  color: #fff !important;
+  font-size: 30px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/*************************************** Route box ****************************************
+  *******************************************************************************************/
+.route-boxes {
+  margin-top: 25px;
+  
+}
+
+.route-box {
+  background-color: #e4e4e4;
+  display: flex;
+  border-radius: 10px 15px 15px 10px;
+  margin-bottom: 24px;
+  height: 120px;
+}
+
+.route-title {
+  padding: 40px 50px;
+  width: 85%;
+  display: flex;
+}
+
+.route-select {
+  width: 15%;
+}
+
+.route-from,
+.route-to {
+  font-size: 23px;
+  font-weight: bold;
+  color: #000;
+  line-height: 36px;
+}
+
+.route-from {
+  width: 35%;
+}
+
+.route-to {
+  width: 55%;
+  margin-left: 25px;
+}
+
+.route-arrow {
+  width: 10%;
+  text-align: center;
+}
+
+.route-arrow i {
+  font-size: 35px;
+  color: #808080;
+  vertical-align: middle;
+}
+
+.route-select a {
+  display: block;
+  position: relative;
+  height: 100%;
+  background-color: #0080ff;
+  text-align: center;
+  border-radius: 0px 10px 10px 0;
+  cursor: pointer;
+}
+
+.route-select a i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 45px;
+  color: #fff;
+}

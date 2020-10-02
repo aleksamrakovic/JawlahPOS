@@ -1,0 +1,55 @@
+<div class="user-menu-page" id="userModal">
+
+  <div class="user-menu">
+    <div class="user-info">
+      <span (click)="closePopup()" class="close-icon">
+        <img src="assets/icon/general/cart-item-delete.png">
+      </span>
+
+      <div class="user-title" *ngIf="loggedUser">
+        <!-- clerk -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.CSA">
+          <img src="assets/icon/top-bar/Clerk.png">
+        </span>
+        <!-- maintenance -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.Maintenance">
+          <img src="assets/icon/top-bar/Maintenance.png">
+        </span>
+        <!-- admin -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.Administrator">
+          <img src="assets/icon/top-bar/Administrator.png">
+        </span>
+        <!-- supervisor -->
+        <span style="margin-right: 5px" *ngIf="loggedUser.employeeRoleId == roleType.RetailSupervisor">
+          <img src="assets/icon/top-bar/supervisor.png">
+        </span>
+
+        <!-- User role icons END -->
+        {{ loggedUser.firstName }} {{ loggedUser.lastName }}
+        <span class="user-id">{{ loggedUser.id }}</span>
+      </div>
+      <div class="user-role" *ngIf="loggedUser">{{ loggedUser.employeeRoleName }}</div>
+      <div class="user-location" *ngIf="posInfo">POS Location: {{ posInfo.location }}</div>
+    </div>
+
+    <div class="user-links">
+      <div class="user-link v-align" (click)="lockUser()">
+        <div class="icon-holder">
+          <img src="assets/icon/user-menu/lock.png">
+        </div>
+        <span>Lock</span>
+      </div>
+      <div class="user-link v-align" (click)="logoutUser()">
+        <div class="icon-holder">
+          <img src="assets/icon/user-menu/logout.png">
+        </div>
+        <span>Logout</span>
+      </div>
+      <div class="pos-info" *ngIf="posInfo">
+        <div>Distribution {{ posInfo.distributionVersion }}</div>
+        <div>App v. {{ posInfo.appVersion }}</div>
+      </div>
+    </div>
+  </div>
+
+</div>

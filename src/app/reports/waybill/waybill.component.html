@@ -1,0 +1,82 @@
+<div class="inner-page">
+
+  <div class="inner-page-title v-align">
+    <span class="back" routerLink="/reports"><img src="assets/icon/general/white-back.png"></span>
+    Reports / Waybill report
+  </div>
+
+  <div class="report-list" *ngIf="waybill">
+    
+    <div class="report-item">
+      <div class="report-box">
+        <div class="report-header v-align">
+          <div style="width: 20%">IPA</div>
+          <div style="width: 25%">Employee</div>
+          <div style="width: 25%">Reservation office</div>
+          <div style="width: 30%">Date & Time</div>
+        </div>
+        <div class="report-data v-align">
+          <div style="width: 20%">{{ waybill.employeeIpa }}</div>
+          <div style="width: 25%">{{ waybill.employeeName }}</div>
+          <div style="width: 25%">{{ waybill.posLocation }}</div>
+          <div style="width: 30%">{{ waybill.shiftDate }} {{ waybill.shiftTime }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-item">
+      <div class="report-box">
+        <div class="report-header v-align">
+          <div style="width: 30%">Details</div>
+          <div style="width: 25%">Payment cash</div>
+          <div style="width: 25%">Payment card</div>
+          <div style="width: 20%">Total value</div>
+        </div>
+        <div class="report-data v-align">
+          <div style="width: 30%">Opening cash balance</div>
+          <div style="width: 25%"></div>
+          <div style="width: 25%"></div>
+          <div style="width: 20%" class="bold">{{ waybill.cashIn }} {{ currency }}</div>
+        </div>
+        <div class="report-data v-align">
+          <div style="width: 30%">Total sales</div>
+          <div style="width: 25%">{{ waybill.totalSalesCash }} {{ currency }}</div>
+          <div style="width: 25%">{{ waybill.totalSalesCard }} {{ currency }}</div>
+          <div style="width: 20%" class="bold">{{ waybill.totalSales }} {{ currency }}</div>
+        </div>
+        <div class="report-data v-align">
+          <div style="width: 30%">Total refunds</div>
+          <div style="width: 25%" class="red">{{ waybill.totalRefundsCash }} {{ currency }}</div>
+          <div style="width: 25%" class="red">{{ waybill.totalRefundsCard }} {{ currency }}</div>
+          <div style="width: 20%" class="bold red">{{ waybill.totalRefunds }} {{ currency }}</div>
+        </div>
+        <div class="report-data v-align">
+          <div style="width: 30%">Current cash balance</div>
+          <div style="width: 25%"></div>
+          <div style="width: 25%"></div>
+          <div style="width: 20%" class="bold">{{ waybill.cashOut }} {{ currency }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-item">
+      <div class="report-box">
+        <div class="report-header v-align">
+          <div style="width: 60%">Ticket/products</div>
+          <div style="width: 20%">Quantity</div>
+          <div style="width: 20%">Value</div>
+        </div>
+        <div class="report-data v-align">
+          <div style="width: 60%" class="bold">Total items sold</div>
+          <div style="width: 20%" class="bold">{{ waybill.totalSalesNum }}</div>
+          <div style="width: 20%" class="bold">{{ waybill.totalNetSales }} {{ currency }}</div>
+        </div>
+        <div class="report-data v-align" *ngFor="let item of waybill.items">
+          <div style="width: 60%">{{ item.name }}</div>
+          <div style="width: 20%">{{ item.number }}</div>
+          <div style="width: 20%">{{ item.value }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>

@@ -1,0 +1,103 @@
+<div class="row m-0">
+  <div class="inner-page">
+    <form [formGroup]="form" (ngSubmit)="form.valid && confirm(form)">
+
+      <div class="inner-page-title v-align">
+        <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+        <span>Top up account / credit</span>
+      </div>
+
+      <!-- Input value box -->
+      <div class="top-up-box">
+        <div class="col-6 p-0">
+          <div class="input-group">
+            <input
+              [ngClass]="{'amount-input-ar' : selectedLang == 'ar'}"
+              class="form-control top-up-input"
+              type="text"
+              (keyup)="addValue($event)"
+              #topupInput
+              formControlName="topupInput"
+              required
+              autocomplete="off"
+              >
+            <div class="input-group-append-2" *ngIf="posInfo">
+              <select id="selectValue" class="input-group-text value" class="btn dropdown-toggle">
+                <option *ngIf="selectedLang != 'ar'" [value]="currency">{{currency}}</option>
+                <option *ngIf="selectedLang == 'ar'" [value]="currency">{{translations.get(currency)}}</option>
+                <option *ngIf="posInfo.showSecondCurrency && selectedLang != 'ar'" [value]="secondCurrency">{{secondCurrency}}</option>
+                <option *ngIf="posInfo.showSecondCurrency && selectedLang == 'ar'" [value]="secondCurrency">{{translations.get(secondCurrency)}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 p-0" *ngIf="accountData">
+          <div class="top-up-current-value" [ngClass]="{'topup-smaller' : topupInput.value.length > 5}">
+            <div>Current</div>
+            <span *ngIf="selectedLang != 'ar'">{{ accountData.credit | currency:currency:''}} {{currency}}</span>
+            <span *ngIf="selectedLang == 'ar'">{{ accountData.credit | currency:currency:''}} {{translations.get(secondCurrency)}}</span>
+
+          </div>
+          <div class="top-up-new-value" [ngClass]="{'topup-smaller' : topupInput.value.length > 5}" >
+            <div>New value</div>
+            <span *ngIf="selectedLang != 'ar'" class="font-weight-bold">{{ newValue | currency:currency:''}} {{currency}}</span>
+            <span *ngIf="selectedLang == 'ar'" class="font-weight-bold">{{ newValue | currency:currency:''}} {{translations.get(secondCurrency)}}</span>
+          </div>
+        </div>
+      </div>
+      <!-- Input value box END -->
+
+      <!-- Numbers touchpad -->
+      <div class="cash-numbers">
+        <div class="box-number">
+          <a (click)="addValue($event)" value="7">7</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="8">8</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="9">9</a>
+        </div>
+        <div class="box-number red">
+          <a (click)="addValue($event)" value="del" class="numpad-del"></a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="4">4</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="5">5</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="6">6</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value=".">.</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="1">1</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="2">2</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="3">3</a>
+        </div>
+        <div class="box-number">
+          <a (click)="addValue($event)" value="0">0</a>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!form.valid" class="btn addtoCart btnGreen">
+        <img src="assets/icon/account/plus-black.png"> Add to cart
+      </button>
+
+    </form>
+  </div>
+
+  <!-- Cart right side -->
+  <app-cart></app-cart>
+
+</div>
+<!-- row end -->
+
+<loading-spinner *ngIf="loading"></loading-spinner>

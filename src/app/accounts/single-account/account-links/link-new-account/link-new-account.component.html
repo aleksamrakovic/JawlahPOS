@@ -1,0 +1,115 @@
+<div class="inner-page">
+    <div class="inner-page-title v-align">
+        <span class="back" routerLink="/account/links"><img src="assets/icon/general/white-back.png"></span>
+        <span>Link Accounts</span>
+    </div>
+
+    <div class="search-account-box mb-4">
+        <form [formGroup]="form" (ngSubmit)="submit(form)">
+            <div class="view-part1">
+                <div class="view-account-title">Grant access to:</div>
+                <div class="search-input">
+                    <input [ngClass]="{'border-set' : accountList.length > 1}" class="edit-input" #searchAccountInput
+                        (keyup)="searchAccount(searchAccountInput.value)" placeholder="Account ID, Phone, Email, Name">
+                    <div class="account-list" *ngIf="accountList">
+                        <a *ngFor="let item of accountList | slice:0:10" (click)="selectAccount(item)">
+                            <div class="d-inline">
+                                <span class="acc-name">{{ item.name }}</span>
+                                <span class="acc-details">ID {{ item.id }}, {{ item.phone }}, {{ item.email }}</span>
+                            </div>
+                            <div class="acc-arrow">
+                                <img src="assets/icon/account/next.png">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- account results -->
+                <div *ngIf="accountSelected">
+                    <div class="row mt-4">
+                        <div class="col-3">
+                            <div class="box-part text-center">
+                                <div class="box-part-photo">
+                                    <img *ngIf="!accountSelected.image" src="assets/icon/regular_full.svg"
+                                        class="user-photo">
+                                    <img *ngIf="accountSelected.image" class="user-photo"
+                                        src="data:image/png;base64,{{path}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="box-part">
+                                <div class="row mb-4">
+                                    <div class="col-4">
+                                        <div class="left-part">Account no</div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="right-part">{{ accountSelected.shortId }}</div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-4">
+                                        <div class="left-part">Account owner</div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="right-part">{{ accountSelected.name }}</div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-4">
+                                        <div class="left-part">Email</div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="right-part">{{ accountSelected.email }}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="left-part">Phone</div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="right-part">{{ accountSelected.phone }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="view-account-title">Select permission level</div>
+                            <!-- material select -->
+                            <mat-form-field
+                                [ngClass]="{'invalid-input': submitted && f.permission.errors }"
+                                class="edit-input" appearance="none">
+                                <mat-select formControlName="permission" placeholder="Select reason" required>
+                                    <mat-option *ngFor="let perm of permissions" [value]="perm.uid">
+                                        {{ perm.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div *ngIf="submitted && f.permission.invalid" class="invalid-feedback">
+                                <div *ngIf="f.permission.errors.required">Field is invalid, or action not allowed</div>
+                            </div>
+                            <!-- material select END -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="popup-modal-buttons">
+                <button type="button" class="btn cancel-btn" routerLink="/account/links">
+                    <img src="assets/icon/general/cancel-button.png">Cancel
+                </button>
+                <button type="submit" class="btn confirm-btn">
+                    <img src="assets/icon/general/checkout.png">Grant
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

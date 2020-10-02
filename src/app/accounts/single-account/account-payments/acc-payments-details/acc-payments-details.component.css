@@ -1,0 +1,42 @@
+.inner-page {
+  width: 100%;
+}
+
+.inner-page-title {
+  justify-content: center;
+}
+
+.list-group {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.list-group-header {
+  height: 48px;
+  padding: 0 24px;
+  letter-spacing: 0.5px;
+  background-color: #9b9b9b;
+}
+
+.list-group-header > span {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.list-group-item {
+  height: 72px;
+  word-break: break-word;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.list-group-item > span {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.list-group-item:first-child {
+  border-top: 0;
+  border-radius: 0;
+}

@@ -1,0 +1,194 @@
+.account-main-part {
+  height: 720px;
+  overflow-y: overlay;
+  width: 626px;
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 24px;
+  position: relative;
+}
+
+.account-status-part {
+  width: 302px;
+  height: 720px;
+  background-color: #e4e4e4;
+  overflow: hidden;
+  position: relative;
+}
+
+.account-name-title {
+  font-size: 30.36px;
+  line-height: 39px;
+  color: #fff;
+  height: 96px;
+  border-bottom: 2px solid #757575;
+}
+
+.account-menu-boxes {
+  margin: 24px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.account-menu-box {
+  font-family: 'Clear Sans Medium';
+  border-radius: 12px;
+  height: 123px;
+  justify-content: center;
+  text-transform: capitalize;
+  cursor: pointer;
+  text-align: center;
+}
+
+.account-menu-box:focus {
+  outline: none;
+  border: none;
+}
+
+.account-menu-box .verified-icon {
+  display: block;
+}
+
+.account-menu-box .verify-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.account-menu-box-pending .verify-box-pending {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+.account-menu-box-pending {
+  font-family: 'Clear Sans Medium';
+  background-color: #fe8f25;
+  border-radius: 12px;
+  height: 123px;
+  justify-content: center;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.not-verified {
+  background-color: #fe8f25;
+}
+
+/*******************************************************************************************
+************************************Account Block part**************************************/
+.account-block-icon {
+  margin: 80px auto 50px auto;
+  border-radius: 50%;
+  border: 2px solid #6f6f6f;
+  width: 137.5px;
+  height: 137.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-block-icon .box {
+  width: 77px;
+  height: 25px;
+  background-color: #6f6f6f;
+}
+
+.account-block-text {
+  color: #fff;
+  font-family: 'Clear Sans Bold';
+  font-size: 29px;
+  text-transform: uppercase;
+}
+
+.account-block-text .small {
+  font-family: 'Clear Sans Regular';
+  font-size: 23px;
+  margin-top: 15px;
+  display: block;
+  text-transform: capitalize;
+  padding: 0 100px;
+  line-height: 31px;
+}
+
+.account-block-button {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+}
+
+.account-block-button button {
+  text-transform: uppercase;
+  font-family: 'Clear Sans Bold';
+  border-radius: 12px;
+  height: 72px;
+  width: 100%;
+  font-size: 21px;
+  letter-spacing: 1.2px;
+}
+
+/***********************Account created*************************/
+.created-message {
+  padding: 0 24px;
+}
+
+.created-message .text {
+  text-align: center;
+  padding-top: 190px;
+  padding-bottom: 70px;
+  border-bottom: 2px solid #cacaca;
+  font-size: 18px;
+  letter-spacing: 0.67px;
+}
+
+.created-message .text img {
+  display: inline-block;
+  margin-bottom: 25px;
+}
+
+.created-message .text-2 {
+  color: #D0021B;
+  font-size: 23px;
+  letter-spacing: 0.8px;
+  font-family: 'Clear Sans Medium';
+  padding: 15px 0;
+  border-bottom: 2px solid #cacaca;
+}
+
+.created-message .text-3 {
+  padding:15px 0;
+  font-size: 18px;
+  letter-spacing: 0.67px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  word-break: break-all;
+  border-bottom: 2px solid #cacaca;
+}
+
+.created-message .text-3 .pending {
+  height: 30px;
+}
+
+.disable {
+  opacity: 0.5;
+}
+
+/* assign card popup style */
+.popup-modal-text .scan-button {
+  background-color: #0080ff;
+  border-radius: 12px;
+  width: 130px;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

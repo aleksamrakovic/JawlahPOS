@@ -1,0 +1,62 @@
+.ticket-list {
+    margin-top: 22px;
+  }
+
+  .ticket-item {
+    padding: 24px 24px 24px 51px;
+    background-color: #E4E4E4;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ticket-info, .ticket-price {
+    font-size: 23px;
+    line-height: 36px;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    word-break: break-word;
+  }
+
+  .ticket-price {
+    color: #474747;
+    font-weight: normal;
+  }
+
+  .button-control {
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  /* add/remove buttons */
+  .btn-minus, .btn-plus {
+    width: 72px;
+    height: 72px;
+    line-height: 72px;
+    border: 0px;
+    padding: 0px;
+    border-radius: 0;
+  }
+
+  .btn-minus {
+    background-color: #9b9b9b;
+  }
+
+  .btn-plus {
+    background-color: #0080ff;
+  }
+
+  .btn-blue {
+    background-color: #0080ff;
+  }
+
+  .ticket-amount {
+    display: inline-block;
+    width: 107.25px;
+    background-color: #fff;
+    line-height: 63px;
+    height: 71.86px;
+    font-size: 46px;
+    vertical-align: middle;
+    text-align: center;
+  }

@@ -1,0 +1,51 @@
+.left-part {
+  height: 720px;
+  background-color: #303030;
+  position: relative;
+  width: 96px;
+}
+
+.main-part {
+  height: 720px;
+  width: 928px;
+  background-color: #474747;
+}
+
+.img-account-holder {
+  margin-top: 20px;
+}
+
+.account-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.regular-border {
+  border: 2px solid #ccc;
+}
+
+.student-border {
+  border: 2px solid #81E03F;
+}
+
+.account-id {
+  font-family: 'Clear Sans Bold';
+  color: #fff;
+  font-size: 13px;
+  line-height: 18px;
+  margin-top: 20px;
+  word-break: break-all;
+  padding: 0 5px;
+}
+
+.exit-link {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  font-size: 45px;
+  color: #fff !important;
+  -webkit-transform: translateX(-50%) rotate(180deg);
+          transform: translateX(-50%) rotate(180deg);
+}

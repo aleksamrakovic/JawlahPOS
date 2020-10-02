@@ -1,0 +1,220 @@
+<div class="inner-page">
+  <form [formGroup]="form">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/account/manage"><img src="assets/icon/general/white-back.png"></span>
+      <span>View verification request</span>
+
+      <span class="verify-buttons" *ngIf="accountData && accountData.verificationRequest.status != 'EXPIRED'">
+        <button type="button" (click)="submitRequest(form)" class="verify-btn btnGreen"><img src="assets/icon/general/checkout.png">Submit</button>
+      </span>
+    </div>
+
+    <!-- First box image -->
+    <div class="box-info" *ngIf="accountData">
+      <div class="row">
+        <div class="col-3">
+          <div class="box-part text-center">
+            <div class="box-part-photo">
+              <div *ngIf="!hasImg" class="user-photo"></div>
+              <img *ngIf="hasImg" class="user-photo" #userImage src="{{path}}">
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="box-part">
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Account no</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.shortId }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Current account type</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.type | titlecase }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Requested account type</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.verificationRequest.targetRider | titlecase }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Full name</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.name }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Address</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.address }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Country</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.countryFull }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">E-mail</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.email }}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="left-part">Phone</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.phone }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal documents -->
+    <div class="box-info2 box-4" *ngFor="let element of accountDocuments">
+
+      <div class="title v-align">
+        <div class="title-text" *ngIf="element.isPersonal"><img src="assets/icon/account/blue-arrow-down.png">Personal document</div>
+        <div class="title-text" *ngIf="!element.isPersonal"><img src="assets/icon/account/blue-arrow-down.png">{{ element.type }}</div>
+      </div>
+
+      <div class="main-part">
+        <div class="box-part">
+
+          <div class="row mb-4" *ngFor="let elem of element.verificationElements">
+            <div class="col-4 v-align">
+              <div class="left-part">{{ elem.name }}</div>
+            </div>
+
+            <div class="col-5" *ngIf="elem.type == 'STRING'">
+              <div class="right-part">
+                <input [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }" class="edit-input" type="text" formControlName='{{ elem.type}}_{{element.id}}_{{elem.id}}'
+                  value="{{elem.value}}" required>
+                  <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                    <div *ngIf="f[elem.type+'_'+element.id+'_'+elem.id].errors.required">Field is required</div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-8" *ngIf="elem.type == 'IMAGE'">
+              <div class="row">
+                <div class="col-6">
+                  <div [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }" class="front-doc" (click)="scannImage(scanImg, elem, element)">
+                    <img #scanImg style="display:block;max-width:100%;max-height:100%" src="data:image/png;base64,{{elem.value}}">
+                    <input #scanInput type="text" class="fake-input" formControlName="{{ elem.type}}_{{element.id}}_{{elem.id}}" value="data:image/png;base64,{{elem.value}}" required minlength="35">
+                  </div>
+                  <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                    <div>Field is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-5" *ngIf="elem.type == 'DATE'">
+              <div class="right-part">
+                <input [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }" type="text" theme="dp-material" [dpDayPicker]="datePickerConfig" class="edit-input input-date"
+                  formControlName="{{ elem.type}}_{{element.id}}_{{elem.id}}" placeholder="dd/mm/yyyy"
+                  value="{{elem.value}}" required>
+                  <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                    <div *ngIf="f[elem.type+'_'+element.id+'_'+elem.id].errors.required">Field is required</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- Document END-->
+
+
+    <div *ngIf="accountData">
+      <div class="box-info2 box-3">
+        <div class="title v-align">
+          <div class="title-text d-flex">Account verification</div>
+        </div>
+        <div class="main-part">
+          <div class="box-part">
+            <div class="row mb-4">
+              <div class="col-4 v-align">
+                <div class="left-part">Status</div>
+              </div>
+              <div class="col-5">
+                <div class="right-part font-weight-bold">{{ accountData.verificationRequest.status }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2 v-align">
+                    <div class="left-part">From</div>
+                  </div>
+                  <div class="col-10">
+                    <div class="right-part">
+                      <input [ngClass]="{'invalid-input': submitted && f.expireDateFrom.errors }" type="text" theme="dp-material" [dpDayPicker]="datePickerConfig" class="edit-input input-date"
+                      formControlName="expireDateFrom" placeholder="dd/mm/yyyy" [value]="accountData.verificationRequest.concessionStartTimestamp" required [minDate]="minDateAttStart" #startDate>
+                      <div *ngIf="submitted && f.expireDateFrom.invalid" class="invalid-feedback">
+                        <div *ngIf="f.expireDateFrom.errors.required">Field is required</div>
+                        <div *ngIf="f.expireDateFrom.errors.minDate">Invalid field</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2 v-align">
+                    <div class="left-part">To</div>
+                  </div>
+                  <div class="col-10">
+                    <div class="right-part">
+                      <input [ngClass]="{'invalid-input': submitted && f.expireDateTo.errors }" type="text" theme="dp-material" [dpDayPicker]="datePickerConfig" class="edit-input input-date"
+                      formControlName="expireDateTo" placeholder="dd/mm/yyyy" [value]="accountData.verificationRequest.concessionExpirationTimestamp" required [minDate]="minDateAttEnd">
+                      <div *ngIf="submitted && f.expireDateTo.invalid" class="invalid-feedback">
+                        <div *ngIf="f.expireDateTo.errors.required">Field is required</div>
+                        <div *ngIf="f.expireDateTo.errors.minDate">Min date is {{ startDate.value }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4" *ngIf="accountData.verificationRequest.description">
+              <div class="col-4 v-align">
+                <div class="left-part">Comment</div>
+              </div>
+              <div class="col-5">
+                <div class="right-part font-weight-bold">{{ accountData.verificationRequest.description }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

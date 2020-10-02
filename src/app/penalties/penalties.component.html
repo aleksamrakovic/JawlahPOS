@@ -1,0 +1,83 @@
+<div class="row m-0">
+
+  <!-- Penalties main page -->
+  <div class="inner-page">
+    <div class="inner-page-title v-align" *ngIf="pageTranslate">{{pageTranslate.header[3]}}</div>
+
+    <!-- Search penalty -->
+    <div class="search-penalties-box">
+      <div class="view-part1">
+        <div class="search-penalties-input">
+          <img (click)="searchPenalty(query)" src="assets/icon/penalties/penalties-search.png">
+          <input (focus)="barcodeOff()" (blur)="barcodeOn()" #penaltyInput [ngClass]="{'border-blue' : penalties.length > 0}" class="form-control" type="text" [(ngModel)]="query"
+            placeholder="Search by penalty ref or account">
+        </div>
+      </div>
+      <div class="view-part2">
+        <button class="scan-qr-button">
+          <img src="assets/icon/account/scan-qr.png">
+          <div>Scan Qr</div>
+        </button>
+      </div>
+    </div>
+    <!-- Search penalty END -->
+
+    <div *ngIf="result">
+      <div class="penalty-result" *ngIf="result.length == 0">Penalty not found in the system.</div>
+    </div>
+
+    <!-- Penalty filter List -->
+    <div class="penalties-history">
+      <div class="penalties-history-title" [hidden]="listAll.length == 0 && listOpen.length == 0">
+
+        <mat-form-field appearance="none" class="mr-4">
+          <mat-select class="selectWhite" placeholder="Select type" (selectionChange)="selectType($event)" [(value)]="selected">
+              <mat-option value="open">Open penalties</mat-option>
+              <mat-option value="all">All penalties</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>{{ penalties.length }}</span>
+      </div>
+
+      <div class="penalties-list" *ngIf="penalties.length > 0">
+        <div class="penalties-list-header v-align">
+          <span style="width: 20%">Pen. ref</span>
+          <span style="width: 20%">Issued</span>
+          <span style="width: 30%">Account</span>
+          <span style="width: 30%">{{currency}}</span>
+        </div>
+        <div class="penalties-list-data">
+          <!-- List of penalties -->
+          <div *ngFor="let item of penalties">
+            <div class="penalties-list-item v-align" [ngClass]="{'penalty-added': item.penalty.status == 'In cart'}">
+              <span style="width:20%" class="penalty-ref-link"
+                (click)="seePenalty(item)">{{ item.penalty.refNumber }}</span>
+              <span style="width:20%"
+                class="penalty-issued-date">{{ item.penalty.issued }}</span>
+              <div style="width:30%" class="penalty-account-data">
+                <span class="penalty-account-name">{{ item.penalty.account.name }}</span>
+                <span class="penalty-account-id">{{ item.penalty.account.shortId }}</span>
+              </div>
+              <span style="width:15%" class="penalty-price">{{ item.penalty.value | currency:currency:''}}</span>
+              <span style="width:15%" class="penalty-paid" *ngIf="item.penalty.status == 'Paid'">Paid</span>
+              <span style="width:15%" *ngIf="item.penalty.status == 'In cart'" class="penalty-incart">In cart</span>
+              <button style="width:15%" *ngIf="item.penalty.status != 'Paid' && item.penalty.status != 'In cart'"
+                (click)="addToCart(item)" class="btnNormal btnBlue">Pay
+              </button>
+            </div>
+          </div>
+          <!-- List of penalties END -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- main page END -->
+
+  <!-- Cart -->
+  <app-cart></app-cart>
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

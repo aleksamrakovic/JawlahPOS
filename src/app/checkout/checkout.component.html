@@ -1,0 +1,36 @@
+<div class="row m-0">
+  <div class="left-part">
+    <a (click)="checkoutModeReset()">
+      <span class="back"><img src="assets/icon/general/white-back.png"></span>
+    </a>
+  </div>
+  <!-- Col left END -->
+
+  <!-- Col Main part -->
+  <div class="main-part">
+    <div class="row m-0">
+      
+      <div class="cart">
+        <app-cart></app-cart>
+      </div>
+
+      <div class="background-checkout p-0">
+        <div class="list-group">
+          <a class="list-group-item" [ngClass]="{ 'active' : mode == checkoutMode.Cash }" (click)="setMode(checkoutMode.Cash)">
+            Cash
+          </a>
+          <a class="list-group-item" [ngClass]="{ 'active' : mode == checkoutMode.Card }" (click)="setMode(checkoutMode.Card)">
+            Card
+          </a>
+        </div>
+
+        <!-- Components Cash/Card -->
+        <app-cash *ngIf="mode == checkoutMode.Cash"></app-cash>
+        <app-card *ngIf="mode == checkoutMode.Card"></app-card>
+      </div>
+    </div>
+  </div>
+  <!-- Main Part END -->
+  
+</div>
+<!-- Row END -->

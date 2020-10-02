@@ -1,0 +1,125 @@
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar {
+  height: 3px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #979797;
+  border-radius: 10px;
+}
+
+.inner-page-title {
+  justify-content: center;
+}
+
+.list-group {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  height: 96px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list-group-item {
+  display: inline-block;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  background-color: transparent;
+  color: #fff !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  border: 0;
+}
+
+.active {
+  background-color: #0080ff;
+  border-radius: 100px;
+}
+
+.boxes {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.box {
+  font-family: "Clear Sans Medium";
+  border-radius: 12px;
+  height: 144px;
+  font-size: 21px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**********************************Pagination style********************************
+***********************************************************************************/
+.my-pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: flex;
+}
+
+.my-pagination .pagination-previous,
+.my-pagination .pagination-next {
+  background-color: #0080ff;
+  width: 50%;
+  height: 100%;
+  font-size: 40px;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-pagination button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-pagination .pagination-previous {
+  border-right: 1px solid #000;
+}
+
+.my-pagination .page-disabled {
+  opacity: 0.5;
+}
+
+.current-pages {
+  position: absolute;
+  top: 615px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.current-pages a {
+  margin-right: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.current-pages a:last-child {
+  margin-right: 0;
+}
+
+.page-active {
+  color: #fff !important;
+  font-size: 16px !important;
+}

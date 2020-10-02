@@ -1,0 +1,326 @@
+.inner-page {
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+.inner-page-title {
+  justify-content: center;
+}
+
+/* Box info style */
+.box-info {
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.box-part {
+  position: relative;
+}
+
+.box-part .box-part-photo {
+  position: relative;
+}
+
+.box-part .box-part-photo .user-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid #979797;
+  background-color: #fff;
+  display: inline-block;
+}
+
+.box-part .box-part-photo .img-change .add-icon,
+.box-part .box-part-photo .img-change .icon-change {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #0080ff;
+  width: 57px;
+  height: 57px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-part .box-part-photo .img-change .add-icon img {
+  width: 25px;
+  transform: rotate(45deg);
+}
+
+.box-part .left-part {
+  font-family: 'Clear Sans Medium';
+  color: #303030;
+  letter-spacing: 1.33px;
+  text-transform: uppercase;
+}
+
+.box-part .right-part {
+  letter-spacing: 0.67px;
+  color: #000;
+  word-break: break-all;
+}
+
+/* Box info 2 style */
+.box-info2 {
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.box-info2 .title {
+  padding: 0 25px 0 50px;
+  height: 72px;
+  justify-content: space-between;
+}
+
+.box-info2 .title .title-text {
+  font-size: 23px;
+  line-height: 31px;
+  letter-spacing: 1.31px;
+  color: #474747;
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+}
+
+.box-info2 .title .title-text img {
+  margin-right: 10px;
+}
+
+.rotate-icon {
+  transform: rotate(-90deg);
+}
+
+.box-info2 .title .title-button i {
+  margin-right: 5px;
+}
+
+.box-info2 .main-part {
+  padding: 25px 25px 25px 50px;
+  border-top: 2px solid #979797;
+}
+
+.box-5 .main-part {
+  padding: 10px 25px 10px 50px !important;
+}
+
+.box-info2 .box-part .left-part .verify-text {
+  letter-spacing: 0.67px;
+  text-transform: none;
+  word-break: break-all;
+}
+
+.box-info2 .box-part .left-part .verify-text .access-icon {
+  margin-right: 20px;
+}
+
+.box-info2 .box-part .verify-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.box-info2 .box-part .right-part .user-title-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.box-info2 .box-part .right-part .user-title-item {
+  font-family: 'Clear Sans Medium';
+  text-transform: uppercase;
+  padding: 7px 20px;
+}
+
+.box-info2 .box-part .right-part .active {
+  background-color: #0080ff;
+  border-radius: 100px;
+  color: #fff;
+  padding: 7px 20px;
+}
+
+/* Input edit */
+.box-info2 .box-part .edit-input {
+  background-color: #fff;
+  border: 1px solid #979797;
+  height: 72px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  width: 100%;
+  color: #000;
+  font-family: 'Clear Sans Medium';
+  letter-spacing: 0.67px;
+}
+
+.link-disabled {
+  opacity: 0.6;
+  background-color: #777!important;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.box-info2 .box-part .edit-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Form saved */
+.saved {
+  -webkit-animation: saved-fade 5s forwards;
+  animation: saved-fade 5s forwards;
+}
+
+@-webkit-keyframes saved-fade {
+  0% {
+    background-color: #DBFFC2;
+  }
+
+  100% {
+    background-color: #e4e4e4;
+  }
+}
+
+@keyframes saved-fade {
+  0% {
+    background-color: #DBFFC2;
+  }
+
+  100% {
+    background-color: #e4e4e4;
+  }
+}
+
+.request-list {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.request-list .header {
+  height: 48px;
+  background-color: #9b9b9b;
+  letter-spacing: 0.67px;
+  padding: 0 24px;
+}
+
+.request-list .list-data {
+  overflow: auto;
+  margin-bottom: 25px;
+}
+
+.request-list .item {
+  height: 72px;
+  background-color: #fff;
+  padding: 0 24px;
+  border-bottom: 1px solid #979797;
+  letter-spacing: 0.67px;
+  word-break: break-word;
+}
+
+/******************************Photo modal style********************************
+********************************************************************************/
+.photo-modal-page {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  z-index: 9000;
+  width: 1024px;
+  height: 720px;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.photo-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.photo-modal-title {
+  font-family: 'Clear Sans Medium';
+  text-transform: uppercase;
+  font-size: 27px;
+  line-height: 36px;
+  letter-spacing: 2px;
+  color: #303030;
+  padding: 0 50px;
+  height: 85px;
+  border-bottom: 2px solid #bdbdbd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.photo-modal-part {
+  padding: 80px 150px;
+  background-color: #fff;
+}
+
+.photo-modal-part .photo-box {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 1px solid #979797;
+}
+
+.photo-modal-part .photo-box video,
+.photo-modal-part .photo-box img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.popup-modal-buttons {
+  display: flex;
+}
+
+.photo-btn {
+  width: 100%;
+  height: 96px;
+  background-color: #0080ff;
+  border: none;
+  border-radius: 0;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 21px;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+  border-right: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.photo-btn i {
+  font-size: 30px;
+  margin-right: 20px;
+}
+
+.photo-btn:last-child {
+  border-right: none;
+}
+
+/*********************************Daytimepicker*********************************/
+.input-date {
+  background: #fff url('/assets/icon/header-menu/period-blue.png');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  padding: 0 40px 0 15px;
+}

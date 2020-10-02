@@ -1,0 +1,100 @@
+.inner-page {
+  width: 100%;
+}
+
+.report-item {
+  background-color: #e4e4e4;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.report-header {
+  padding: 0 24px;
+  background-color: #9b9b9b;
+  font-family: 'Clear Sans Regular';
+  letter-spacing: 0.67px;
+  height: 48px;
+}
+
+.report-data {
+  padding: 0 24px;
+  background-color: #fff;
+  border-bottom: 1px solid #979797;
+  height: 72px;
+  word-wrap: break-word;
+}
+
+.report-data-red {
+  color: #D0021B;
+}
+
+.report-msg {
+  color: #fff;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/**********************************Pagination style********************************
+***********************************************************************************/
+.my-pagination {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  height: 72px;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-next {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination .pagination-first, .my-pagination .pagination-last {
+  color: #fff;
+  background-color: #0080ff;
+  width: 15%;
+  height: 100%;
+  font-size: 40px;
+  padding: 0;
+  border: 0;
+}
+
+.my-pagination button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.my-pagination .pagination-previous, .my-pagination .pagination-first, .my-pagination .pagination-next {
+  border-right: 1px solid #000;
+}
+
+.my-pagination .page-disabled {
+  opacity: 0.5;
+}
+
+.current-pages {
+  width: 40%;
+  background-color: #0080ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #000;
+}
+
+.current-pages a {
+  letter-spacing: 1.71px;
+  color: #fff;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+}

@@ -1,0 +1,355 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+.v-align {
+  display: flex;
+  align-items: center;
+}
+
+/* Scroll style */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #ddd;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #979797;
+  border-radius: 12px;
+}
+
+/*********Login pages***********/
+.login-box-main {
+  height: 720px;
+  width: 1024px;
+  /* background: #E0E0E0 url('/assets/icon/general/BG_net.png') no-repeat center right; */
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+/* inner page and title, just change where needed */
+
+.inner-page {
+  padding: 0 24px;
+  height: 720px;
+  width: 626px;
+  overflow-y: overlay;
+  position: relative;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.inner-page-title {
+  height: 96px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 23px;
+  font-family: 'Clear Sans Bold';
+  letter-spacing: 1.3px;
+  position: relative;
+  padding-left: 50px;
+  border-bottom: 2px solid #757575;
+  margin-bottom: 24px;
+}
+
+.inner-page-title .back {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* styles for buttons, just change size where needed */
+.btnNormal {
+  width: 150px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border-radius: 12px;
+  font-family: 'Clear Sans Medium';
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 0;
+}
+
+.btnBlue {
+  background-color: #0080ff !important;
+  color: #fff!important;
+}
+
+.btnGreen {
+  background-color: #D2FF4C!important;
+  color: #000!important;
+}
+
+.btnRed {
+  background-color: #D0021B !important;
+  color: #fff!important;
+}
+
+.btnXl {
+  width: 200px;
+  height: 72px;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.mat-form-field-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.mat-form-field-infix {
+  border-top: 0px;
+}
+
+.mat-select-arrow {
+  color: #0080ff;
+  border-left: 10px solid transparent!important;
+  border-right: 10px solid transparent!important;
+  border-top: 10px solid!important;
+}
+
+.mat-select-value,
+.mat-select-placeholder {
+  color: #000;
+  font-family: 'Clear Sans Medium';
+}
+
+.selectWhite .mat-select-value {
+  color: #fff;
+}
+
+.mat-radio-label {
+  margin-bottom: 0;
+}
+
+.mat-autocomplete-panel {
+  max-height: 500px!important;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.mat-option {
+  height: 70px!important;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.mat-option-text {
+  display: flex!important;
+  align-items: center;
+}
+
+
+dp-date-picker {
+  display: block !important;
+}
+
+dp-calendar-nav .dp-calendar-nav-container {
+  height: 50px !important;
+}
+
+dp-calendar-nav .dp-nav-btns-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 160px !important;
+}
+
+dp-calendar-nav .dp-nav-btns-container button {
+  margin-right: 2px;
+}
+
+dp-calendar-nav .dp-calendar-secondary-nav-right {
+  right: 0px !important;
+}
+
+dp-calendar-nav .dp-calendar-secondary-nav-right::before,
+dp-calendar-nav .dp-calendar-secondary-nav-left::before {
+  right: -5px !important;
+}
+
+dp-calendar-nav .dp-calendar-nav-left,
+dp-calendar-nav .dp-calendar-nav-right,
+dp-calendar-nav .dp-calendar-secondary-nav-left,
+dp-calendar-nav .dp-calendar-secondary-nav-right {
+  width: 20px !important;
+}
+
+dp-calendar-nav.dp-material .dp-calendar-secondary-nav-right {
+  background: transparent !important;
+}
+
+dp-calendar-nav.dp-material .dp-calendar-secondary-nav-left,
+dp-calendar-nav.dp-material .dp-calendar-secondary-nav-right {
+  width: 45px !important;
+}
+
+dp-calendar-nav .dp-calendar-nav-left::before,
+dp-calendar-nav .dp-calendar-secondary-nav-left::after,
+dp-calendar-nav .dp-calendar-secondary-nav-left::before,
+dp-calendar-nav .dp-calendar-secondary-nav-right::before,
+dp-calendar-nav .dp-calendar-secondary-nav-right::after {
+  height: 12px !important;
+  width: 12px !important;
+}
+
+dp-month-calendar .dp-calendar-month {
+  width: 70.5px !important;
+  height: 70.5px !important;
+}
+
+dp-calendar-nav .dp-nav-header {
+  font-size: 18px !important;
+}
+
+dp-calendar-nav .dp-calendar-nav-left::before,
+dp-calendar-nav .dp-calendar-nav-right::before {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+dp-day-calendar.dp-material .dp-calendar-weekday {
+  width: 50px !important;
+}
+
+dp-day-calendar .dayBtn {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+dp-day-calendar .dp-selected {
+  background: #0080ff !important;
+}
+
+/* popup modal style for all */
+.popup-modal-page {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  z-index: 900;
+  width: 1024px;
+  height: 720px;
+  background-color: #474747;
+}
+
+.popup-modal {
+  width: 729px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #e4e4e4;
+  border-radius: 12px;
+}
+
+.popup-modal-title {
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+  font-size: 23px;
+  letter-spacing: 1.31px;
+  color: #474747;
+  height: 96px;
+  border-bottom: 2px solid #bdbdbd;
+  padding-left: 40px;
+}
+
+.popup-modal-text {
+  font-size: 24px;
+  line-height: 39px;
+  padding: 40px 60px 60px 40px;
+}
+
+.popup-modal-text .modal-input {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #979797;
+  height: 72px;
+  border-radius: 12px;
+  font-size: 23px;
+  font-family: 'Clear Sans Bold';
+  color: #000;
+  padding: 0 25px;
+}
+
+.popup-modal-text .modal-input:focus {
+  color: #000;
+  box-shadow: none;
+  border-color: #979797;
+  outline: none;
+}
+
+.popup-modal-text .bold {
+  font-family: 'Clear Sans Bold';
+}
+
+.popup-modal-buttons {
+  display: flex;
+  border-top: 1px solid #000;
+}
+
+.popup-modal-buttons button img {
+  margin-right: 10px;
+}
+
+.popup-modal-buttons button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.popup-modal-buttons .cancel-btn,
+.popup-modal-buttons .confirm-btn {
+  width: 50%;
+  height: 96px;
+  text-transform: uppercase;
+  color: #000;
+  font-size: 21px;
+  font-family: 'Clear Sans Bold';
+  letter-spacing: 1.2px;
+  cursor: pointer;
+}
+
+.popup-modal-buttons .cancel-btn {
+  background-color: #D0021B;
+  color: #fff;
+  border-radius: 0 0 0 12px;
+  border-right: 1px solid #000;
+}
+
+.popup-modal-buttons .confirm-btn {
+  background-color: #81E03F;
+  border-radius: 0 0 12px 0;
+}
+
+/*************Error input message******/
+.invalid-input {
+  border-width: 2px !important;
+  border-color: #ff0000 !important;
+}
+
+.invalid-feedback {
+  color: #ff0000;
+  display: block;
+  font-size: 100%;
+}
+
+/**************Arabic style************/
+html[dir="rtl"] .scroll-buttons{
+  left: 0;
+  right: unset;
+}
+
+.rotate-arab {
+  transform: rotate(180deg);
+}

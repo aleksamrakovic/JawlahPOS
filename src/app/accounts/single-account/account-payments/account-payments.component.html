@@ -1,0 +1,75 @@
+<div class="inner-page">
+
+  <div class="inner-page-title v-align">
+    <span class="back" routerLink="/account"><img src="assets/icon/general/white-back.png"></span>
+    <span>Purchase history</span>
+  </div>
+
+  <div class="payments-history-title" *ngIf="accountData">
+
+    <mat-form-field appearance="none" class="mr-4">
+      <mat-select class="selectWhite" placeholder="Select date" (selectionChange)="selectDate($event)"
+        [(value)]="selected">
+        <mat-option *ngFor="let month of accountData.purchasesMonths" [value]="month">{{ month }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="none" class="mr-4">
+      <mat-select class="selectWhite" placeholder="Select type" (selectionChange)="selectType($event)"
+        [(value)]="selectedType">
+        <mat-option value="all">All types</mat-option>
+        <mat-option *ngFor="let type of accountData.transactionTypes" [value]="type">{{ type | titlecase}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span class="payments-history-length">{{ transactionList.length }}</span>
+  </div>
+
+  <div class="list-group" *ngIf="accountData && transactionList.length > 0">
+    <div class="list-group-header v-align">
+      <span style="width:15%">Date & Time</span>
+      <span style="width:20%">Type</span>
+      <span style="width:45%">Details</span>
+      <span style="width:20%">Price</span>
+    </div>
+
+    <div class="list-group-item v-align" *ngFor="let item of transactionList | paginate: config">
+      <span style="width:15%;color:#474747" class="font-weight-normal">{{ item.transactionDateFormated }}</span>
+      <span style="width:20%">{{ item.transactionType }}</span>
+      <span style="width:45%">{{ item.transactionDetails }}</span>
+      <span style="width:15%">{{ item.amount | currency:currency:''}} {{currency}}</span>
+      <span style="width: 5%;" class="text-right" (click)="viewTransaction(item)"><img
+          src="assets/icon/account/next.png"></span>
+    </div>
+  </div>
+
+  <div *ngIf="transactionList.length == 0" class="report-msg">
+    No purchase activity...
+  </div>
+
+  <!-- pagination -->
+  <div *ngIf="transactionList">
+    <pagination-template *ngIf="transactionList.length > 5" class="my-pagination" #p="paginationApi" maxSize="999"
+      [id]="config.id" (pageChange)="config.currentPage = $event">
+      <button class="pagination-first" (click)="p.setCurrent(1)" [disabled]="p.isFirstPage()">
+        <img src="assets/icon/general/first_page.png" [ngClass]="{'page-disabled' : p.isFirstPage()}">
+      </button>
+      <button class="pagination-previous" (click)="p.previous()" [disabled]="p.isFirstPage()">
+        <img src="assets/icon/general/nav-back.png" [ngClass]="{'page-disabled' : p.isFirstPage()}">
+      </button>
+      <div class="current-pages">
+        <a>{{ config.currentPage }} / {{ p.pages.length }}</a>
+      </div>
+      <button class="pagination-next" (click)="p.next()" [disabled]="p.isLastPage()">
+        <img src="assets/icon/general/nav-next.png" [ngClass]="{'page-disabled' : p.isLastPage()}">
+      </button>
+      <button class="pagination-last" (click)="p.setCurrent(p.pages.length)" [disabled]="p.isLastPage()">
+        <img src="assets/icon/general/last_page.png" [ngClass]="{'page-disabled' : p.isLastPage()}">
+      </button>
+    </pagination-template>
+  </div>
+  <!-- pagination END -->
+
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

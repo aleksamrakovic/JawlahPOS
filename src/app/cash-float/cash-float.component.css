@@ -1,0 +1,88 @@
+.cashfloat-card {
+  width: 729px;
+  margin-top: 72px;
+  border-radius: 12px;
+  background-color: #e4e4e4;
+  position: relative;
+}
+
+.cashfloat-card-header {
+  height: 96px;
+  padding-left: 75px;
+  font-family: "Clear Sans Bold";
+  font-size: 23px;
+  letter-spacing: 1.31px;
+  color: #474747;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #bdbdbd;
+}
+
+.cashfloat-card-text {
+  font-size: 23px;
+  line-height: 39px;
+  padding: 25px 75px 0 75px;
+}
+
+.cashfloat-card-text-form {
+  padding: 25px 75px 0 75px;
+}
+
+.cashfloat-input {
+  height: 96px;
+  border-radius: 12px;
+  border: 2px solid #979797;
+  width: 278px;
+  display: inline-block;
+  font-size: 46px;
+  color: #000;
+  font-weight: bold;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #979797;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.cashfloat-card label {
+  margin-left: 25px;
+  font-size: 27px;
+  line-height: 36px;
+  letter-spacing: 1px;
+  transform: translateY(-10px);
+}
+
+.cashfloat-card .confirm-btn {
+  margin-top: 50px;
+  border-radius: 0px 0px 12px 12px;
+  height: 96px;
+  width: 100%;
+  font-size: 21px;
+  line-height: 30px;
+  letter-spacing: 1.2px;
+  background-color: #0080ff;
+  color: #fff;
+  font-family: 'Clear Sans Bold';
+  text-transform: uppercase;
+}
+
+.cashfloat-card .confirm-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.cashfloat-card .confirm-btn img {
+  margin-right: 15px;
+}

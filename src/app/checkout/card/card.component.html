@@ -1,0 +1,38 @@
+<div class="col-12 card-page">
+  <form [formGroup]="form" (ngSubmit)="form.valid && confirm(form)">
+
+
+      <div class="input-box">
+        <div class="card-payment-title">Enter the amount {{amountToPay | currency:currency:''}} {{currency}} into card reader. When the purchase is
+          successfull, enter transcation number below and press confirm.</div>
+        <label>Transaction number</label>
+        <input type="text" class="form-control transaction-input" #transaction formControlName="transaction" required autocomplete="off" />
+      </div>
+
+
+    <div class="button-holder">
+      <button class="btnNormal btnGreen btnXl w-100" type="submit" [disabled]="!form.valid" [ngClass]="{'disabled': !form.valid}">
+        <img src="assets/icon/general/checkout.png">CONFIRM
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<div class="device-alert" *ngIf="ticketAlert">
+  <div class="popup-alert">
+    <div class="title">Alert</div>
+    <div class="text">
+      <div class="row m-0">
+        <div class="col-3 p-0"><img src="assets/icon/general/alert.png"></div>
+        <div class="col-9 p-0"><span>{{ ticketAlertMsg }}</span></div>
+      </div>
+    </div>
+    <div class="button-holder">
+      <button (click)="ticketAlertFunction()" class="btn">
+        <img style="margin-right: 10px" src="assets/icon/general/white-checkout.png">Ok
+      </button>
+    </div>
+  </div>
+</div>
+<loading-spinner *ngIf="loading"></loading-spinner>

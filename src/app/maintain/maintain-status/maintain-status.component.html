@@ -1,0 +1,89 @@
+<div class="maintain-status-page">
+  <div class="maintain-status-title v-align">Status</div>
+
+  <!-- Pos version -->
+  <div class="status-box">
+    <div class="row m-0">
+      <div class="col-5 p-0">
+        <div class="left">Distrib.</div>
+        <div class="left">App v.</div>
+      </div>
+      <div class="col-7 p-0">
+        <div class="right" *ngIf="posInfo">{{ posInfo.distributionVersion }}</div>
+        <div class="right" *ngIf="posInfo">{{ posInfo.appVersion }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Device status list -->
+  <div class="device-status">
+    <div class="row m-0">
+      <div class="col-3 p-0 v-align">
+        <span class="camera-icon">
+          <img [hidden]="cameraConnected" src="assets/icon/maintenance/camera_red.png">
+          <img [hidden]="!cameraConnected" src="assets/icon/maintenance/camera_green.png">
+        </span>
+      </div>
+      <div class="col-9 p-0 disconnected" [ngClass]="{'connected': cameraConnected}" id="webcam_status1">
+        <div class="deviceId">Camera 1546</div>
+        <div class="date">12.12.2012</div>
+      </div>
+    </div>
+  </div>
+  <div class="device-status">
+    <div class="row m-0">
+      <div class="col-3 p-0 v-align">
+        <span class="smartcard-icon">
+          <img [hidden]="smartcardConnected" src="assets/icon/maintenance/smart_card_reader_red.png">
+          <img [hidden]="!smartcardConnected" src="assets/icon/maintenance/smart_card_reader_green.png">
+        </span>
+      </div>
+      <div class="col-9 p-0 disconnected" [ngClass]="{'connected': smartcardConnected}" id="reader_status1">
+        <div class="deviceId">SC Reader 1546</div>
+        <div class="date">12.12.2012</div>
+      </div>
+    </div>
+  </div>
+  <div class="device-status">
+    <div class="row m-0">
+      <div class="col-3 p-0 v-align">
+        <span class="printer-icon">
+          <img [hidden]="printerConnected" src="assets/icon/maintenance/printer_red.png">
+          <img [hidden]="!printerConnected" src="assets/icon/maintenance/printer_green.png">
+        </span>
+      </div>
+      <div class="col-9 p-0 disconnected" [ngClass]="{'connected': printerConnected}" id="printer_status1">
+        <div class="deviceId">Printer 1546</div>
+        <div class="date">12.12.2012</div>
+      </div>
+    </div>
+  </div>
+  <div class="device-status">
+    <div class="row m-0">
+      <div class="col-3 p-0 v-align">
+        <span class="qr-icon">
+          <img [hidden]="qrcodeConnected" src="assets/icon/maintenance/QR_code_reader_red.png">
+          <img [hidden]="!qrcodeConnected" src="assets/icon/maintenance/QR_code_reader_green.png">
+        </span>
+      </div>
+      <div class="col-9 p-0 disconnected" [ngClass]="{'connected': qrcodeConnected}" id="qrcode_status1">
+        <div class="deviceId">Reader 1546</div>
+        <div class="date">12.12.2012</div>
+      </div>
+    </div>
+  </div>
+  <div class="device-status">
+    <div class="row m-0">
+      <div class="col-3 p-0 v-align">
+        <span class="scanner-icon">
+          <img [hidden]="scannerConnected" src="assets/icon/maintenance/scanner_red.png">
+          <img [hidden]="!scannerConnected" src="assets/icon/maintenance/scanner_green.png">
+        </span>
+      </div>
+      <div class="col-9 p-0 disconnected" [ngClass]="{'connected': scannerConnected}" id="scanner_status1">
+        <div class="deviceId">Scanner 1546</div>
+        <div class="date">12.12.2012</div>
+      </div>
+    </div>
+  </div>
+</div>

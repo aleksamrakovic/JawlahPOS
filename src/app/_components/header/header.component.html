@@ -1,0 +1,81 @@
+<div class="list-group text-center" *ngIf="headerTitles">
+    <a class="header-link"
+      *ngIf="userRoleId == roleType.Maintenance"
+      routerLinkActive="active"
+      routerLink="/maintenance">
+      <img [hidden]="router.url !== '/maintenance'" class="header-icon" src="assets/icon/header-menu/maintain-white.png">
+      <img [hidden]="router.url === '/maintenance'" class="header-icon" src="assets/icon/header-menu/maintain-blue.png">
+      <span>{{headerTitles[0]}}</span>
+    </a>
+
+  <!-- ticket show dinamically -->
+  <a
+    *ngIf="hasTickets && (userRoleId == roleType.Administrator || userRoleId == roleType.RetailSupervisor || userRoleId == roleType.CSA)"
+    class="header-link"
+    [ngClass]="{'active': router.url === '/tickets' || router.url === '/city' || router.url === '/intercity-ticket' || router.url === '/intercity-route'}"
+    routerLink="/tickets">
+    <img [hidden]="router.url !== '/tickets' && router.url !== '/city' && router.url !== '/intercity-ticket' && router.url !== '/intercity-route'" class="header-icon" src="assets/icon/header-menu/tickets-white.png">
+    <img [hidden]="router.url === '/tickets' || router.url === '/city' || router.url === '/intercity-ticket' || router.url === '/intercity-route'" class="header-icon" src="assets/icon/header-menu/tickets-blue.png">
+    <span>{{headerTitles[1]}}</span>
+  </a>
+
+  <!-- period-pass -->
+  <a *ngIf="hasPeriodPass && (userRoleId == roleType.Administrator || userRoleId == roleType.RetailSupervisor || userRoleId == roleType.CSA)"
+    class="header-link"
+    [ngClass]="{'active': router.url === '/period-pass' || router.url === '/period-city' || router.url === '/period-products'}"
+    routerLink="/period-pass">
+    <img [hidden]="router.url !== '/period-pass' && router.url !== '/period-city' && router.url !== '/period-products'" class="header-icon" src="assets/icon/header-menu/period-white.png">
+    <img [hidden]="router.url === '/period-pass' || router.url === '/period-city' || router.url === '/period-products'" class="header-icon" src="assets/icon/header-menu/period-blue.png">
+    <span>{{headerTitles[2]}}</span>
+  </a>
+
+  <!-- penalties -->
+  <!-- <a  *ngIf="userRoleId == roleType.Administrator || userRoleId == roleType.RetailSupervisor || userRoleId == roleType.CSA"
+    class="header-link"
+    [routerLink]="online ? ['/penalties'] : []"
+    [ngClass]="{'active': router.url === '/penalties' || router.url === '/penalties/details', 'disabled' : !online}">
+    <img [hidden]="router.url !== '/penalties' && router.url !== '/penalties/details'" class="header-icon" src="assets/icon/header-menu/penalties-white.png">
+    <img [hidden]="router.url === '/penalties' || router.url === '/penalties/details'" class="header-icon" src="assets/icon/header-menu/penalties-blue.png">
+    <span>{{headerTitles[3]}}</span>
+  </a> -->
+
+  <!-- accounts -->
+  <a *ngIf="userRoleId == roleType.Administrator || userRoleId == roleType.RetailSupervisor || userRoleId == roleType.CSA"
+    class="header-link"
+    [routerLink]="online ? ['/accounts'] : []"
+    [ngClass]="{'active': router.url === '/accounts' || router.url === '/accounts/create' || router.url === '/accounts/create/form', 'disabled' : !online}">
+    <img [hidden]="router.url !== '/accounts' && router.url !== '/accounts/create' && router.url !== '/accounts/create/form'" class="header-icon" src="assets/icon/header-menu/accounts-white.png">
+    <img [hidden]="router.url === '/accounts' || router.url === '/accounts/create' || router.url === '/accounts/create/form'" class="header-icon" src="assets/icon/header-menu/accounts-blue.png">
+    <span>{{headerTitles[4]}}</span>
+  </a>
+
+  <!-- reports -->
+  <a *ngIf="userRoleId == roleType.Administrator || userRoleId == roleType.RetailSupervisor || userRoleId == roleType.CSA"
+    class="header-link"
+    routerLink="/reports"
+    [ngClass]="{'active': router.url === '/reports' || router.url === '/reports/waybill' || router.url === '/reports/transactions'}">
+    <img [hidden]="router.url !== '/reports' && router.url !== '/reports/waybill' && router.url !== '/reports/transactions'" class="header-icon" src="assets/icon/header-menu/reports-white.png">
+    <img [hidden]="router.url === '/reports' || router.url === '/reports/waybill' || router.url === '/reports/transactions'" class="header-icon" src="assets/icon/header-menu/reports-blue.png">
+    <span>{{headerTitles[5]}}</span>
+  </a>
+
+  <!-- pos users -->
+  <a class="header-link"
+    *ngIf="userRoleId == roleType.Administrator || userRoleId == roleType.RetailSupervisor"
+    [routerLink]="online ? ['/pos-user'] : []"
+    [ngClass]="{'active': router.url === '/pos-user' || router.url === '/pos-user/history', 'disabled' : !online}">
+    <img [hidden]="router.url !== '/pos-user' && router.url !== '/pos-user/history'" class="header-icon" src="assets/icon/header-menu/users-white.png">
+    <img [hidden]="router.url === '/pos-user' || router.url === '/pos-user/history'" class="header-icon" src="assets/icon/header-menu/users-blue.png">
+    <span>{{headerTitles[6]}}</span>
+  </a>
+
+  <!-- driver card -->
+  <!-- <a class="header-link"
+    *ngIf="userRoleId == roleType.Administrator || userRoleId == roleType.RetailSupervisor"
+    [routerLink]="online ? ['/driver-cards'] : []"
+    [ngClass]="{'active': router.url === '/driver-cards', 'disabled' : !online}">
+    <img [hidden]="router.url !== '/driver-cards'" class="header-icon" src="assets/icon/header-menu/driver-white.png">
+    <img [hidden]="router.url === '/driver-cards'" class="header-icon" src="assets/icon/header-menu/driver-blue.png">
+    <span>{{headerTitles[7]}}</span>
+  </a> -->
+</div>

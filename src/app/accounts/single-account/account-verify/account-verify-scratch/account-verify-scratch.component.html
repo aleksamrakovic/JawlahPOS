@@ -1,0 +1,317 @@
+<div class="inner-page">
+  <form [formGroup]="form">
+    <div class="inner-page-title v-align">
+      <span class="back" routerLink="/account/verify/rider"><img src="assets/icon/general/white-back.png"></span>
+      <span *ngIf="accountTarget">Verify account as {{ accountTarget.name }}</span>
+
+      <span class="verify-buttons" *ngIf="accountData && formStructure.length > 0">
+        <button type="button" (click)="submitRequest(form)" class="verify-btn btnGreen"><img
+            src="assets/icon/general/checkout.png">Submit</button>
+      </span>
+    </div>
+
+    <!-- First box image -->
+    <div class="box-info" *ngIf="accountData">
+      <div class="row">
+        <div class="col-3">
+          <div class="box-part text-center">
+            <div class="box-part-photo">
+              <img *ngIf="hasImg" class="user-photo" #userImage src="{{path}}">
+              <img *ngIf="!hasImg" src="assets/icon/regular_full.svg" class="user-photo">
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="box-part">
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Account no</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.shortId }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Current account type</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.type | titlecase }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Requested account type</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part" *ngIf="accountTarget">{{ accountTarget.name | titlecase }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Full name</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.name }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Address</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.address }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">Country</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.countryFull }}</div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="left-part">E-mail</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.email }}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="left-part">Phone</div>
+              </div>
+              <div class="col-6">
+                <div class="right-part">{{ accountData.phone }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal documents -->
+    <div class="box-info2 box-4" *ngIf="formStructure.length > 0">
+
+      <div class="title v-align">
+        <div class="title-text"><img src="assets/icon/account/blue-arrow-down.png">Personal document</div>
+
+        <div>
+          <mat-form-field appearance="none">
+            <mat-select placeholder="Select document" #docSelect (selectionChange)="selectChange($event)">
+              <div *ngFor="let element of formStructure">
+                <mat-option *ngIf="element.isPersonal" [value]="element.id">{{ element.type }}</mat-option>
+              </div>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div *ngFor="let element of formStructure">
+        <div class="main-part" *ngIf="element.isPersonal && selectedDocument == element.id">
+          <div class="box-part">
+
+            <div class="row mb-4" *ngFor="let elem of element.verificationElements">
+              <div class="col-4 v-align">
+                <div class="left-part">{{ elem.name }}</div>
+              </div>
+
+              <div class="col-5" *ngIf="elem.type == 'STRING'">
+                <div class="right-part">
+                  <input [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }"
+                    class="edit-input" type="text" formControlName='{{ elem.type}}_{{element.id}}_{{elem.id}}' required>
+                  <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                    <div *ngIf="f[elem.type+'_'+element.id+'_'+elem.id].errors.required">Field is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-8" *ngIf="elem.type == 'IMAGE'">
+                <div class="row">
+                  <div class="col-6">
+                    <div [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }"
+                      class="front-doc" (click)="scannImage(scanImg, plc, elem, element)">
+                      <div class="placeholder" #plc>
+                        <img src="assets/icon/account/photo-icon.png">
+                        <div>{{ elem.description }}</div>
+                      </div>
+                      <img #scanImg style="display: none;max-width:100%;max-height:100%">
+                      <input #scanInput type="text" class="fake-input"
+                        formControlName="{{ elem.type}}_{{element.id}}_{{elem.id}}" required>
+                    </div>
+                    <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                      <div>Field is required</div>
+                    </div>
+                    <div *ngIf="scanImg.style.display == 'block'" class="zoom-icon">
+                      <i (click)="zoomScanner(scanImg)" class="fas fa-search-plus"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-5" *ngIf="elem.type == 'DATE'">
+                <div class="right-part">
+                  <input [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }"
+                    type="text" theme="dp-material" [dpDayPicker]="datePickerConfig" class="edit-input input-date"
+                    formControlName="{{ elem.type}}_{{element.id}}_{{elem.id}}" placeholder="dd/mm/yyyy" required>
+                  <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                    <div *ngIf="f[elem.type+'_'+element.id+'_'+elem.id].errors.required">Field is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Document END-->
+
+
+    <!-- Documents -->
+    <div *ngIf="accountData && formStructure.length > 0">
+      <div *ngFor="let element of formStructure">
+        <div class="box-info2 box-4" *ngIf="!element.isPersonal">
+
+          <div class="title v-align">
+            <div class="title-text"><img src="assets/icon/account/blue-arrow-down.png">{{ element.type }}</div>
+          </div>
+
+          <div class="main-part">
+            <div class="box-part">
+
+              <div class="row mb-4" *ngFor="let elem of element.verificationElements">
+                <div class="col-4 v-align">
+                  <div class="left-part">{{ elem.name }}</div>
+                </div>
+
+                <div class="col-5" *ngIf="elem.type == 'STRING'">
+                  <div class="right-part">
+                    <input [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }"
+                      class="edit-input" type="text" formControlName='{{ elem.type}}_{{element.id}}_{{elem.id}}'
+                      required>
+                    <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                      <div *ngIf="f[elem.type+'_'+element.id+'_'+elem.id].errors.required">Field is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-8" *ngIf="elem.type == 'IMAGE'">
+                  <div class="row">
+                    <div class="col-6">
+                      <div [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }"
+                        class="front-doc front-doc-margin" (click)="scannImage(scanImg, plc, elem, element)">
+                        <div class="placeholder" #plc>
+                          <img src="assets/icon/account/photo-icon.png">
+                          <div>{{ elem.description }}</div>
+                        </div>
+                        <img #scanImg style="display: none;max-width:100%;max-height:100%">
+                        <input #scanInput type="text" class="fake-input"
+                          formControlName="{{ elem.type}}_{{element.id}}_{{elem.id}}" required>
+                      </div>
+                      <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid"
+                        class="invalid-feedback">
+                        <div>Field is required</div>
+                      </div>
+                      <div *ngIf="scanImg.style.display == 'block'" class="zoom-icon">
+                        <i (click)="zoomScanner(scanImg)" class="fas fa-search-plus"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-5" *ngIf="elem.type == 'DATE'">
+                  <div class="right-part">
+                    <input [ngClass]="{'invalid-input': submitted && f[elem.type+'_'+element.id+'_'+elem.id].errors }"
+                      type="text" theme="dp-material" [dpDayPicker]="datePickerConfig" class="edit-input input-date"
+                      formControlName="{{ elem.type}}_{{element.id}}_{{elem.id}}" placeholder="dd/mm/yyyy" required>
+                    <div *ngIf="submitted && f[elem.type+'_'+element.id+'_'+elem.id].invalid" class="invalid-feedback">
+                      <div *ngIf="f[elem.type+'_'+element.id+'_'+elem.id].errors.required">Field is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Document END-->
+
+
+    <div *ngIf="accountData && formStructure.length > 0">
+      <div class="box-info2 box-3">
+        <div class="title v-align">
+          <div class="title-text d-flex">Account status validity</div>
+        </div>
+        <div class="main-part">
+          <div class="box-part">
+            <div class="row">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2 v-align">
+                    <div class="left-part">From</div>
+                  </div>
+                  <div class="col-10">
+                    <div class="right-part">
+                      <input [ngClass]="{'invalid-input': submitted && f.startDate.errors }" (keyup)="onKey($event)"
+                        #dateDirectivePicker="dpDayPicker" type="text" theme="dp-material" [dpDayPicker]="datePickerConfig"
+                        class="edit-input input-date" #startDate formControlName="startDate" placeholder="dd/mm/yyyy" required
+                        [minDate]="minDateAtt">
+                      <div *ngIf="submitted && f.startDate.invalid" class="invalid-feedback">
+                        <div *ngIf="f.startDate.errors.required">Field is required</div>
+                        <div *ngIf="f.startDate.errors.minDate">Field is invalid</div>
+                      </div>
+
+                      <!-- <mat-form-field [ngClass]="{'invalid-input': submitted && f.startDate.errors }" class="edit-input" appearance="none" required>
+                        <input matInput [matDatepicker]="picker" [min]="mindate" #startDate formControlName="startDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      <div *ngIf="submitted && f.startDate.invalid" class="invalid-feedback">
+                        <div *ngIf="f.startDate.errors.required">Field is required</div>
+                        <div *ngIf="f.startDate.errors.minDate">Field is invalid</div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-2 v-align">
+                    <div class="left-part">To</div>
+                  </div>
+                  <div class="col-10">
+                    <div class="right-part">
+                      <input [ngClass]="{'invalid-input': submitted && f.expireDate.errors }" (keyup)="onKey2($event)"
+                        #dateDirectivePicker="dpDayPicker" type="text" theme="dp-material" [dpDayPicker]="datePickerConfig"
+                        class="edit-input input-date" formControlName="expireDate" placeholder="dd/mm/yyyy" required
+                        [minDate]="startDate.value">
+                      <div *ngIf="submitted && f.expireDate.invalid" class="invalid-feedback">
+                        <div *ngIf="f.expireDate.errors.required">Field is required</div>
+                        <div *ngIf="f.expireDate.errors.minDate">Min date is {{startDate.value}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- The Modal -->
+<div id="zoom" class="zoomModal" [hidden]="!zoomModal">
+  <span class="close" (click)="zoomModal = !zoomModal">&times;</span>
+  <img id="zoomImg">
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>

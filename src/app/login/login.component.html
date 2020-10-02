@@ -1,0 +1,52 @@
+<div class="login-box-main">
+
+  <div class="center-page">
+    <div class="login-part-one">
+      <div class="row">
+        <div class="col-6">
+          <div class="login-pos-title">
+            <div>POS <span class="pos-location" *ngIf="posInfo">{{ posInfo.id }} {{ posInfo.location }}</span></div>
+          </div>
+        </div>
+        <div class="col-6 text-right">
+          <img class="login-logo" src="assets/icon/general/LOGO.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="login-part-two">
+      <span class="login-distribution" *ngIf="posInfo">Distribution: {{ posInfo.distributionVersion }}</span>
+      <span class="login-appVersion" *ngIf="posInfo">App version {{ posInfo.appVersion }}</span>
+      <button class="login-btn border-0 text-uppercase font-weight-bold" (click)="goNextStep()">
+        <img src="assets/icon/general/login.png">Log in
+      </button>
+    </div>
+  </div>
+
+
+  <button class="power-off-btn" (click)="showTurnOffPopup()"><i class="fas fa-power-off"></i></button>
+</div>
+
+<loading-spinner *ngIf="loading"></loading-spinner>
+
+<!-- power off popup -->
+<div class="popup-modal-page" *ngIf="powerOffPopup">
+  <div class="popup-modal">
+    <div class="popup-modal-title v-align">Power off?</div>
+    <div class="popup-modal-text">
+      <div class="row m-0">
+        <div class="col-3 p-0"><img src="assets/icon/general/help.png"></div>
+        <div class="col-9 p-0">Are you sure you want to power off this POS device ?</div>
+      </div>
+    </div>
+    <div class="popup-modal-buttons">
+      <button class="btn cancel-btn" (click)="powerOffPopup = !powerOffPopup">
+        <img src="assets/icon/general/cancel-button.png">Cancel
+      </button>
+      <button class="btn confirm-btn" (click)="powerOff()">
+        <img src="assets/icon/general/checkout.png">Ok
+      </button>
+    </div>
+  </div>
+</div>
+<!-- power off popup END -->
