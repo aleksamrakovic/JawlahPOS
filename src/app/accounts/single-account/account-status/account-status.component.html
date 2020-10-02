@@ -84,12 +84,12 @@
         <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
       </span>
     </a>
-    <a class="account-status-link" [routerLink]="accountData.penaltiesNum > 0 && !accountData.blocked ? ['/account/penalties'] : []">Penalties
+    <!-- <a class="account-status-link" [routerLink]="accountData.penaltiesNum > 0 && !accountData.blocked ? ['/account/penalties'] : []">Penalties
       <span>
         {{ accountData.penaltiesNum }}
         <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
       </span>
-    </a>
+    </a> -->
     <a class="account-status-link" [routerLink]="accountData.devicesNum > 0 && !accountData.blocked ? ['/account/devices'] : []">Devices
       <span>
         {{ accountData.devicesNum }}
