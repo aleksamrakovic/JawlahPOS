@@ -44,6 +44,7 @@ export class AccountPaymentsComponent implements OnInit {
       err => {
         this.loading = false
         this.posService.setAlertMessage('Error occured, please try again later.');
+        this.router.navigate(['/account']);
       });
   }
 

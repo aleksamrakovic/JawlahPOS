@@ -70,7 +70,7 @@ export class AccountsComponent implements OnInit {
   }
 
   searchAccount(input: string) {
-    if (input.length > 5) {
+    if (input.length > 4) {
       this.loading = false;
       this.accountList = [];
 
@@ -100,7 +100,7 @@ export class AccountsComponent implements OnInit {
             this.searchAccountInput.nativeElement.focus();
           }
         )
-      }, 2000);
+      }, 1000);
 
     } else {
       this.accountList = [];

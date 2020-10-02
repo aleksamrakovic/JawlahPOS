@@ -192,7 +192,7 @@ export class CashComponent implements OnInit {
                                 } else if (item.productBaggageReturn != null) {
                                   route = 'Intercity';
                                 } else if (item.productPeriod != null) {
-                                  route = 'Period pass';
+                                  route = item.productPeriod.route;
                                 } else {
                                   route = '';
                                 }

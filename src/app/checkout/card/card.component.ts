@@ -116,6 +116,8 @@ export class CardComponent implements OnInit {
                               route = 'Intercity';
                             } else if (item.productBaggageReturn != null) {
                               route = 'Intercity';
+                            } else if (item.productPeriod != null) {
+                              route = item.productPeriod.route;
                             } else {
                               route = '';
                             }
