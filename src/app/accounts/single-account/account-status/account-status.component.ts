@@ -13,6 +13,7 @@ export class AccountStatusComponent implements OnInit {
   currency: any;
   selectedLang: any;
   hasTopup: boolean = false;
+  hasTickets: boolean = false;
 
   constructor(private accService: AccountServiceService, private posService: PosDataServiceService, private translate: TranslateService) {}
 
@@ -22,7 +23,11 @@ export class AccountStatusComponent implements OnInit {
       this.selectedLang = event.lang;
     });
 
-    this.posService.getPosData().subscribe((data: any) => {this.currency = data.currencyCode});
+    this.posService.getPosData().subscribe(
+      (data: any) => {
+        this.currency = data.currencyCode;
+        this.hasTickets = data.displayTicketModule;
+      });
 
     //get data using session or using api if no data
     var x = this.accService.getAccountStorage();

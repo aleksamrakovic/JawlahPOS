@@ -72,13 +72,13 @@
 
   <div class="part-action-links">
     <!-- hide credit if user is not allowed -->
-    <a class="account-status-link" [routerLink]="!accountData.blocked ? ['/account/wasel'] : []" *ngIf="hasTopup">Credit
+    <a *ngIf="hasTopup" class="account-status-link" [routerLink]="!accountData.blocked ? ['/account/wasel'] : []">Credit
       <span>
         {{ accountData.credit | currency:currency:''}} {{currency}}
         <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
       </span>
     </a>
-    <a class="account-status-link" [routerLink]="accountData.ticketsNum > 0 && !accountData.blocked ? ['/account/tickets/all'] : []">Tickets
+    <a *ngIf="hasTickets" class="account-status-link" [routerLink]="accountData.ticketsNum > 0 && !accountData.blocked ? ['/account/tickets/all'] : []">Tickets
       <span>
         {{ accountData.ticketsNum }}
         <img [ngClass]="{'rotate-arab' : selectedLang == 'ar'}" src="assets/icon/account/next.png">
