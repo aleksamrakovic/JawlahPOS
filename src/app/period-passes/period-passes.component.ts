@@ -46,7 +46,7 @@ export class PeriodPassesComponent implements OnInit {
           });
       }
       //check next page regarding ticket type
-      !this.defaultRoute.isIntercity ? this.ticketRoute = 'city' : this.ticketRoute = 'intercity-route';
+      // !this.defaultRoute.isIntercity ? this.ticketRoute = 'city' : this.ticketRoute = 'intercity-route';
     },
       err => {
         this.loading = false;

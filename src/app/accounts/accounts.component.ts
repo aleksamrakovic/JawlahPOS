@@ -100,7 +100,7 @@ export class AccountsComponent implements OnInit {
             this.searchAccountInput.nativeElement.focus();
           }
         )
-      }, 1000);
+      }, 1200);
 
     } else {
       this.accountList = [];

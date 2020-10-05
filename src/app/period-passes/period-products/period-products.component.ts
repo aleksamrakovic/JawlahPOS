@@ -37,6 +37,7 @@ export class PeriodProductsComponent implements OnInit {
       },
       err => {
         this.posService.setAlertMessage('Error occured, please try again later.');
+        this.router.navigate(['/period-pass']);
       }
     )
   }

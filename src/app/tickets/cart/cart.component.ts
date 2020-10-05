@@ -184,7 +184,7 @@ export class CartComponent implements OnInit {
   }
 
   //delete city period ticket
-  deleteCityPeriod(item: Item, i: number) {
+  deleteProductPeriod(item: Item, i: number) {
     this.cart.total -= item.productPeriod.price * item.quantity;
     this.cart.totalCent -= item.productPeriod.priceCent * item.quantity;
     item.quantity = 0;
