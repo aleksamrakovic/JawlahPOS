@@ -232,6 +232,8 @@ export class SingleAccountComponent implements OnInit {
         if (res) {
           this.loading = false;
           this.assignCardPopup = false;
+          // if this is needed
+          this.accountData.smartCards.push({printedId: form.value.smartCardId, uid: form.value.smartCardId});
         } else {
           this.loading = false;
           this.posService.setAlertMessage('Smartcard Id is invalid or already in use');

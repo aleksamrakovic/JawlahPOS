@@ -39,6 +39,11 @@ export class PeriodPassesComponent implements OnInit {
             this.loading = false;
             this.riders = riders,
             console.log(riders)
+
+            //if only one rider/route, no need for click?
+            // if (this.routeTypes.length == 1 && this.riders.length == 3) {
+            //   this.selectRider(this.riders[0]);
+            // }
           },
           err => {
             this.loading = false;
@@ -66,23 +71,11 @@ export class PeriodPassesComponent implements OnInit {
         this.riders = [];
         this.loading = false;
       });
-    // !this.defaultRoute.isIntercity ? this.ticketRoute = 'city' : this.ticketRoute = 'intercity-route';
   }
 
   selectRider(rider: any) {
     this.ticketService.setRiderType({city: this.defaultRoute, rider: rider});
     this.router.navigate(['/period-products'])
   }
-
-  // //select rider and route
-  // selectRider(rider: any) {
-  //   if (rider) {
-  //     this.ticketService.setRiderType({ city: this.defaultRoute, rider: rider });
-  //     this.router.navigate([this.ticketRoute]);
-  //   } else {
-  //     this.ticketService.setRiderType({ city: this.defaultRoute, rider: null });
-  //     this.router.navigate(['/luggage']);
-  //   }
-  // }
 
 }
