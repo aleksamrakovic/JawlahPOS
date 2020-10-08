@@ -1,5 +1,6 @@
 <div class="row m-0">
   <div class="background-ticket">
+
     <div class="list-group" *ngIf="routeTypes">
       <a
         *ngFor="let route of routeTypes"
@@ -8,6 +9,7 @@
         (click)="selectRouteType(route)">
         {{ route.name | uppercase }}
       </a>
+      <div *ngIf="routeTypes.length == 0" class="result">No routes available.</div>
     </div>
 
     <!-- List of periodpass riders -->
@@ -17,6 +19,8 @@
       </div>
     </div>
     <!-- List of rider types END -->
+
+    <div *ngIf="riders.length == 0" class="result">No riders available.</div>
 
     <!-- Pagination -->
     <div *ngIf="riders.length > 6">

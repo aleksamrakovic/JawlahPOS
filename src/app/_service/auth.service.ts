@@ -160,7 +160,7 @@ export class AuthService {
     var totalSalesVal = this.formatArabicNum(res.totalSales);
     if (!totalSalesAr) {
       total += `${this.addSpace(`${totalSalesEn}`, 24)}` + `${this.addSpace2(`${res.totalSales} ${curr}`, 24)}\n`;
-    } else {
+    } else { 
       if (totalSalesEn.length > 16 || totalSalesAr.length > 16 || totalSalesVal.length > 10) {
         total += `${this.addSpace(`${totalSalesEn}`, 24)}` + `${this.addSpace2(`${res.totalSales} ${curr}`, 24)}\n`;
         total += `${this.addSpace(`${str.repeat(2)}${totalSalesVal}${curr}${totalSalesAr}`, 48)}\n`;

@@ -6,6 +6,7 @@ import { TranslateService, DefaultLangChangeEvent } from '@ngx-translate/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PosDataServiceService } from '../_service/pos-data-service.service';
 import { Subscription } from 'rxjs';
+import { SingleAccountComponent } from './single-account/single-account.component';
 
 @Component({
   selector: 'app-accounts',
@@ -104,6 +105,9 @@ export class AccountsComponent implements OnInit {
 
     } else {
       this.accountList = [];
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
     }
   }
 

@@ -155,7 +155,7 @@ export class IntercityComponent implements OnInit {
     console.log(this.routeInfo.routeId);
 
 
-    forkJoin(this.ticketService.getIntercityTicket(from.id, to.id, this.riderType.externalId, this.routeInfo.routeId, this.riderInfo.city.externalId), this.ticketService.getLuggages(this.riderInfo.city.externalId, this.riderType.externalId)).subscribe(
+    forkJoin([this.ticketService.getIntercityTicket(from.id, to.id, this.riderType.externalId, this.routeInfo.routeId, this.riderInfo.city.externalId), this.ticketService.getLuggages(this.riderInfo.city.externalId, this.riderType.externalId)]).subscribe(
       res => {
         console.log(res);
         this.loading = false;

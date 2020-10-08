@@ -81,7 +81,7 @@ export class AccIntercityComponent implements OnInit {
     //api call for stations and account
     this.accountNo = this.accService.getAccountNo();
 
-    forkJoin(this.ticketService.getStationListForIntercity(this.routeInfo.routeId), this.accService.getAccountDetails(this.accountNo)).subscribe(
+    forkJoin([this.ticketService.getStationListForIntercity(this.routeInfo.routeId), this.accService.getAccountDetails(this.accountNo)]).subscribe(
       res => {
         console.log(res);
         this.stationList = res[0];
@@ -154,7 +154,7 @@ export class AccIntercityComponent implements OnInit {
 
     this.loading = true;
 
-    forkJoin(this.ticketService.getIntercityTicket(from.id, to.id, this.riderType.externalId, this.routeInfo.routeId, this.riderInfo.city.externalId, this.accountData.shortId), this.ticketService.getLuggages(this.riderInfo.city.externalId, this.accountData.riderTypeId)).subscribe(
+    forkJoin([this.ticketService.getIntercityTicket(from.id, to.id, this.riderType.externalId, this.routeInfo.routeId, this.riderInfo.city.externalId, this.accountData.shortId), this.ticketService.getLuggages(this.riderInfo.city.externalId, this.accountData.riderTypeId)]).subscribe(
       res => {
         console.log(res);
         this.loading = false;

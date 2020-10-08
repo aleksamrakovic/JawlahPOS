@@ -35,7 +35,6 @@ export class AccountStatusComponent implements OnInit {
       this.accService.getAccount().subscribe(
         data => {
           this.accountData = data;
-
           this.accService.getTopupInfo(this.accountData.riderTypeId).subscribe(
             (res: any) => {
               this.hasTopup = res.exist;

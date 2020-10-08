@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Location, formatDate } from '@angular/common';
 import { PosDataServiceService } from '../_service/pos-data-service.service';
 
 @Injectable({
@@ -16,7 +15,7 @@ export class TicketsServiceService {
   phone: any;
   website: any;
 
-  constructor(private http: HttpClient, private location: Location, private posService: PosDataServiceService) {
+  constructor(private http: HttpClient, private posService: PosDataServiceService) {
     //set cart object
     if (this.cart == null && sessionStorage.getItem('cart') != null) {
       this.cart = JSON.parse(sessionStorage.getItem('cart'));

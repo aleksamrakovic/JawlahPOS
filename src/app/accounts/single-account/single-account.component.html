@@ -5,7 +5,7 @@
     <div class="account-name-title v-align" *ngIf="accountData">{{ accountData.name }}</div>
 
     <div class="account-menu-boxes" *ngIf="accountData && !accountData.blocked">
-      <div class="account-menu-box btnGreen v-align" *ngIf="hasTopup" routerLink="/account/topup">
+      <div *ngIf="hasTopup" class="account-menu-box btnGreen v-align" routerLink="/account/topup">
         Top up
       </div>
 

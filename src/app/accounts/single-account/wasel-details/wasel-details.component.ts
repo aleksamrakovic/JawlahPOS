@@ -34,7 +34,7 @@ export class WaselDetailsComponent implements OnInit {
     this.loading = true;
     this.accountNo = this.accService.getAccountNo();
 
-    forkJoin(this.posService.getPosData(), this.accService.getAccountDetails(this.accountNo)).subscribe(
+    forkJoin([this.posService.getPosData(), this.accService.getAccountDetails(this.accountNo)]).subscribe(
       (res: any[]) => {
         this.currency = res[0].currencyCode;
         this.accountData = res[1];

@@ -43,12 +43,8 @@ export class PeriodProductsComponent implements OnInit {
   }
 
   selectProduct(product: any) {
-    //if product is city open city page, else airport page
-    if (this.routeInfo.city.name != 'Airport') {
-      var router = 'period-city';
-    }
+    var router = 'period-city';
     sessionStorage.setItem('product', JSON.stringify(product));
     this.router.navigate([router]);
-
   }
 }

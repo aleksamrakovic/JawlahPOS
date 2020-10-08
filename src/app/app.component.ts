@@ -41,8 +41,8 @@ export class AppComponent {
         console.log(res.autoLockMinutes);
 
         // commented for test purpose only
-        // this.idleTime = Number(res.autoLockMinutes) * 60000;
-        this.idleTime = Number(res.autoLockMinutes) * 6000000;
+        this.idleTime = Number(res.autoLockMinutes) * 60000;
+        // this.idleTime = Number(res.autoLockMinutes) * 6000000;
 
         this.resetTimer(this.idleTime);
         this.idleLogout(this.idleTime);

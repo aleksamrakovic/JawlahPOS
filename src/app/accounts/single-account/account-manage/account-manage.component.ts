@@ -75,7 +75,7 @@ export class AccountManageComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.accountNo = this.accService.getAccountNo();
-    forkJoin(this.accService.getAccountDetails(this.accountNo), this.accService.getBlockAccountReasons(), this.accService.getUnblockAccountReasons()).subscribe(
+    forkJoin([this.accService.getAccountDetails(this.accountNo), this.accService.getBlockAccountReasons(), this.accService.getUnblockAccountReasons()]).subscribe(
       res => {
         this.accountData = res[0];
         if (this.accountData.image) {

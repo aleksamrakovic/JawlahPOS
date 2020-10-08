@@ -168,9 +168,9 @@ export class CreateFormComponent implements OnInit {
       }
       console.log(account);
 
-      forkJoin(
+      forkJoin([
         this.accountService.checkAccountByEmail(account.email), this.accountService.checkAccountByPhone(account.phone)
-      ).subscribe(res => {
+      ]).subscribe(res => {
         this.loading = false;
         if (res[0] && res[1]) {
           this.deviceMessage = 'User with this email and phone already exists.'

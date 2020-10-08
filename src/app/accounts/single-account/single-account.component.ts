@@ -94,6 +94,8 @@ export class SingleAccountComponent implements OnInit {
 
     forkJoin([this.accService.getBlockAccountReasons(),this.accService.getUnblockAccountReasons()]).subscribe(
       res => {
+        console.log(res);
+
         this.blockAccountReasons = res[0];
         this.unblockAccountReasons = res[1];
       }, err => {
@@ -232,8 +234,6 @@ export class SingleAccountComponent implements OnInit {
         if (res) {
           this.loading = false;
           this.assignCardPopup = false;
-          // if this is needed
-          this.accountData.smartCards.push({printedId: form.value.smartCardId, uid: form.value.smartCardId});
         } else {
           this.loading = false;
           this.posService.setAlertMessage('Smartcard Id is invalid or already in use');
@@ -265,7 +265,6 @@ export class SingleAccountComponent implements OnInit {
     }
     this.loading = true;
     var request = { accountId: this.accountData.id, cardId: form.value.smartCardId }
-    console.log(request);
 
     this.accService.unassignSmartCard(request).subscribe(
       res => {

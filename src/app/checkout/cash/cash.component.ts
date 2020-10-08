@@ -149,10 +149,10 @@ export class CashComponent implements OnInit {
 
     if (this.cart.items.length > 0) {
       this.loading = true;
-      // this.http.post<any>('http://127.0.0.1:3333/status', {}).subscribe(
-      //   res => {
-      //     console.log(res[2]);
-      //     if (res[2].status == 'connected' && this.cart.items.length > 0) {
+      this.http.post<any>('http://127.0.0.1:3333/status', {}).subscribe(
+        res => {
+          console.log(res[2]);
+          if (res[2].status == 'connected' && this.cart.items.length > 0) {
             if (isNaN(form.value.cashInput) == true) {
               this.form.controls['cashInput'].setValue('');
             } else {
@@ -214,19 +214,19 @@ export class CashComponent implements OnInit {
                                     var lastPart = this.ticketService.lastPartText(this.loggedUser.id, this.posInfo.location, res.ticketValid, this.translations, route, res.ticketId);
                                     var totalText = firstPart + secondPart;
 
-                                    // await new Promise(finishPrint => {
-                                    //   this.ticketService.printTicket(totalText, res.qrCodes[k], lastPart).subscribe(
-                                    //     res => {
+                                    await new Promise(finishPrint => {
+                                      this.ticketService.printTicket(totalText, res.qrCodes[k], lastPart).subscribe(
+                                        res => {
 
                                           setTimeout(() => {
                                             console.log('gotovo intercity');
                                             this.ticketService.updateDeviceCounter(this.printCounter);
-                                            // finishPrint();
+                                            finishPrint();
                                           }, 3000);
 
-                                    //     }
-                                    //   )
-                                    // });
+                                        }
+                                      )
+                                    });
                                   }
                                   resolveCheck();
                                   console.log('gotova oba intercity');
@@ -239,19 +239,19 @@ export class CashComponent implements OnInit {
                                   var lastPart = this.ticketService.lastPartText(this.loggedUser.id, this.posInfo.location, res.ticketValid, this.translations, route, res.ticketId);
                                   var totalText = firstPart + secondPart;
 
-                                  // await new Promise(finishPrint => {
-                                  //   this.ticketService.printTicket(totalText, res.qrCodes[0], lastPart).subscribe(
-                                  //     res => {
+                                  await new Promise(finishPrint => {
+                                    this.ticketService.printTicket(totalText, res.qrCodes[0], lastPart).subscribe(
+                                      res => {
 
                                         setTimeout(() => {
                                           console.log('gotovo stampanje');
                                           this.ticketService.updateDeviceCounter(this.printCounter);
-                                          // finishPrint();
+                                          finishPrint();
                                         }, 3000);
 
-                                  //     }
-                                  //   )
-                                  // });
+                                      }
+                                    )
+                                  });
                                 }
                                 resolveCheck();
                                 console.log('gotov checkoutItem');
@@ -277,20 +277,20 @@ export class CashComponent implements OnInit {
                     }//first for end
                     console.log('kraj svega, finalni racun');
 
-                    // setTimeout(() => {
-                    //   var firstPart = this.ticketService.firstPartText(resCheck);
-                    //   var secondPart = this.printTotalReceipt(this.cart);
-                    //   var lastPartRec = this.ticketService.lastPartText(this.loggedUser.id, this.posInfo.location, '', this.translations, '', '');
-                    //   var totalRec = firstPart + secondPart;
-                    //   this.ticketService.printTicket(totalRec, '', lastPartRec).subscribe(
-                    //     res => {
+                    setTimeout(() => {
+                      var firstPart = this.ticketService.firstPartText(resCheck);
+                      var secondPart = this.printTotalReceipt(this.cart);
+                      var lastPartRec = this.ticketService.lastPartText(this.loggedUser.id, this.posInfo.location, '', this.translations, '', '');
+                      var totalRec = firstPart + secondPart;
+                      this.ticketService.printTicket(totalRec, '', lastPartRec).subscribe(
+                        res => {
                           this.ticketService.finishCart(true);
                           this.loading = false;
                           this.router.navigate([this.routeSaved]);
                           this.ticketService.setReprintItems(this.reprintItems)
-                    //     }
-                    //   );
-                    // }, 2500)
+                        }
+                      );
+                    }, 2500)
 
                   });
               } else {
@@ -298,16 +298,16 @@ export class CashComponent implements OnInit {
                 this.form.controls['cashInput'].setValue('');
               }
             }
-        //   } else {
-        //     this.loading = false;
-        //     this.alertMessage = 'Printer is not connected to device.';
-        //     this.posService.setAlertMessage(this.alertMessage);
-        //   }
-        // }, errorRes => {
-        //   this.loading = false;
-        //   this.alertMessage = 'No connection to peripheral devices.';
-        //   this.posService.setAlertMessage(this.alertMessage);
-        // });
+          } else {
+            this.loading = false;
+            this.alertMessage = 'Printer is not connected to device.';
+            this.posService.setAlertMessage(this.alertMessage);
+          }
+        }, errorRes => {
+          this.loading = false;
+          this.alertMessage = 'No connection to peripheral devices.';
+          this.posService.setAlertMessage(this.alertMessage);
+        });
     } else {
       return
     }

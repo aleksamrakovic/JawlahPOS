@@ -154,7 +154,6 @@ export class TopUpAccountComponent implements OnInit {
       this.opt == this.currency ? unos = Number(value) : unos = Number(value) / Number(this.currencyRate);
 
       if ((Number(unos) >= this.topupMin && Number(unos) <= this.topupMax) && (this.currentBalance + Number(unos)) <= (this.maximumBalance - Number(this.accountData.credit)) && Number(this.accountData.credit) < this.maximumBalance) {
-        console.log(true);
         var topup = {
           id: this.accountData.shortId.toString(),
           name: this.accountData.name,

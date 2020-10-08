@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./period-passes.component.css']
 })
 export class PeriodPassesComponent implements OnInit {
-  ticketType = 'period-city';
   routeTypes: any[] = [];
   riders: any[] = [];
   defaultRoute: any;
@@ -50,10 +49,9 @@ export class PeriodPassesComponent implements OnInit {
             this.riders = [];
           });
       }
-      //check next page regarding ticket type
-      // !this.defaultRoute.isIntercity ? this.ticketRoute = 'city' : this.ticketRoute = 'intercity-route';
     },
       err => {
+        this.routeTypes = [];
         this.loading = false;
       });
   }
@@ -74,8 +72,9 @@ export class PeriodPassesComponent implements OnInit {
   }
 
   selectRider(rider: any) {
+    this.ticketRoute = '/period-products';
     this.ticketService.setRiderType({city: this.defaultRoute, rider: rider});
-    this.router.navigate(['/period-products'])
+    this.router.navigate([this.ticketRoute]);
   }
 
 }
